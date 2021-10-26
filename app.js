@@ -18,11 +18,18 @@ app.use(methodOverride('_method'))
 // app.use(express.static(publicDirectoryPath)) 
 
 
+
 app.get('/demo7', (req,res)=>{
     app.set('views', path.join(__dirname,'./demo7/views'))
+    let route = "partials/_content"
+    res.render('index',{route})
+})
 
-    res.render('index')
-}) 
+app.get('/demo7/forms', (req,res)=>{
+    app.set('views', path.join(__dirname,'./demo7/views'))
+    let route = "pages/salesOrderForm"
+    res.render('index', {route})
+})
 app.get('/demo1', (req,res)=>{
     app.set('views', path.join(__dirname,'./demo1/views'))
     res.render('index')
