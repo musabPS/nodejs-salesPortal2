@@ -25,9 +25,14 @@ app.get('/demo7', (req,res)=>{
     res.render('index',{route})
 })
 
-app.get('/demo7/forms', (req,res)=>{
+app.get('/demo7/create-sales-order', (req,res)=>{
     app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "pages/salesOrderForm"
+    res.render('index', {route})
+})
+app.get('/demo7/sales-orders', (req,res)=>{
+    app.set('views', path.join(__dirname,'./demo7/views'))
+    let route = "pages/table"
     res.render('index', {route})
 })
 app.get('/demo1', (req,res)=>{
