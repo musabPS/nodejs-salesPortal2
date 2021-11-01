@@ -1,109 +1,139 @@
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
+        
         <!--begin::Container-->
         <div class="container">
+
             <!-- begin::Card-->
             <div class="card card-custom overflow-hidden">
                 <div class="card-body p-0">
-                    <!-- begin: Invoice-->
-                    <!-- begin: Invoice header-->
-                    <div class="row justify-content-center bgi-size-cover bgi-no-repeat py-8 px-8 py-md-27 px-md-0" style="background-image: url(assets/media/misc/bg-3.jpg);">
-                        <div class="col-md-9">
-                            <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
-                                <h1 class="display-4 text-white font-weight-boldest mb-10">INVOICE</h1>
-                                <div class="d-flex flex-column align-items-md-end px-0">
-                                    <!--begin::Logo-->
-                                    <a href="#" class="mb-5">
-                                        <img src="assets/media/logos/logo-2.svg" alt="" />
-                                    </a>
-                                    <!--end::Logo-->
-                                    <span class="text-white d-flex flex-column align-items-md-end opacity-70">
-                                        <span>Cecilia Chapman, 711-2880 Nulla St, Mankato</span>
-                                        <span>Mississippi 96522</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="border-bottom w-100 opacity-20"></div>
-                            <div class="d-flex justify-content-between text-white pt-6">
-                                <div class="d-flex flex-column flex-root">
-                                    <span class="font-weight-bolde mb-2r">DATA</span>
-                                    <span class="opacity-70">Dec 12, 2017</span>
-                                </div>
-                                <div class="d-flex flex-column flex-root">
-                                    <span class="font-weight-bolder mb-2">INVOICE NO.</span>
-                                    <span class="opacity-70">GS 000014</span>
-                                </div>
-                                <div class="d-flex flex-column flex-root">
-                                    <span class="font-weight-bolder mb-2">INVOICE TO.</span>
-                                    <span class="opacity-70">Iris Watson, P.O. Box 283 8562 Fusce RD.
-                                    <br />Fredrick Nebraska 20620</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end: Invoice header-->
-                    <!-- begin: Invoice body-->
+                  <!--end::Header-->
+					<!--begin::Content-->
+					
+								
+										<!-- begin: Invoice-->
+										<!-- begin: Invoice header-->
+										<div class="row justify-content-center bgi-size-cover bgi-no-repeat py-8 px-8 py-md-27 px-md-0" style="background-image: url(assets/media/misc/bg-3.jpg);">
+											<div class="col-md-9">
+												<div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
+                                                    <h1 class="display-4 font-weight-boldest mb-10 opacity-80">Sale Order <p class="text-danger" style="font-size:20px;">Pending</p></h1>
+													<div class="d-flex flex-column align-items-md-end px-0">
+													
+														<span class="text-white d-flex flex-column align-items-md-end opacity-70">
+															<span>Cecilia Chapman, 711-2880 Nulla St, Mankato</span>
+															<span>Mississippi 96522</span>
+														</span>
+													</div>
+												</div>
+												<div class="border-bottom w-100 opacity-20"></div>
+												<div class="d-flex justify-content-between text-white pt-6">
+													<div class="d-flex flex-column flex-root">
+														<span class="font-weight-bolde mb-2r">DATE</span>
+														<span class="opacity-70"><%= salesOrderData[0].date %></span>
+													</div>
+													<div class="d-flex flex-column flex-root">
+														<span class="font-weight-bolder mb-2">Order NO.</span>
+														<span class="opacity-70"><%= salesOrderData[0].tranid %></span>
+													</div>
+													<div class="d-flex flex-column flex-root">
+														<span class="font-weight-bolder mb-2">INVOICE TO.</span>
+														<span class="opacity-70">Iris Watson, P.O. Box 283 8562 Fusce RD.
+														<br />Fredrick Nebraska 20620</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- end: Invoice header-->
+										<!-- begin: Invoice body-->
+                    
                     <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
+                        
                         <div class="col-md-9">
+                            <NLFORM>
+                                <form method="POST" >
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="pl-0 font-weight-bold text-muted text-uppercase">Description</th>
-                                            <th class="text-right font-weight-bold text-muted text-uppercase">Hours</th>
-                                            <th class="text-right font-weight-bold text-muted text-uppercase">Rate</th>
-                                            <th class="text-right pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
+                               
+                                <td style="display:none;"><input id="totalrows" class="form-control" value="0" name="totalrows" style="display:none;"></td>
+                                <table class="table" id="table-main">
+                                    <thead style="text-align: center;">
+                                        <tr >
+                                            
+                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase">S#</th>
+                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase">Product</th>
+                                            <th class=" font-weight-bold text-muted text-uppercase"> Qty</th>
+                                            <th class=" font-weight-bold text-muted text-uppercase">Available Quantity</th>
+                                            <th class=" font-weight-bold text-muted text-uppercase">Rate</th>
+                                            <th class=" pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
+                                            <th style="display: none;"class=" pr-0 font-weight-bold text-muted text-uppercase" id="headeraddrows" >Add Rows</th>
+                    
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="font-weight-boldest font-size-lg">
-                                            <td class="pl-0 pt-7">Creative Design</td>
-                                            <td class="text-right pt-7">80</td>
-                                            <td class="text-right pt-7">$40.00</td>
-                                            <td class="text-danger pr-0 pt-7 text-right">$3200.00</td>
-                                        </tr>
-                                        <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                            <td class="border-top-0 pl-0 py-4">Front-End Development</td>
-                                            <td class="border-top-0 text-right py-4">120</td>
-                                            <td class="border-top-0 text-right py-4">$40.00</td>
-                                            <td class="text-danger border-top-0 pr-0 py-4 text-right">$4800.00</td>
-                                        </tr>
-                                        <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                            <td class="border-top-0 pl-0 py-4">Back-End Development</td>
-                                            <td class="border-top-0 text-right py-4">210</td>
-                                            <td class="border-top-0 text-right py-4">$60.00</td>
-                                            <td class="text-danger border-top-0 pr-0 py-4 text-right">$12600.00</td>
-                                        </tr>
-                                    </tbody>
+                                    
+                                    <tbody class="table-tbody">
+
+                                        <% var i=0; itemdata.forEach((el)=>{ i++  %>
+                                            <tr>
+                                                <td><%= i++ %></td>
+                                                <td><%= el.name %></td>
+                                                <td><%= el.qty %></td>
+                                                <td>0</td>
+                                                <td><%= el.rate %></td>
+                                                <td> <%= el.amount %> </td>
+                                                <td></td>
+                                                </tr>
+                                            <%}) %>
+
+                                            <!-- <tr>
+                                                 <td>1</td>
+
+                                                 <td> <select id="itemdropdown" class="form-control itemdropdown" name="option0"> </select>
+                                                        
+                                                 </td>
+
+                                                <td><input  id="qty0" type="text" class="form-control qty" name="qty0"></td>
+                                                <td><input type="text" class="form-control " name="availableqty"></td>
+                                                <td><input id="rate0" type="text" class="form-control rate" name="rate0"></td>
+                                                <td><input type="text" id="amount0" class="form-control amount" name="amount0"></td>
+                                                <td><button id="addformtablerows" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> </tr>
+                                                
+                                            </tr> -->
+                                    
+  
+                                          </tbody>
+
                                 </table>
+                                
                             </div>
+                            <button type="submit" class="btn btn-primary" name="save" value="billdata">Save</button>
+                                    
+                </form>
+            </NLFORM>
                         </div>
+                        
                     </div>
+                    
                     <!-- end: Invoice body-->
                     <!-- begin: Invoice footer-->
                     <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0">
                         <div class="col-md-9">
-                            <div class="d-flex justify-content-between flex-column flex-md-row font-size-lg">
-                                <div class="d-flex flex-column mb-10 mb-md-0">
-                                    <div class="font-weight-bolder font-size-lg mb-3">BANK TRANSFER</div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <span class="mr-15 font-weight-bold">Account Name:</span>
-                                        <span class="text-right">Barclays UK</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <span class="mr-15 font-weight-bold">Account Number:</span>
-                                        <span class="text-right">1234567890934</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span class="mr-15 font-weight-bold">Code:</span>
-                                        <span class="text-right">BARC0032UK</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column text-md-right">
-                                    <span class="font-size-lg font-weight-bolder mb-1">TOTAL AMOUNT</span>
-                                    <span class="font-size-h2 font-weight-boldest text-danger mb-1">$20.600.00</span>
-                                    <span>Taxes Included</span>
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table" id="formtable">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th class="font-weight-bold text-muted text-uppercase">Total  Qty</th>
+                                            <th class="font-weight-bold text-muted text-uppercase">Total  Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr class="font-weight-bolder">
+                                            <td id="totalqty" class="text-danger font-size-h3 font-weight-boldest" >0</td>
+                                            <td id="totalamount" class="text-danger font-size-h3 font-weight-boldest" >0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -112,8 +142,14 @@
                     <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                         <div class="col-md-9">
                             <div class="d-flex justify-content-between">
-                                <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.print();">Download Invoice</button>
+
+                                
+                                <!-- <button type="submit" class="btn btn-light-success font-weight-bold headerapprove" >Accept</button>-->
+                                  
+                                <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button>
                                 <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Invoice</button>
+                               <!-- <button type="button" class="btn btn-hover-bg-dark btn-text-dark btn-hover-text-white border-0 font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button>-->
+
                             </div>
                         </div>
                     </div>
@@ -128,3 +164,379 @@
     <!--end::Entry-->
 </div>
 <!--end::Content-->
+
+<!-- Modal -->
+<div class="modal fade" id="myModaldate" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="exampleModalLabel">Change Date To all Items</h5>
+
+
+</div>
+<div class="modal-body">
+<NLFORM>
+<form method="POST" >
+<div id="totalcount" style="display:none;">
+
+</div>
+<input type="date" id="changeallitemdate" class="form-control changeallitemdate" name="changeallitemdate" value="">
+
+<table class="table modeltable">
+<thead>
+<tr>
+    <th scope="col" style="display:none;">line #</th>
+    <th scope="col">Product</th>
+    <th scope="col">Qty</th>
+    <th scope="col">Rate</th>
+    <th scope="col">Remove</th>
+</tr>
+</thead>
+<tbody class="table-body">
+
+</tbody>
+
+</table>
+<button type="submit" class="btn btn-primary" name="save" value="linedate">Save</button>
+</form>
+</NLFORM>
+</div>
+
+<div class="modal-footer">
+
+</div>
+</div>
+
+</div>
+</div>
+<!-- END  Modal -->
+<NLFORM>
+<form method="POST" id="approveform">
+<div id="approvepost" style="display: none;">
+</div>
+</form>
+</NLFORM>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+
+var totalqty=0
+var totalAmount=0
+var button = document.getElementById("addformtablerows");
+var dataArray=[];
+var itemdropdown=''
+var masterData=''
+var lines=1
+// button.addEventListener( "click" , function(){
+
+// var options = document.getElementsByClassName('qty');
+// alert("qty-"+options[0].value)
+// var calc = 0;
+// var totalPrice = 0;    
+
+//  for (i = 0; i < options.length; i++) {
+ 
+//     calc = calc + parseInt( options[i].value );
+// }
+// totalqty=calc + totalPrice;
+
+// });
+
+
+$(function () {
+counttd=0
+sno=2
+
+$('#table-main .table-tbody').on('click','.addformtablerows',function(){
+
+              var value = this.value;
+             var $cell = $(this).parent();
+             var $row = $cell.parent();
+             if($("#qty"+$row.index()).val()=="")
+             {
+                 alert("enter qty") 
+                return
+             }
+      
+
+            $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
+qty=0
+td='<tr>'
+td+='<td>'+sno+'</td>' 
+td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"'>"+itemdropdown+" </select>"
+td+=  '</td>'                                                              
+td+='<td><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" ></td>'  
+td+=' <td><input type="text" class="form-control av" name="avlqty'+lines+'"></td>'  
+td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" ></td>'  
+td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" ></td>'                                              
+td+='<td style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>'
+td+='<td><button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> '
+td+=  '</tr>'                                                              
+                                           
+// $('#table-main tbody').find('.addformtablerows').each(function(){
+
+//     $(this).append(td);
+// })
+
+$.fn.eachFunction();
+// $('#table-main tbody').append(td)
+// var tr = $(this).prev('modeltable').find('tr:last');
+// tr.clone(true).insertAfter(tr);
+
+sno++
+counttd++
+lines++
+$('#totalrows').val(counttd);
+});
+
+$.fn.eachFunction=function(){
+
+$('#table-main').find('.table-tbody').each(function(){
+        //Retrieves the text within <td>
+     $(this).append(td);
+})
+
+$('#table-main').find('.table-tbody .qty').each(function(){
+if ($(this).val() != "") {totalqty+=parseInt($(this).val());}      
+})
+$('#table-main').find('.table-tbody .amount').each(function(){
+if ($(this).val() != "") {totalAmount+=parseInt($(this).val());}      
+})
+$('#totalqty').empty().append();
+$("#totalqty").append(totalqty);
+totalqty=0
+$('#totalamount').empty().append();
+$("#totalamount").append(totalAmount);
+totalAmount=0
+
+}
+
+///////////////
+$('#table-main .table-tbody').on('click','.delrow',function(){       //delete buttons
+
+$(this).parents('tr').remove();
+counttd--
+$('#totalrows').text(counttd);
+sno--
+lines--
+$.fn.eachFunctiondel();
+
+
+});
+$.fn.eachFunctiondel=function(){
+
+$('#table-main').find('.table-tbody .qty').each(function(){
+
+if ($(this).val() != "") {totalqty+=parseInt($(this).val());} 
+})
+$('#table-main').find('.table-tbody .amount').each(function(){
+if ($(this).val() != "") {totalAmount+=parseInt($(this).val());}      
+})
+$('#totalqty').empty().append();
+$("#totalqty").append(totalqty);
+totalqty=0
+$('#totalamount').empty().append();
+$("#totalamount").append(totalAmount);
+totalAmount=0
+
+}
+
+});
+
+
+$(function () {
+
+$("#checkAll").click(function(){
+$('input:checkbox').not(this).prop('checked', this.checked);
+});
+
+//
+
+// var Nodata ="<tr><th colspan='10' style='font-weight:normal;'>No Data Available In Table</th></tr>"
+// $('#table-main tbody').append(Nodata);
+
+$("#modaldate").click(function () {
+
+$('.modeltable .table-body').empty();
+var counttd=0
+var nodata='<tr colspan="7"><td>No data Selected </td></tr>'
+//Loop through all checked CheckBoxes in GridView.
+$("#table-main tbody input[type=checkbox]:checked").each(function () {
+
+// var row = $(this).closest("tr")[0];
+//var name = $('.txt-td').val();
+linenumber=$(this).parents("tr").find(".linenumber").text();
+item =$(this).parents("tr").find(".item").text();
+qty =$(this).parents("tr").find(".qty").text();
+rate =$(this).parents("tr").find(".rate").text();
+// amount =$(this).parents("tr").find(".amount").text();
+// itemid=$(this).parents("tr").find(".itemid").text();
+// linenumber=$(this).parents("tr").find(".linenumber").text();
+console.log("qty",qty)
+td=  '<tr>'
+td+= '<td style="display:none;" ><input id="modallinenumber" class="form-control" value="'+linenumber+'" name="linenumber'+counttd+'" ></td>'
+td+= '<td><input id="modalitem" class="form-control " value="'+item+'" name="item'+counttd+'" ></td>'
+td+= '<td><input id="modalqty" class="form-control" value="'+qty+'" name="qty'+parseInt(linenumber-1)+'" ></td>' 
+td+= '<td><input id="modalqty" class="form-control" value="'+rate+'" name="rate'+counttd+'" ></td>' 
+td+='<td><button type="button" class="btn btn-danger removebtntop" id="deltop">-</button></td>'
+td+='</tr>' 
+counttd++ 
+$('.modeltable .table-body').append(td);
+});
+if(counttd==0)
+{
+$('.modeltable .table-body').append(nodata);
+}
+
+total= '<input id="linenumbertop" class="form-control" value="'+counttd+'" name="linenumbertop" >' 
+$('#totalcount').append(total);
+})
+
+$(".headerapprove").click(function () 
+{
+
+var counttd=0
+//Loop through all checked CheckBoxes in GridView.
+$("#table-main tbody input[type=checkbox]:checked").each(function () {
+// var row = $(this).closest("tr")[0];
+//var name = $('.txt-td').val();
+linenumber=$(this).parents("tr").find(".linenumber").text();
+td='<input type="text" id="changeallitemdate" class="form-control changeallitemdate" name="lineapprove'+counttd+'" value="'+linenumber+' " >'
+$('#approvepost').append(td);
+counttd++
+});
+td='<button type="submit" class="btn btn-light-success font-weight-bold" id="btnapprove" name="save" value="approve">Approve</button>'
+$('#approvepost').append(td);
+total= '<input id="linenumbertop" class="form-control" value="'+counttd+'" name="linenumbertop" >' 
+$('#approvepost').append(total);
+console.log("check")
+$("#btnapprove").click();
+const form  = document.getElementById('#approveform');
+// form.addEventListener('submit', (event) => {
+// handle the form data
+// form.submit();
+// });
+
+})
+});
+ //////////////................ajax.......................///////////////
+   $(document).ready(function(){
+       
+
+    var url = window.location.href;
+    url=url.replace("create-sales-order", "getsaleorder");
+   
+
+   var orderid = [{ //Fetch form data
+            'orderid'     : url+'&id=123' //Store name fields value
+            }];
+            console.log(orderid)
+
+    $.ajax({ 
+            type      : 'POST', 
+            url       : '/demo7/getsaleorder',
+            data      : JSON.stringify(orderid), 
+            contentType: "application/json; charset=utf-8",
+            success   : function(data) 
+                        {
+                          console.log(data)
+                        }
+        });
+
+ 
+   $.ajax(
+     {
+      url: "http://localhost:3000/data",
+      headers: { 'Access-Control-Allow-Origin': '*' }, 
+      success: function(result){
+		console.log("checkdata",result.Products);
+		masterData=result
+        setItems(result.Products)
+       // result = JSON.parse(result);
+
+        //loadGraphAPI(result[0],result[1],result[2],result[3]);
+      }});
+
+      $('form').submit(function(event) { //Trigger on form submit
+        $('#name + .throw_error').empty(); //Clear the messages first
+        $('#success').empty();
+
+        //Validate fields if required using jQuery
+            
+             var postDataArray=[];
+
+
+        var postForm = { //Fetch form data
+            'tranid'     : 'sdsd' //Store name fields value
+                       };
+                       
+             for(var i=0;i<lines;i++)
+             {
+                postDataArray.push(
+                    {
+                        'rate': $("#rate"+i).val(),'qty': $("#qty"+i).val(),
+                         'amount': $("#amount"+i).val(),
+                         'item': $('#itemdropdown'+i).find(":selected").text()
+                    }
+                    )
+             }
+             postForm.item=postDataArray
+             console.log("checks postDataArray",postForm)
+
+        $.ajax({ 
+            type      : 'POST', //Method type
+            url       : 'http://localhost:8000/demo7/receive', //Your form processing file URL
+            data      : JSON.stringify(postForm), //Forms name
+            dataType  : 'json',
+            success   : function(data) 
+                        {
+                          
+                        }
+        });
+        event.preventDefault(); //Prevent the default submit
+    });
+      
+});
+//////////////................ajax end.......................///////////////
+
+function setItems(itemData)
+{
+    itemdropdown+='<option></option>'
+    for(var i=0; i<itemData.length; i++)
+    {
+        itemdropdown+='<option value="'+itemData[i].name+'">'+itemData[i].name+'</option>'
+    }
+    $("#itemdropdown").append(itemdropdown);  
+}
+
+$(document).ready(function () {
+        //Dropdownlist Selectedchange event
+        $('#table-main').on('change', '.itemdropdown', function()  {
+            // // var selectedValue = $(this).val();
+         
+              var value = this.value;
+             var $cell = $(this).parent();
+             var $row = $cell.parent();
+          //   alert("Selected ["+value+"] in cell ["+$cell.index()+"] of row ["+$row.index()+"]");
+            // // var nextfield = row.find('.classnamefornextfield'); 
+            // // $(nextfield).html(selectedVal);
+            if($(this).val()!="")
+            {
+               // alert($(this).val())
+               
+                for(var i=0; i<masterData.Products.length; i++)
+                {
+                    if(masterData.Products[i].name==$(this).val())
+                    {
+                        $(this).parent($('#table-main tbody #rate'+$row.index()+'').val(masterData.Products[i].rate));
+                    }
+                }
+               
+            }
+        })
+    });
+
+</script>

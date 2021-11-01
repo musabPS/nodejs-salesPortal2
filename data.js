@@ -33,7 +33,18 @@ module.exports = [
         {
           "id": "1",
           "name": "shing shing wooden door",
-          "rate": 2
+          "rate": 2,
+          "qty" : 5,
+          "amount" : 1212
+          
+        },
+        {
+          "id": "1",
+          "name": "shing shing wooden door",
+          "rate": 2,
+          "qty" : 5,
+          "amount" : 1212
+          
         }
       ]
     },
@@ -71,7 +82,9 @@ module.exports = [
         {
           "id": "1",
           "name": "shing shing wooden door",
-          "rate": 2
+          "rate": 2,
+          "qty" : 5,
+          "amount" : 1212
         }
       ]
     },
@@ -109,7 +122,9 @@ module.exports = [
         {
           "id": "1",
           "name": "shing shing wooden door",
-          "rate": 2
+          "rate": 2,
+          "qty" : 5,
+          "amount" : 1212
         }
       ]
     },
@@ -147,7 +162,9 @@ module.exports = [
         {
           "id": "1",
           "name": "shing shing wooden door",
-          "rate": 2
+          "rate": 2,
+          "qty" : 5,
+          "amount" : 1212
         }
       ]
     },
@@ -185,7 +202,9 @@ module.exports = [
         {
           "id": "1",
           "name": "shing shing wooden door",
-          "rate": 2
+          "rate": 2,
+          "qty" : 5,
+          "amount" : 1212
         }
       ]
     }

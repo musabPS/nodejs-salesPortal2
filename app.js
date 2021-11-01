@@ -6,7 +6,8 @@ const express = require('express')
 const path = require('path')
 const methodOverride = require('method-override')
 const data = require('./data.js')
-
+const masterdata = require('./masterdata.js')
+const bodyParser = require('body-parser');
 // console.log(data)
 let publicDirectoryPath = path.join(__dirname, './demo7/public')
 
@@ -17,7 +18,8 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname,'./demo7/views'))
 app.use('/',express.static(path.join(__dirname, './demo7/public')))
 app.use('/demo1',express.static(path.join(__dirname, './demo1/public')))
-
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
 // app.use(express.static(publicDirectoryPath)) 
@@ -38,6 +40,7 @@ app.get('/create-sales-order', (req,res)=>{
 app.get('/sales-orders', (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "pages/table"
+    console.log("trandata",data)
     res.render('index', {route,data}) 
 })
 app.get('/view',async (req,res)=>{
@@ -46,6 +49,26 @@ app.get('/view',async (req,res)=>{
     let route = "pages/transaction"
     res.render('index', {route})
 })
+
+//////////////////////...data s......////////////////////
+app.get("/data", (req,res)=>{
+    // console.log("Req",req)
+    
+     res.send(masterdata)
+ })
+
+ app.post("/getsaleorder", (req,res)=>{   //get data from ajax
+     console.log("Req",req.body)
+     req.body._id=getNextId(data)
+     console.log("fnalreq.body",req.body);
+     data.push(req.body)
+     res.send(data)
+ })
+ function getNextId(obj) {
+    return (Math.max.apply(Math, obj.map(function(o) {
+      return o._id;
+    })) + 1)
+ }
  
 app.get('/sales-orders/:id', async (req,res)=>{
     app.use('/sales-orders',express.static(path.join(__dirname, './demo7/public')))
@@ -56,17 +79,26 @@ app.get('/sales-orders/:id', async (req,res)=>{
             return el
         }
     })
-    console.log("salesorder data", salesOrderData)
-    res.render('index', {route,salesOrderData})
+     itemdata=salesOrderData[0].items
+    console.log("salesorder data", itemdata)
+    res.render('index', {route,itemdata,salesOrderData})
 })
 
 app.get('/sales-orders/:id/edit', async (req,res)=>{
     var {id} = req.params
     app.use('/sales-orders/'+id ,express.static(path.join(__dirname, './demo7/public')))
 
+    var salesOrderData = data.filter((el)=>{
+        if(el._id == id){
+            return el
+        }
+    })
+
+    itemdata=salesOrderData[0].items
     let route = "pages/transaction"
-    res.render('index', {route})
+    res.render('index', {route,salesOrderData,itemdata})
 })
+
 // app.put('/sales-orders/:id', async (req,res)=>{
 //     var {id} = req.params
 //     let route = "pages/salesOrderForm"
@@ -79,14 +111,12 @@ app.get('/sales-orders/:id/edit', async (req,res)=>{
 // })
 
 
-
-
-
 app.get('/demo1', (req,res)=>{
     app.set('views', path.join(__dirname,'./demo1/views'))
     res.render('index')
 }) 
-const port =  process.env.PORT || 8000
+
+const port =  process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 }) 
