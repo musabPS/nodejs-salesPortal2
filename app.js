@@ -80,7 +80,7 @@ app.get('/sales-orders/:id', async (req,res)=>{
         }
     })
      itemdata=salesOrderData[0].items
-    console.log("salesorder data", itemdata)
+    console.log("salesorder data", data)
     res.render('index', {route,itemdata,salesOrderData})
 })
 

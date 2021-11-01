@@ -254,7 +254,7 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
 qty=0
 td='<tr>'
 td+='<td>'+sno+'</td>' 
-td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"'>"+itemdropdown+" </select>"
+td+="<td><select id='itemdropdown0"+lines+"' class='form-control itemdropdown' name='option"+lines+"'>"+itemdropdown+" </select>"
 td+=  '</td>'                                                              
 td+='<td><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" ></td>'  
 td+=' <td><input type="text" class="form-control av" name="avlqty'+lines+'"></td>'  
@@ -467,11 +467,11 @@ const form  = document.getElementById('#approveform');
                     {
                         'rate': $("#rate"+i).val(),'qty': $("#qty"+i).val(),
                          'amount': $("#amount"+i).val(),
-                         'item': $('#itemdropdown'+i).find(":selected").text()
+                         'name': $('#itemdropdown'+i).find(":selected").text()
                     }
                     )
              }
-             postForm.item=postDataArray
+             postForm.items=postDataArray
              console.log("checks postDataArray",postForm)
 
         $.ajax({ 
@@ -497,7 +497,7 @@ function setItems(itemData)
     {
         itemdropdown+='<option value="'+itemData[i].name+'">'+itemData[i].name+'</option>'
     }
-    $("#itemdropdown").append(itemdropdown);  
+    $(".itemdropdown").append(itemdropdown);  
 }
 
 $(document).ready(function () {
