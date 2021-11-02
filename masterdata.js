@@ -1,22 +1,21 @@
 module.exports={
 
-
 "Customers":[
     {
         "id":1,
-        "name":"Huang Helou huggu"
+        "name":"Huang Helou"
     },
     {
         "id":2,
-        "name":"Wang paadu"
+        "name":"Wang"
     },
     {
         "id":3,
-        "name":"Chen chutt"
+        "name":"Chen"
     },
     {
         "id":4,
-        "name":"Zhou "
+        "name":"Zhou"
     },
     {
         "id":5,

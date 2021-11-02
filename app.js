@@ -7,6 +7,7 @@ const path = require('path')
 const methodOverride = require('method-override')
 const data = require('./data.js')
 const masterdata = require('./masterdata.js')
+const invitmdata = require('./invoice_itemfulldata.js')
 const bodyParser = require('body-parser');
 // console.log(data)
 let publicDirectoryPath = path.join(__dirname, './demo7/public')
@@ -66,7 +67,7 @@ app.get('/create-sales-order', (req,res)=>{
 app.get('/sales-orders', (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "pages/table"
-    console.log("trandata",data)
+   // console.log("trandata",data)
     res.render('index', {route,data}) 
 })
 app.get('/view',async (req,res)=>{
@@ -76,19 +77,33 @@ app.get('/view',async (req,res)=>{
     res.render('index', {route})
 })
 
+app.get('/itemfulfillments', (req,res)=>{
+     let route = "pages/itemfulfillment_table"
+      console.log("invitmdata.itemfulfillments")
+     let itmdata=invitmdata.itemfulfillments
+     let trantype="Item Fulfillment"
+     res.render('index', {route,itmdata,trantype}) 
+ })
+ app.get('/invoices', (req,res)=>{
+    let route = "pages/itemfulfillment_table"
+     
+     let trantype="Invoice"
+    let itmdata=invitmdata.invoice
+    res.render('index', {route,itmdata,trantype}) 
+})
+
 //////////////////////...data s......////////////////////
 app.get("/data", (req,res)=>{
     // console.log("Req",req)
-    
      res.send(masterdata)
  })
 
  app.post("/getsaleorder", (req,res)=>{   //get data from ajax
-     console.log("Req",req.body)
+     //console.log("Req",req.body)
      req.body._id=getNextId(data)
      
      req.body.tranid="SO_"+req.body._id
-     console.log("fnalreq.body",req.body);
+   //  console.log("fnalreq.body",req.body);
      data.push(req.body)
      res.send(data)
  })
@@ -107,9 +122,9 @@ app.get('/sales-orders/:id', async (req,res)=>{
             return el
         }
     })
-    console.log("salesorder data", salesOrderData)
+   // console.log("salesorder data", salesOrderData)
      itemdata=salesOrderData[0].items
-    console.log("salesorder data", salesOrderData)
+   // console.log("salesorder data", salesOrderData)
     res.render('index', {route,itemdata,salesOrderData})
 })
 
