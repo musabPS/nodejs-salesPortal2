@@ -479,7 +479,7 @@ const form  = document.getElementById('#approveform');
 
    $.ajax(
      {
-      url: "http://localhost:3000/data",
+      url: "/data",
       headers: { 'Access-Control-Allow-Origin': '*' }, 
       success: function(result){
 		console.log("checkdata",result.Products);
