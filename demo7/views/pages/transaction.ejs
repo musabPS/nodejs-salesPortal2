@@ -18,7 +18,9 @@
 										<div class="row justify-content-center bgi-size-cover bgi-no-repeat py-8 px-8 py-md-27 px-md-0" style="background-image: url(assets/media/misc/bg-3.jpg);">
 											<div class="col-md-9">
 												<div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
-                                                    <h1 class="display-4 font-weight-boldest mb-10 opacity-80 text-white">Sale Order <span id="orderid"> </span> <p class="text-danger" style="font-size:20px;">Pending</p></h1>
+                                                    <h1 class="display-4 font-weight-boldest mb-10 opacity-80 text-white">Sale Order <span id="orderid"> </span> 
+                                                        <!-- <p class="text-danger" style="font-size:20px;">Pending</p> -->
+                                                    </h1>
 													<div class="d-flex flex-column align-items-md-end px-0">
 													
 													
@@ -71,7 +73,7 @@
 
                                         <% var i=0; itemdata.forEach((el)=>{ i++  %>
                                             <tr>
-                                                <td style="text-align: center;"><%= i++ %></td>
+                                                <td style="text-align: center;"><%= i %></td>
                                                 <td style="text-align: center;"><%= el.name %></td>
                                                 <td style="text-align: center;"><%= el.qty %></td>
                                                
@@ -142,8 +144,8 @@
                                 
                                 <!-- <button type="submit" class="btn btn-light-success font-weight-bold headerapprove" >Accept</button>-->
                                   
-                                <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button>
-                                <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Invoice</button>
+                                <!-- <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button> -->
+                                <button style="float:right;" type="button" class="btn btn-primary font-weight-bold" onclick="window.print();"  ><i class="flaticon2-file-1" ></i> Print Invoice</button>
                                <!-- <button type="button" class="btn btn-hover-bg-dark btn-text-dark btn-hover-text-white border-0 font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button>-->
 
                             </div>

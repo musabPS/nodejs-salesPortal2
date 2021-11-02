@@ -15,7 +15,8 @@
 										<div class="row justify-content-center py-8 px-8 py-md-27 px-md-0">
 											<div class="col-md-9">
 												<div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
-													<h1 class="display-4 font-weight-boldest mb-10">Sales Order # <span>2323 </span> <p class="text-danger" style="font-size:20px;">Pending</p></h1>
+													<h1 class="display-4 font-weight-boldest mb-10">Sales Order </h1>
+                                                        <!-- <p class="text-danger" style="font-size:20px;">Pending</p>--> 
                                                    
 													<div class="d-flex flex-column align-items-md-end px-0">
 													
@@ -88,7 +89,7 @@
                                 </table>
                                 
                             </div>
-                            <button type="submit" class="btn btn-primary" name="save" value="billdata">Save</button>
+                            <button type="submit" class="btn btn-primary" name="save" value="billdata" ><i class="flaticon2-send-1"></i> Save</button>
                                     
                 </form>
             </NLFORM>
@@ -125,11 +126,10 @@
                         <div class="col-md-9">
                             <div class="d-flex justify-content-between">
 
-                                
                                 <!-- <button type="submit" class="btn btn-light-success font-weight-bold headerapprove" >Accept</button>-->
                                   
-                                <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button>
-                                <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Invoice</button>
+                                <!-- <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button> -->
+                                <!-- <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Invoice</button> -->
                                <!-- <button type="button" class="btn btn-hover-bg-dark btn-text-dark btn-hover-text-white border-0 font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button>-->
 
                             </div>
@@ -146,18 +146,25 @@
          <!-- begin::sideCard-->
         <!--begin::Card-->
         
-        <div class="card card-custom bg-primary" style="height: 40%; width: 23%; float: left;  margin-left: 1%; ">  
+        <div class="card card-custom bg-white" style="height: 30%; width: 26%; float: right;  margin-left: 1%; ">  
             <div class="card-header border-0">
                 <div class="card-title">
                     <span class="card-icon">
                         <i class="flaticon2 "></i>
                     </span>
-                    <h3 class="card-label  text-white">Summary</h3>
+                    <h3 class="card-label  text-black">Summary</h3>
                 </div>
                
             </div>
             <div class="separator separator-solid separator-grey opacity-20"></div>
-            <div class="card-body text-white "><p> <h5>Total Amount : <span id="totalamount" class="text-danger"> 0 </span></h5>  </p> <h5><p>Total Quantity : <span id="totalqty" class="text-danger"> 0 </span></p></h5></div>
+            <div class="card-body text-black "><p> <h5>Total Amount : <span id="totalamount" class="text-danger"> 0 </span></h5>  </p> <h5><p>Total Quantity : <span id="totalqty" class="text-danger"> 0 </span></p></h5>
+                <div class="separator separator-solid separator-grey opacity-50"></div>
+                <div class="separator separator-solid separator-grey opacity-50"></div>
+            </br>
+                <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();"> <i class="flaticon2-file-1"></i> Print Invoice</button>
+            </div>
+           
+          
         </div>
 
         <!--end::Card-->
@@ -272,12 +279,12 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
 qty=0
 td='<tr>'
 td+='<td>'+sno+'</td>' 
-td+="<td><select id='itemdropdown0"+lines+"' class='form-control itemdropdown' name='option"+lines+"'>"+itemdropdown+" </select>"
+td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' required>"+itemdropdown+" </select>"
 td+=  '</td>'                                                              
-td+='<td><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" ></td>'  
+td+='<td><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" required></td>'  
 //td+=' <td><input type="text" class="form-control av" name="avlqty'+lines+'"></td>'  
-td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" ></td>'  
-td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" ></td>'                                              
+td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" required></td>'  
+td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" required></td>'                                              
 td+='<td style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>'
 td+='<td><button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> '
 td+=  '</tr>'                                                              
