@@ -243,6 +243,7 @@ var dataArray=[];
 var itemdropdown=''
 var masterData=''
 var lines=1
+var currentcell=0
 // button.addEventListener( "click" , function(){
 
 // var options = document.getElementsByClassName('qty');
@@ -273,14 +274,15 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
 
               var value = this.value;
              var $cell = $(this).parent();
-             var $row = $cell.parent();
-             
+             currentcell = $cell.parent();
+             $row = $cell.parent();
+             $row = currentcell 
              if($("#qty"+$row.index()).val()=="")
              {
                  alert("enter qty") 
                 return
              }
-               
+            
                $("#totalitems").text($('#table-main tr').length)
 
             $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
@@ -288,6 +290,7 @@ qty=0
 td='<tr>'
 //td+='<td>'+sno+'</td>' 
 td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' required>"+itemdropdown+" </select>"
+   
 td+=  '</td>'                                                              
 td+='<td><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" required></td>'  
 //td+=' <td><input type="text" class="form-control av" name="avlqty'+lines+'"></td>'  
@@ -301,7 +304,7 @@ td+=  '</tr>'
 
 //     $(this).append(td);
 // })
-
+         
 $.fn.eachFunction();
 // $('#table-main tbody').append(td)
 // var tr = $(this).prev('modeltable').find('tr:last');
@@ -314,11 +317,17 @@ $('#totalrows').val(counttd);
 });
 
 $.fn.eachFunction=function(){
-
+    
+    
+         
 $('#table-main').find('.table-tbody').each(function(){
         //Retrieves the text within <td>
      $(this).append(td);
 })
+
+$('#itemdropdown'+parseInt(lines)).select2({
+            placeholder: "Select Item"});
+            
 
 $('#table-main').find('.table-tbody .qty').each(function(){
 if ($(this).val() != "") {totalqty+=parseInt($(this).val());}      
@@ -553,7 +562,7 @@ function setCustomers(customerData)
 $(document).ready(function () {
 
      // Select2
-     $('.itemdropdown').select2({
+     $('#itemdropdown0').select2({
        placeholder: "Select Item",
       });
 
@@ -565,6 +574,7 @@ $(document).ready(function () {
         //Dropdownlist Selectedchange event
         $('#table-main').on('change', '.itemdropdown', function()  {
 
+            
            
             // // var selectedValue = $(this).val();
             $(".qty").change(function(){
@@ -578,7 +588,9 @@ $(document).ready(function () {
                  alert("enter qty") 
                 return
              }
-      
+            
+             $('#itemdropdown'+$row.index()).select2({
+              placeholder: "Select Item"});
 
             $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
 

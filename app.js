@@ -52,7 +52,7 @@ app.post('/login', (req,res)=>{
    
 })
 
-app.get('/', (req,res)=>{
+app.get('/',authCheck, (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "partials/_content"
     res.render('index',{route})
