@@ -146,7 +146,6 @@
                         <thead>
                             <tr>
                                 <th title="Field #1">S#</th>
-                                <th title="Field #2">View</th>
                                 <th title="Field #3">SO #</th>
                                 <th title="Field #4">Date</th>
                                 <th title="Field #5">Quantity</th>
@@ -164,8 +163,7 @@
                                     <td><%= el.trandata %></td>
                                     <td><%= el.quantity %></td>
                                     <td><%= el.amount %></td>
-                                    <td>  </td>
-                                    <td><a href= "/sales-orders/<%= el._id %>/edit" >    <i class="flaticon2-edit"></i> </a> <i class="flaticon2-rubbish-bin-delete-button"></i></td>
+                                    <td><a href= "/sales-orders/<%= el._id %>/edit" >    <i class="flaticon2-edit"></i> &nbsp;&nbsp;&nbsp; &nbsp;</a> <i class="flaticon2-rubbish-bin-delete-button"></i></td>
                                     
                                     </tr>
                                 <%}) %>

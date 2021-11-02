@@ -24,7 +24,33 @@ app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
 // app.use(express.static(publicDirectoryPath)) 
 
+const authCheck = (req, res, next) => {
+    if (!req.user) {
+        return res.redirect('/login')
+    }
+    next()
+}
 
+app.get('/login', (req,res)=>{
+    res.render("pages/login")
+   //  res.render('login')
+ })
+
+app.post('/login', (req,res)=>{
+    let credentials = { username:"jasim@point-star.com", password:"jasim" }
+    console.log("post route history", req.body )
+   if(req.body.username==credentials.username && req.body.password == credentials.password){
+       console.log("ifff")
+       req.user = "Jasim"
+       let route = "partials/_content"
+       res.render('index',{route})
+   }
+   else{
+       let message =  "Username or password is incorrect"
+       res.render('login',{message})
+   }
+   
+})
 
 app.get('/', (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
@@ -60,6 +86,8 @@ app.get("/data", (req,res)=>{
  app.post("/getsaleorder", (req,res)=>{   //get data from ajax
      console.log("Req",req.body)
      req.body._id=getNextId(data)
+     
+     req.body.tranid="testid"+req.body._id
      console.log("fnalreq.body",req.body);
      data.push(req.body)
      res.send(data)
@@ -79,8 +107,9 @@ app.get('/sales-orders/:id', async (req,res)=>{
             return el
         }
     })
+    console.log("salesorder data", salesOrderData)
      itemdata=salesOrderData[0].items
-    console.log("salesorder data", data)
+    console.log("salesorder data", salesOrderData)
     res.render('index', {route,itemdata,salesOrderData})
 })
 

@@ -5,6 +5,7 @@ module.exports = [
       "trandate": "9/23/2021",
       "quantity": "4",
       "amount": "4884.75",
+      "customer" : "sghuhds",
       "statusref": [
         {
           "value": "PurchOrd:A",
@@ -54,6 +55,7 @@ module.exports = [
       "trandate": "9/27/2021",
       "quantity": "1",
       "amount": "4884.75",
+      "customer" : "sghuhds",
       "statusref": [
         {
           "value": "PurchOrd:A",
@@ -94,6 +96,7 @@ module.exports = [
       "trandate": "9/28/2021",
       "quantity": "8",
       "amount": "4884.75",
+      "customer" : "sghuhds",
       "statusref": [
         {
           "value": "PurchOrd:A",
@@ -134,6 +137,7 @@ module.exports = [
       "trandate": "9/26/2021",
       "quantity": "3",
       "amount": "4884.75",
+      "customer" : "sghuhds",
       "statusref": [
         {
           "value": "PurchOrd:A",
@@ -174,6 +178,7 @@ module.exports = [
       "trandate": "9/24/2021",
       "quantity": "3",
       "amount": "4884.75",
+       "customer" : "sghuhds",
       "statusref": [
         {
           "value": "PurchOrd:A",

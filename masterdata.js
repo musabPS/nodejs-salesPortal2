@@ -1,7 +1,7 @@
 module.exports={
 
 
-"customers":[
+"Customers":[
     {
         "id":1,
         "name":"Huang Helou huggu"
