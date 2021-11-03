@@ -111,7 +111,7 @@ app.get("/data", (req,res)=>{
      //console.log("Req",req.body)
      req.body._id=getNextId(data)
      
-     req.body.tranid="SO_"+req.body._id
+     req.body.tranid="SO"+req.body._id
    //  console.log("fnalreq.body",req.body);
      data.push(req.body)
      res.send(data)
