@@ -11,15 +11,15 @@ module.exports={
     },
     {
         "id":3,
-        "name":"Chen"
+        "name":""
     },
     {
         "id":4,
-        "name":"Zhou"
+        "name":"john"
     },
     {
         "id":5,
-        "name":"chin chin chap"
+        "name":"keen"
     }
 ],
 "Products": [

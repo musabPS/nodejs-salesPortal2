@@ -1,7 +1,7 @@
 module.exports = [
     {
       "_id": "1",
-      "tranid": "SO112",
+      "tranid": "SO1",
       "trandate": "9/23/2021",
       "quantity": "4",
       "amount": "4884.75",
@@ -51,7 +51,7 @@ module.exports = [
     },
     {
       "_id": "2",
-      "tranid": "SO11244",
+      "tranid": "SO2",
       "trandate": "9/27/2021",
       "quantity": "1",
       "amount": "4884.75",
@@ -92,7 +92,7 @@ module.exports = [
     },
     {
       "_id": "3",
-      "tranid": "SO11243",
+      "tranid": "SO3",
       "trandate": "9/28/2021",
       "quantity": "8",
       "amount": "4884.75",
@@ -133,7 +133,7 @@ module.exports = [
     },
     {
       "_id": "4",
-      "tranid": "SO11243",
+      "tranid": "SO4",
       "trandate": "9/26/2021",
       "quantity": "3",
       "amount": "4884.75",
@@ -174,7 +174,7 @@ module.exports = [
     },
     {
       "_id": "5",
-      "tranid": "SO116743",
+      "tranid": "SO5",
       "trandate": "9/24/2021",
       "quantity": "3",
       "amount": "4884.75",

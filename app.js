@@ -37,20 +37,29 @@ app.get('/login', (req,res)=>{
    //  res.render('login')
  })
 
-app.post('/login', (req,res)=>{
-    let credentials = { username:"jasim@point-star.com", password:"jasim" }
+app.post('/login',async (req,res)=>{
+    let credentials = { username:"jasim@point-star.com", password:"1" }
     console.log("post route history", req.body )
+    const {username, password}=req.body 
+   // const user= await User.findOne({username})
+   // console.log("post route history", user )
    if(req.body.username==credentials.username && req.body.password == credentials.password){
        console.log("ifff")
        req.user = "Jasim"
        let route = "partials/_content"
        res.render('index',{route})
    }
-   else{
+    else{
        let message =  "Username or password is incorrect"
-       res.render('login',{message})
+        res.send(message)
    }
    
+})
+
+app.get('/signout',async (req,res)=>{
+
+    req.user = "";
+   res.redirect("/login")
 })
 
 app.get('/',authCheck, (req,res)=>{
