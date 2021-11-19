@@ -34,11 +34,11 @@
 													</div>
 													<div class="d-flex flex-column flex-root">
 														<span class="font-weight-bolder mb-2">Order NO.</span>
-														<span class="opacity-70"><%= salesOrderData[0].tranid %></span>
+														<span class="opacity-70"><%= salesOrderData[0].tranid %><input style="display: none;"  type="text" id="tranid" value="<%= salesOrderData[0].tranid %>"></span>
 													</div>
 													<div class="d-flex flex-column flex-root">
 														<span class="font-weight-bolder mb-2">Customer</span>
-														<span class="opacity-70" > <%= salesOrderData[0].customer%> </span>
+														<span class="opacity-70" > <select id="customerdropdown" class="form-control customerdropdown0" name="option" style="width:82%;"> <option value="<%= salesOrderData[0].customer%>"><%= salesOrderData[0].customer%></option> </select> </span>
 													</div>
 												</div>
 											</div>
@@ -48,9 +48,9 @@
                     
                     <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                         
-                        <div class="col-md-9">
-                            <NLFORM>
-                                <form method="POST" >
+                        <div class="col-md-10">
+                           
+                                <form method="POST">
                             <div class="table-responsive">
                                
                                 <td style="display:none;"><input id="totalrows" class="form-control" value="0" name="totalrows" style="display:none;"></td>
@@ -60,6 +60,7 @@
                                             
                                             <th class=" pl-0 font-weight-bold text-muted text-uppercase">S#</th>
                                             <th class=" pl-0 font-weight-bold text-muted text-uppercase">Product</th>
+                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase"></th>
                                             <th class=" font-weight-bold text-muted text-uppercase"> Qty</th>
                                            
                                             <th class=" font-weight-bold text-muted text-uppercase">Rate</th>
@@ -71,17 +72,23 @@
                                     
                                     <tbody class="table-tbody">
 
-                                        <% var i=0; itemdata.forEach((el)=>{ i++  %>
+                                        <% var i=0; var len=itemdata.length; itemdata.forEach((el)=>{  %>
                                             <tr>
-                                                <td style="text-align: center;"><%= i %></td>
-                                                <td style="text-align: center;"><%= el.name %></td>
-                                                <td style="text-align: center;"><%= el.qty %></td>
-                                               
-                                                <td style="text-align: center;"><%= el.rate %></td>
-                                                <td style="text-align: center;"> <%= el.amount %> </td>
-                                              
+                                                <td ><%= i+1 %></td>
+                                                <td > <select id="itemdropdown<%= i %>" class="form-control itemdropdown" name="option0" > <option value="'+itemData[i].name+'"><%= el.name %></option> </select></td>
+                                                <td>  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>
+
+                                                <td ><input  id="qty<%= i %>" type="number" class="form-control qty" name="qty0" value="<%= el.qty %>"></td>
+                                                <td ><input id="rate<%= i %>" type="text" class="form-control rate" name="rate0" value="<%= el.rate %>"></td>
+                                                <td > <input type="text" id="amount<%= i %>" class="form-control amount" name="amount0" value="<%= el.amount %>"></td>
+
+                                                <%if (len == i+1) { %>
+                                                    <td>   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
+                                                    <% } %>
+
                                                 </tr>
-                                            <%}) %>
+
+                                            <% i++;   }) %>
 
                                             <!-- <tr>
                                                  <td>1</td>
@@ -104,10 +111,10 @@
                                 </table>
                                 
                             </div>
-                            <!-- <button type="submit" class="btn btn-primary" name="save" value="billdata">Save</button> -->
+                            <button type="submit" class="btn btn-primary" name="save" value="billdata" ><i class="flaticon2-send-1"></i> Save</button>
                                     
                 </form>
-            </NLFORM>
+          
                         </div>
                         
                     </div>
@@ -163,53 +170,44 @@
 </div>
 <!--end::Content-->
 
+
 <!-- Modal -->
-<div class="modal fade" id="myModaldate" role="dialog">
-<div class="modal-dialog">
-
-<!-- Modal content-->
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="exampleModalLabel">Change Date To all Items</h5>
-
-
-</div>
-<div class="modal-body">
-<NLFORM>
-<form method="POST" >
-<div id="totalcount" style="display:none;">
-
-</div>
-<input type="date" id="changeallitemdate" class="form-control changeallitemdate" name="changeallitemdate" value="">
-
-<table class="table modeltable">
-<thead>
-<tr>
-    <th scope="col" style="display:none;">line #</th>
-    <th scope="col">Product</th>
-    <th scope="col">Qty</th>
-    <th scope="col">Rate</th>
-    <th scope="col">Remove</th>
-</tr>
-</thead>
-<tbody class="table-body">
-
-</tbody>
-
-</table>
-<button type="submit" class="btn btn-primary" name="save" value="linedate">Save</button>
-</form>
-</NLFORM>
-</div>
-
-<div class="modal-footer">
-
-</div>
-</div>
-
-</div>
-</div>
-<!-- END  Modal -->
+<div class="modal fade" id="inventorydetailmodel" role="dialog">
+    <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title">Inventory Detail</h5>
+    
+    
+    </div>
+    <div class="modal-body">
+    
+            <table class="table modeltable" id="">
+            <thead>
+            <tr>
+            
+                <th scope="col">Location</th>
+                <th scope="col">Quantity</th>
+            </tr>
+            </thead>
+            <tbody class="modeltable-body">
+            
+            </tbody>
+    
+            </table>
+    
+    </div>
+    
+    <div class="modal-footer">
+    
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    <!-- END  Modal -->
 <NLFORM>
 <form method="POST" id="approveform">
 <div id="approvepost" style="display: none;">
@@ -265,9 +263,10 @@ qty=0
 td='<tr>'
 td+='<td>'+sno+'</td>' 
 td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"'>"+itemdropdown+" </select>"
-td+=  '</td>'                                                              
-td+='<td><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" ></td>'  
-td+=' <td><input type="text" class="form-control av" name="avlqty'+lines+'"></td>'  
+td+=  '</td>'  
+td+='<td>  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
+
+td+='<td><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'" ></td>'  
 td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" ></td>'  
 td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" ></td>'                                              
 td+='<td style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>'
@@ -423,15 +422,9 @@ const form  = document.getElementById('#approveform');
  //////////////................ajax.......................///////////////
    $(document).ready(function(){
        
-
     var url = window.location.href;
-    url=url.replace("create-sales-order", "getsaleorder");
-   
+  console.log("cjsd",url)
 
-   var orderid = [{ //Fetch form data
-            'orderid'     : url+'&id=123' //Store name fields value
-            }];
-            console.log(orderid)
 
     $.ajax({ 
             type      : 'POST', 
@@ -447,12 +440,13 @@ const form  = document.getElementById('#approveform');
  
    $.ajax(
      {
-      url: "http://localhost:3000/data",
+      url: "/data",
       headers: { 'Access-Control-Allow-Origin': '*' }, 
       success: function(result){
 		console.log("checkdata",result.Products);
 		masterData=result
         setItems(result.Products)
+        setCustomers(result.Customers)
        // result = JSON.parse(result);
 
         //loadGraphAPI(result[0],result[1],result[2],result[3]);
@@ -468,7 +462,11 @@ const form  = document.getElementById('#approveform');
 
 
         var postForm = { //Fetch form data
-            'tranid'     : 'sdsd' //Store name fields value
+            'tranid'     :  $('#tranid').val(),
+            'customer'     : $('#customerdropdown').find(":selected").text(),
+            'trandate'     : $('#trandate').val(),
+            'amount'       : $('#totalamount').text(),
+            'quantity'     :  $('#totalqty').text(),
                        };
                        
              for(var i=0;i<lines;i++)
@@ -477,21 +475,25 @@ const form  = document.getElementById('#approveform');
                     {
                         'rate': $("#rate"+i).val(),'qty': $("#qty"+i).val(),
                          'amount': $("#amount"+i).val(),
-                         'item': $('#itemdropdown'+i).find(":selected").text()
+                         'name': $('#itemdropdown'+i).find(":selected").text(),
+                         
                     }
                     )
              }
-             postForm.item=postDataArray
+             postForm.items=postDataArray
              console.log("checks postDataArray",postForm)
 
         $.ajax({ 
             type      : 'POST', //Method type
-            url       : 'http://localhost:8000/demo7/receive', //Your form processing file URL
+            url       : '/editsaleorder', //Your form processing file URL
             data      : JSON.stringify(postForm), //Forms name
-            dataType  : 'json',
+            contentType: "application/json; charset=utf-8",
             success   : function(data) 
                         {
-                          
+                            console.log("sucess")
+                            Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="sales-orders">View all saleorder</a>'})
+                            $("#trandate option[value='']").attr('selected', true)
+                            $("#customer option[value='']").attr('selected', true)
                         }
         });
         event.preventDefault(); //Prevent the default submit
@@ -502,13 +504,39 @@ const form  = document.getElementById('#approveform');
 
 function setItems(itemData)
 {
-    itemdropdown+='<option></option>'
+    itemdropdown='<option></option>'
     for(var i=0; i<itemData.length; i++)
     {
         itemdropdown+='<option value="'+itemData[i].name+'">'+itemData[i].name+'</option>'
     }
-    $("#itemdropdown").append(itemdropdown);  
+    $(".itemdropdown").append(itemdropdown); 
+    
+    var rowCount = $('#table-main tr').length-1;
+         
+            for(var i=0; i<=rowCount; i++)
+            {
+                $('#itemdropdown'+i).select2({
+              placeholder: "Select Item"});
+            }
 }
+function setCustomers(customerData)
+{
+    dropdownData=''
+    for(var i=0; i<customerData.length; i++)
+    {
+        dropdownData+='<option value="'+customerData[i].name+'">'+customerData[i].name+'</option>'
+    }
+    $("#customerdropdown").append(dropdownData);  
+}
+// function setLocation(locationData)
+// {
+//     dropdownData='<option></option>'
+//     for(var i=0; i<locationData.length; i++)
+//     {
+//         dropdownData+='<option value="'+locationData[i].name+'">'+locationData[i].name+'</option>'
+//     }
+//     $("#customerlocation").append(dropdownData);  
+// }
 
 $(document).ready(function () {
         //Dropdownlist Selectedchange event
@@ -536,5 +564,109 @@ $(document).ready(function () {
             }
         })
     });
+
+    $(document).ready(function () {
+
+//////////.............. Select2 itemdropdown feature
+
+$('#itemdropdown0').select2({
+  placeholder: "Select Item",
+ // minimumResultsForSearch: Infinity
+ });
+
+//   $('.itemdropdown').on('change', function(){
+//    // Revalidate field
+//    validator.revalidateField('.itemdropdown');
+//   });
+   var inventorydetailarray=[]
+   //Dropdownlist Selectedchange event
+   $('#table-main').on('change', '.itemdropdown', function()  {
+
+        
+         //// var selectedValue = $(this).val();
+        $(".qty").change(function(){
+        //alert("The text has been changed.");
+        var value = this.value;
+        var $cell = $(this).parent();
+        var $row = $cell.parent();
+        var rowCount = $('#table-main tr').length-1;
+        if($("#qty"+$row.index()).val()=="")
+        {
+            alert("enter qty") 
+            return
+        }
+       
+        $('#itemdropdown'+$row.index()).select2({
+         placeholder: "Select Item"});
+
+        $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
+
+        });
+         var value = this.value;
+        var $cell = $(this).parent();
+        var $row = $cell.parent();
+        //   alert("Selected ["+value+"] in cell ["+$cell.index()+"] of row ["+$row.index()+"]");
+         // // var nextfield = row.find('.classnamefornextfield'); 
+        // // $(nextfield).html(selectedVal);
+        
+       
+        if($(this).val()!="")
+        {
+          // alert($(this).val())
+           for(var i=0; i<masterData.Products.length; i++)
+           {
+               if(masterData.Products[i].id==$(this).val())
+               {
+                   $(this).parent($('#table-main tbody #rate'+$row.index()+'').val(masterData.Products[i].rate));
+               }
+           }
+        }
+        inventorydetailarray.push({
+           "row":$row.index(),
+           "location":[
+               {
+                   "A":3,
+                   "B":4,
+                   "C": 6
+               }
+           ]
+       })
+       console.log("inventorydetail",inventorydetailarray)
+       $('#table-main').on('click','.inventorydetail',function()
+     {
+      
+       var value = this.value;
+        var $cell2 = $(this).parent();
+        var $row2 = $cell2.parent();
+        let inventorydetailrow = inventorydetailarray.find(inventorydetailarray => inventorydetailarray.row === $row2.index());
+        $('.modeltable .modeltable-body').empty().append()
+        for(var k=0; k<inventorydetailrow.location.length; k++)
+        {
+           mtd=''
+           for (const [key, value] of Object.entries(inventorydetailrow.location[0])) 
+           {
+               mtd+='<tr>'
+               mtd+='<td>'+key+'</td>'
+               mtd+='<td>'+value+'</td>'
+               mtd+='</tr>'
+           }
+           
+        }
+        
+           // console.log(inventorydetailrow.location)
+           //  mtd='<tr>'
+           //  mtd+='<td>'+inventorydetailrow.location[k]+'</td>'
+           //  mtd+='<td>'+inventorydetailrow.location[k]+'</td>'
+           //  mtd+='</tr>'
+        
+        $('.modeltable .modeltable-body').append(mtd);
+        
+     });
+
+   })
+   
+
+
+});
 
 </script>

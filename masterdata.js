@@ -1,25 +1,44 @@
 module.exports={
+   "Locations":[
+      {
+          "id":1,
+          "name":"Singapore : East Coast"
+      },
+      {
+          "id":2,
+          "name":"Singapore : West Coast"
+      },
+      {
+          "id":3,
+          "name":"Singapore : South Coast"
+      }
+  ],
 
 "Customers":[
     {
         "id":1,
-        "name":"Huang Helou"
+        "name":"Hamzah Abdul Gani",
+        "location" : "Singapore : East Coast",
     },
     {
         "id":2,
-        "name":"Wang"
+        "name":"wei sheng",
+        "location" : "Singapore : East Coast",
     },
     {
         "id":3,
-        "name":""
+        "name":"william",
+        "location" : "Singapore : East Coast",
     },
     {
         "id":4,
-        "name":"john"
+        "name":"john",
+        "location" : "Singapore : East Coast",
     },
     {
         "id":5,
-        "name":"keen"
+        "name":"Jasim Khan",
+        "location" : "Singapore : East Coast",
     }
 ],
 "Products": [
