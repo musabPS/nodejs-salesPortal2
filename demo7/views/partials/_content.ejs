@@ -638,7 +638,7 @@
 														<th title="Field #5">In transit Qty</th>
 														<th title="Field #5">Delivered Qty</th>
 														<th title="Field #6">Amount</th>
-														<th title="Field #6">Action</th>
+														
 														
 													 <% } %>
 													 <% if (type=="summary") { %>
@@ -647,7 +647,6 @@
 														<th title="Field #4">Date</th>
 														<th title="Field #5">Quantity</th>
 														<th title="Field #6">Amount</th>
-														<th title="Field #6">Action</th>
 													 <% } %>
 													
 												</tr>
@@ -670,7 +669,6 @@
 																<td><%= el.quantity %></td>
 																<td><%= el.quantity %></td>
 																<td><%= el.amount %></td>
-																<td><a href= "/sales-orders/<%= el._id %>/edit" >    <i class="flaticon2-edit"></i> &nbsp;&nbsp;&nbsp; &nbsp;</a> <i class="flaticon2-rubbish-bin-delete-button"></i></td>
 																
 																</tr>
 															<% } %>

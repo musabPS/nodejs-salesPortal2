@@ -48,7 +48,7 @@ const authCheck = (req, res, next) => {
        req.user = "musab"
        let route = "partials/_content"
        type="detail"
-        res.render('index',{route,data,headerData,type})
+        res.render('index',{route,data,type})
    // res.redirect("index")
    }
     else{
@@ -74,6 +74,18 @@ const authCheck = (req, res, next) => {
     let route = "pages/salesOrderForm"
     res.render('index', {route})
  })
+
+ app.get('/create-sales-order/:name', (req,res)=>{
+   //  app.set('views', path.join(__dirname,'./demo7/views'))
+
+   var {name} = req.params
+   app.use('/create-sales-order/'+name ,express.static(path.join(__dirname, './demo7/public')))
+
+     let route = "pages/salesOrderForm"
+     console.log("param",req.params)
+     res.render('index', {route})
+  })
+
  app.get('/sales-orders', (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "pages/table"
@@ -93,9 +105,15 @@ const authCheck = (req, res, next) => {
 
  app.get('/customerlist', (req,res)=>{
    let route = "pages/customertable"
-   
+  let type="customerlist"
     let customerData=masterdata.Customers
-   res.render('index', {route,customerData}) 
+   res.render('index', {route,customerData,type}) 
+})
+app.get('/customerrequestlist', (req,res)=>{
+   let route = "pages/customertable"
+    let type="customerrequest"
+    let customerData=masterdata.Customers
+   res.render('index', {route,customerData,type}) 
 })
 
  app.get('/view',async (req,res)=>{

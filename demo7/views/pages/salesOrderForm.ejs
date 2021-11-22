@@ -9,7 +9,7 @@
 
             <!-- begin::Card-->
             <div class="card card-custom overflow-hidden " style="width: 100%;">
-                <div class="card-body p-0">
+                <div class="card-body ">
                  <!-- begin: Invoice-->
 										<!-- begin: Invoice header-->
 										<div class="row justify-content-center py-8 px-8 py-md-27 px-md-0">
@@ -22,24 +22,36 @@
 													
 													</div>
 												</div>
+
+
+
 												<div class="separator separator-solid separator-primary opacity-20"></div>
-												<div class="d-flex justify-content-between pt-6">
-													<div class="d-flex flex-column flex-root">
-														<span class="font-weight-bolder mb-2">DATE</span>
-														<span  class="opacity-70"><input  id="trandate" type="date" class="form-control" name="qty0" required style="width:82%;"></span>
-													</div>
-													
-													<div class="d-flex flex-column flex-root">
-														<span class="font-weight-bolder mb-2">Customer</span>
-														<span class="opacity-70"><select id="customerdropdown" class="form-control customerdropdown0" name="option" style="width:82%;"> </select>
-														</span>
-													</div>
-                                                    <div class="d-flex flex-column flex-root">
-														<span class="font-weight-bolder mb-2">Location</span>
-														<span class="opacity-70"><select id="customerlocation" class="form-control customerlocationdropdown0" name="option" style="width:82%;"> </select>
-														</span>
-													</div>
-												</div>
+                                                <div class="form-group row">
+                                                    <div class="col-lg-4">
+                                                        <div class="d-flex flex-column flex-root ">
+                                                            <span class="font-weight-bolder mb-2">DATE</span>
+                                                            <span  class="opacity-70"><input  id="trandate" type="date" class="form-control" name="qty0" required style="width:70%;"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="d-flex flex-column flex-root ">
+                                                            <span class="font-weight-bolder mb-2">Customer</span>
+                                                            <span class="opacity-70"><select id="customerdropdown" class="form-control customerdropdown0" name="option" style="width:70%;"> </select>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="d-flex flex-column flex-root ">
+                                                            <span class="font-weight-bolder mb-2">Location</span>
+                                                            <span class="opacity-70"><select id="customerlocation" class="form-control customerlocationdropdown0" name="option" style="width:70%;"> </select>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+
+                                           
+
 											</div>
 										</div>
 										<!-- end: Invoice header-->
@@ -54,16 +66,73 @@
                         <div class="col-md-11">
                             
                                 <form method="POST">
-                            <div class="table-responsive">
+
+                                    <!-- <div id="kt_repeater_1">
+                                        <div class="form-group row">
+                                            <label class="col-lg-2 col-form-label text-right"></label>
+                                            <div data-repeater-list="" class="col-lg-12">
+                                                <div data-repeater-item="" class="form-group row align-items-center">
+                                                    <div class="col-md-2">
+                                                        <label>Item:</label>
+                                                        <select id="itemdropdown0" class="form-control itemdropdown" name="option0" > </select>
+                                                        <div class="d-md-none mb-2"></div>
+
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label>Item Desciption</label>
+                                                        <input  id="description" type="text" class="form-control description" name="discription">                                                        <div class="d-md-none mb-2"></div>
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+        
+                                                    <div class="col-md-2">
+                                                        <label>Qty:</label>
+                                                        <input  id="qty0" type="number" class="form-control qty" name="qty0">
+                                                        <div class="d-md-none mb-2"></div>
+                                                       
+                                                   
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label>Rate:</label>
+                                                        <input  id="rate0" type="text" class="form-control rate" name="rate0">
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                 
+                                                           
+                                                    <div class="col-md-2">
+                                                        <label>Amount:</label>
+                                                        <input type="text" id="amount0" class="form-control amount" name="amount0">
+                                                        <div class="d-md-none mb-2"> </div>
+                                                    </div>
+                                               
+                                                    <div class="col-md-2">
+                                                    </br>
+                                                        <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+                                                            <i class="la la-trash-o"></i></a>
+                                                        <a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+                                                            <i class="la la-plus"></i>ADD</a>
+                                                            <div class="d-md-none mb-2"> </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="separator separator-solid separator-primary opacity-20"></div>
+                             
+                                    </div> -->
+
+
+                                    
+                             <div class="table-responsive">
                                
                                 <td style="display:none;"><input id="totalrows" class="form-control" value="0" name="totalrows" style="display:none;"></td>
-                                <table class="table" id="table-main">
+                                
+                                <table class="table item-detail-table" id="table-main">
                                     <thead style="text-align: center;">
                                         <tr >
                                             
-                                            <!-- <th class=" pl-0 font-weight-bold text-muted text-uppercase">S#</th> -->
+                                             <!-- <th class=" pl-0 font-weight-bold text-muted text-uppercase">S#</th>  -->
                                             <th class=" pl-0 font-weight-bold text-muted text-uppercase">Product</th>
-                                            <th class=" font-weight-bold text-muted text-uppercase"> </th>
+                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase">in</th>
                                             <th class=" font-weight-bold text-muted text-uppercase"> Qty</th>
                                             <th class=" font-weight-bold text-muted text-uppercase">Rate</th>
                                             <th class=" pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
@@ -72,26 +141,30 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tbody class="table-tbody">
+                                    <tbody class="table-tbody ">
 
-                                            <tr>
-                                                 <!-- <td>1</td> -->
-
-                                                 <td style="width:40%;"> <select id="itemdropdown0" class="form-control itemdropdown" name="option0" > </select> </td>
-                                                 <td>  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>
+                                            <tr >   
+                                                  <!-- <td style="text-align: center;">1</td>  -->
+                                                
+                                                 <td>  
+                                                        <select id="itemdropdown0" class="form-control itemdropdown" name="option0" style="width: 100%;"> </select>
+                                                </td>
+                                            
+                                                 <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>
+                                                
 
                                                 <td><input  id="qty0" type="number" class="form-control qty" name="qty0"></td>
                                                 <td><input id="rate0" type="text" class="form-control rate" name="rate0"></td>
                                                 <td><input type="text" id="amount0" class="form-control amount" name="amount0"></td>
-                                                <td><button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> </td>
+                                                <td style="text-align: center;">  <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
                                                 
                                             </tr>
 
                                           </tbody>
-
+                                       
                                 </table>
                                 
-                            </div>
+                            </div> 
                             <button type="submit" class="btn btn-primary" name="save" value="billdata" ><i class="flaticon2-send-1"></i> Save</button>
                                     
                 </form>
@@ -231,6 +304,10 @@
 
 <script>
 
+
+
+
+
 var totalqty=0
 var totalAmount=0
 var button = document.getElementById("addformtablerows");
@@ -283,15 +360,15 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
 qty=0
 td='<tr>'
 //td+='<td>'+sno+'</td>' 
-td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' required>"+itemdropdown+" </select>"
+td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' required style='width: 100%;'>"+itemdropdown+" </select>"
    
 td+=  '</td>'   
-td+='<td>  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
+td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
 td+='<td><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" required></td>'  
 td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" required></td>'  
 td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" required></td>'                                              
-td+='<td id="addformtablerows'+lines+'" style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>'
-td+='<td><button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
+td+='<td style="text-align: center;" id="addformtablerows'+lines+'" style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
+//td+='<td><button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
 td+=  '</tr>'                                                              
                                            
 // $('#table-main tbody').find('.addformtablerows').each(function(){

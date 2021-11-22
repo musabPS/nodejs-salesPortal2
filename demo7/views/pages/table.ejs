@@ -197,7 +197,7 @@
                             <tr>
 
                                 <% if (type=="detail") { %>
-                                    <th title="Field #1">S#</th>
+                                   
                                     <th title="Field #2">SO #</th>
                                     <th title="Field #3">Customer</th>
                                     <th title="Field #4">Location</th>
@@ -211,7 +211,7 @@
                                     
                                  <% } %>
                                  <% if (type=="summary") { %>
-                                    <th title="Field #1">S#</th>
+                                    
                                     <th title="Field #3">SO #</th>
                                     <th title="Field #4">Date</th>
                                     <th title="Field #5">Quantity</th>
@@ -229,7 +229,7 @@
                                     <tr>
                                         <% for(let count = 0; count < el.items.length; count++ ){ linecount++; %>
                                             
-                                        <td><a> <%= linecount  %> </td>
+                                        
                                             <td> <a href= "/sales-orders/<%= el._id %>" > <%= el.tranid %>  </a> </td>
                                             <td><%= el.customer %></td>
                                             <td><%= el.location[0].text %></td>
@@ -252,7 +252,7 @@
                              <% if (type=="summary") { %>
                                 <% data.forEach((el)=>{  %>
                                     <tr>
-                                        <td><a> <%= el._id  %> </td>
+                                       
                                         <td> <a href= "/sales-orders/<%= el._id %>" > <%= el.tranid %>  </a> </td>
                                         <td><%= el.trandate %></td>
                                         <td><%= el.quantity %></td>

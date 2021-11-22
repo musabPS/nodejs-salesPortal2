@@ -145,7 +145,7 @@
                     <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
                         <thead>
                             <tr>
-                                <th title="Field #1">S#</th>
+                               
                                 <th title="Field #3">Tran #</th>
                                 <th title="Field #4">Date</th>
                                 <th title="Field #5">Quantity</th>
@@ -158,12 +158,12 @@
                             
                             <% var i=0; itmdata.forEach((el)=>{ i++ %>
                                 <tr>
-                                    <td> <%= i  %> </td>
+                                   
                                     
                                     <td> <%= el.DocumentNumber  %> </td>
                                     <td> <%= el.Date  %> </td>
                                     <td> <%= el.quantity  %> </td>
-                                    <td> <%= el.amount  %> </td>
+                                    <td> <%= el.quantity*2  %> </td>
                                     <td><a href= "/sales-orders/<%= el._id %>/edit" >    <i class="flaticon2-edit"></i> &nbsp;&nbsp;&nbsp; &nbsp;</a> <i class="flaticon2-rubbish-bin-delete-button"></i></td>
 
                                 <%}) %>

@@ -84534,3 +84534,44 @@ body {
     padding: 15px 0;
   }
 }
+
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  .item-detail-table table, 
+  .item-detail-table thead, 
+  .item-detail-table tbody, 
+  .item-detail-table th, 
+  .item-detail-table td,
+  .item-detail-table tr { 
+		display: block; 
+	}
+	
+	 .item-detail-table thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	.item-detail-table tr { border: 1px solid #ccc; margin-bottom: 2px;}
+	
+	.item-detail-table	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+
+	}
+  
+
+  .item-detail-table	td:nth-of-type(1):before { content: "Product"; }
+  .item-detail-table td:nth-of-type(2):before { content: " ";}
+
+  .item-detail-table	td:nth-of-type(3):before { content: "Qty"; }
+	.item-detail-table td:nth-of-type(4):before { content: "Rate"; }
+	.item-detail-table td:nth-of-type(5):before { content: "Amount"; }
+  .item-detail-table td:nth-of-type(6):before { content: ""; }
+
+}

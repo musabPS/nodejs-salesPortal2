@@ -54,11 +54,11 @@
                             <div class="table-responsive">
                                
                                 <td style="display:none;"><input id="totalrows" class="form-control" value="0" name="totalrows" style="display:none;"></td>
-                                <table class="table" id="table-main">
+                                <table class="table item-detail-table" id="table-main">
                                     <thead style="text-align: center;">
                                         <tr >
                                             
-                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase">S#</th>
+                                            <!-- <th class=" pl-0 font-weight-bold text-muted text-uppercase">S#</th> -->
                                             <th class=" pl-0 font-weight-bold text-muted text-uppercase">Product</th>
                                             <th class=" pl-0 font-weight-bold text-muted text-uppercase"></th>
                                             <th class=" font-weight-bold text-muted text-uppercase"> Qty</th>
@@ -74,16 +74,16 @@
 
                                         <% var i=0; var len=itemdata.length; itemdata.forEach((el)=>{  %>
                                             <tr>
-                                                <td ><%= i+1 %></td>
-                                                <td > <select id="itemdropdown<%= i %>" class="form-control itemdropdown" name="option0" > <option value="'+itemData[i].name+'"><%= el.name %></option> </select></td>
-                                                <td>  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>
+                                                <!-- <td ><%= i+1 %></td> -->
+                                                <td > <select id="itemdropdown<%= i %>" class="form-control itemdropdown" name="option0" style="width: 100%;"> <option value="'+itemData[i].name+'"><%= el.name %></option> </select></td>
+                                                <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>
 
                                                 <td ><input  id="qty<%= i %>" type="number" class="form-control qty" name="qty0" value="<%= el.qty %>"></td>
                                                 <td ><input id="rate<%= i %>" type="text" class="form-control rate" name="rate0" value="<%= el.rate %>"></td>
                                                 <td > <input type="text" id="amount<%= i %>" class="form-control amount" name="amount0" value="<%= el.amount %>"></td>
 
                                                 <%if (len == i+1) { %>
-                                                    <td>   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
+                                                    <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
                                                     <% } %>
 
                                                 </tr>
@@ -124,7 +124,7 @@
                     <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0">
                         <div class="col-md-9">
                             <div class="table-responsive">
-                                <table class="table" id="formtable">
+                                <table class="table " id="formtable">
                                     <thead>
                                         <tr>
                                             
@@ -214,8 +214,9 @@
 </div>
 </form>
 </NLFORM>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="assets/js/pages/features/forms/validation/form-widgets.js"></script>
 
 <script>
 
@@ -260,18 +261,18 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
 
             $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
 qty=0
-td='<tr>'
-td+='<td>'+sno+'</td>' 
-td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"'>"+itemdropdown+" </select>"
-td+=  '</td>'  
-td+='<td>  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
+    td='<tr>'
+  //  td+='<td>'+sno+'</td>' 
+    td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' style='width: 100%;'>"+itemdropdown+" </select>"
+    td+=  '</td>'  
+    td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
 
-td+='<td><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'" ></td>'  
-td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" ></td>'  
-td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" ></td>'                                              
-td+='<td style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>'
-td+='<td><button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> '
-td+=  '</tr>'                                                              
+    td+='<td><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'" ></td>'  
+    td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" ></td>'  
+    td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" ></td>'                                              
+    td+='<td style="text-align: center;"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
+    //td+='<td><button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> '
+    td+=  '</tr>'                                                              
                                            
 // $('#table-main tbody').find('.addformtablerows').each(function(){
 
@@ -495,7 +496,10 @@ const form  = document.getElementById('#approveform');
                             $("#trandate option[value='']").attr('selected', true)
                             $("#customer option[value='']").attr('selected', true)
                         }
+
         });
+        Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="sales-orders">View all saleorder</a>'})
+
         event.preventDefault(); //Prevent the default submit
     });
       

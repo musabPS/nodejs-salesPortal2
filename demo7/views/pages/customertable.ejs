@@ -7,7 +7,12 @@
             <div class="card card-custom">
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
-                        <h3 class="card-label">Sales Order</h3>
+                        <% if (type=="customerrequest") { %>
+                        <h3 class="card-label">Customer Request</h3>
+                        <% } %>
+                        <% if (type=="customerlist") { %>
+                            <h3 class="card-label">Customers</h3>
+                            <% } %>
                     </div>
                     <div class="card-toolbar">
                         <!--begin::Dropdown-->
@@ -123,28 +128,37 @@
                         <thead>
                             <tr>
 
-                                    <th title="Field #1">S#</th>
+                                   
                                     <th title="Field #2">Id</th>
                                     <th title="Field #3">Customer</th>
                                     <th title="Field #4">Location</th>
+                                 
+                                    <% if (type=="customerrequest") { %>
+                                        <th title="Field #5">Note</th>
+                                        <th title="Field #6">Action</th>
+                                        <% } %>
 
                             </tr>
                         </thead>
                         <tbody>
 
-                           
-
                                 <% var count=0; customerData.forEach((el)=>{ count++; %>
                                     <tr>
                                        
                                             
-                                        <td><a> <%= count  %> </td>
+                                       
                                             
                                             <td><%= el.id %></td>
                                             <td><%= el.name %></td>
-                                            <td><%= el.location %></td>
                                            
-                                            
+                                           
+                                            <td><%= el.location %></td>
+                                            <% if (type=="customerrequest") { %>
+                                                <td> New Building </td>
+                                                <td><a href="create-sales-order/<%= el.name %> %>" ><i class="flaticon2-edit"></i> </a></td> 
+
+                                                <% } %>
+
                                             </tr>
                                         <% }) %>
                              
