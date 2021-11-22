@@ -151,10 +151,8 @@
                                                 </td>
                                             
                                                  <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>
-                                                
-
-                                                <td style="text-align: center;"><input  id="qty0" type="number" class="form-control qty" name="qty0"></td>
-                                                <td style="text-align: center;"> <input id="rate0" type="text" class="form-control rate" name="rate0"></td>
+                                                <td ><input  id="qty0" type="number" class="form-control qty" name="qty0" style="text-align: center;"></td>
+                                                <td style="text-align: center;"> <input id="rate0" type="text" class="form-control rate" name="rate0" style="text-align: center;"></td>
                                                 <td style="text-align: center;"><input type="text" id="amount0" class="form-control amount" name="amount0"></td>
                                                 <td style="text-align: center;">  <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
                                                 
@@ -351,7 +349,16 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
              $row = currentcell 
              if($("#qty"+$row.index()).val()=="")
              {
-                 alert("enter qty") 
+                 
+                Swal.fire({  icon: 'warning',  title: 'Please Enter Quantity'  })
+
+                return
+             }
+             if($("#qty"+$row.index()).val()=="0" || $("#qty"+$row.index()).val()<0)
+             {
+                 
+                Swal.fire({  icon: 'warning',  title: 'Quantity must be greater then 0'  })
+
                 return
              }
             
@@ -668,7 +675,7 @@ $(document).ready(function () {
              var rowCount = $('#table-main tr').length-1;
              if($("#qty"+$row.index()).val()=="")
              {
-                 alert("enter qty") 
+               alert("enter qty")
                  return
              }
             

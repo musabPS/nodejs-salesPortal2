@@ -84555,7 +84555,7 @@ only screen and (max-width: 760px),
 		left: -9999px;
 	}
 	
-	.item-detail-table tr { border: 1px solid #b1d2f6; margin-bottom: 2px; width:100%;text-align: center; }
+	.item-detail-table tr { border: 1px solid #cccc; margin-bottom: 2px; width:100%;text-align: center; }
 	
 	.item-detail-table	td { 
 		/* set td */
