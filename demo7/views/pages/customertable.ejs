@@ -130,9 +130,10 @@
 
                                    
                                     <th title="Field #1">Id</th>
+                                    <th title="Field #2">Create Date</th>
                                     <th title="Field #2">Customer</th>
                                     <th title="Field #3">Location</th>
-                                   
+                                    <th title="Field #4">Customer Type</th>
                                  
                                     <% if (type=="customerrequest") { %>
                                         <th title="Field #5">Note</th>
@@ -145,14 +146,13 @@
 
                                 <% var count=0; customerData.forEach((el)=>{ count++; %>
                                     <tr>
-                                       
-                                            
-                                       
+
                                             
                                             <td><%= el.id %></td>
+                                            <td>1-2-2021</td>
                                             <td><%= el.name %></td>
                                            
-                                           
+                                            <td>test type</td>
                                             <td><%= el.location %></td>
                                             <% if (type=="customerrequest") { %>
                                                 <td> New Building </td>
@@ -163,8 +163,6 @@
                                             </tr>
                                         <% }) %>
                              
-                                  
-
                         </tbody>
                     </table>
                         
