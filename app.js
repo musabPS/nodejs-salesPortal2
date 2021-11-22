@@ -76,11 +76,11 @@ const authCheck = (req, res, next) => {
  })
 
  app.get('/create-sales-order/:name', (req,res)=>{
-   //  app.set('views', path.join(__dirname,'./demo7/views'))
-
-   var {name} = req.params
-   app.use('/create-sales-order/'+name ,express.static(path.join(__dirname, './demo7/public')))
-
+    // app.set('views', path.join(__dirname,'./demo7/views'))
+    var {name} = req.params
+    console.log("param",name)
+    app.use('/create-sales-order/' ,express.static(path.join(__dirname, './demo7/public')))
+  
      let route = "pages/salesOrderForm"
      console.log("param",req.params)
      res.render('index', {route})
