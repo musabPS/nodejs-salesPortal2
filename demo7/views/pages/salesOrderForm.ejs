@@ -153,7 +153,7 @@
                                                  <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>
                                                 <td ><input  id="qty0" type="number" class="form-control qty" name="qty0" style="text-align: center;"></td>
                                                 <td style="text-align: center;"> <input id="rate0" type="text" class="form-control rate" name="rate0" style="text-align: center;"></td>
-                                                <td style="text-align: center;"><input type="text" id="amount0" class="form-control amount" name="amount0"></td>
+                                                <td style="text-align: center;"><input type="text" id="amount0" class="form-control amount" name="amount0" disabled></td>
                                                 <td style="text-align: center;">  <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
                                                 
                                             </tr>
@@ -373,7 +373,7 @@ td+=  '</td>'
 td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
 td+='<td><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" required></td>'  
 td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" required></td>'  
-td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" required></td>'                                              
+td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" disabled></td>'                                              
 td+='<td style="text-align: center;" id="addformtablerows'+lines+'" style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
 //td+='<td><button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
 td+=  '</tr>'                                                              
