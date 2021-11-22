@@ -127,8 +127,6 @@
                     <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
                         <thead>
                             <tr>
-
-                                   
                                     <th title="Field #1">Id</th>
                                     <th title="Field #2">Create Date</th>
                                     <th title="Field #2">Customer</th>
@@ -147,13 +145,13 @@
                                 <% var count=0; customerData.forEach((el)=>{ count++; %>
                                     <tr>
 
-                                            
                                             <td><%= el.id %></td>
                                             <td>1-2-2021</td>
                                             <td><%= el.name %></td>
                                            
-                                            <td>test type</td>
+                                           
                                             <td><%= el.location %></td>
+                                            <td>test type</td>
                                             <% if (type=="customerrequest") { %>
                                                 <td> New Building </td>
                                                 <td><a href="create-sales-order/<%= el.name %> %>" ><i class="flaticon2-edit"></i> </a></td> 
