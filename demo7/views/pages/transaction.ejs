@@ -58,35 +58,39 @@
                                     <thead style="text-align: center;">
                                         <tr >
                                             
-                                            <!-- <th class=" pl-0 font-weight-bold text-muted text-uppercase">S#</th> -->
                                             <th class=" pl-0 font-weight-bold text-muted text-uppercase">Product</th>
-                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase"></th>
+                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase">Inventory Detail</th>
                                             <th class=" font-weight-bold text-muted text-uppercase"> Qty</th>
-                                           
                                             <th class=" font-weight-bold text-muted text-uppercase">Rate</th>
                                             <th class=" pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
-                                           
+                                            <th class=" pr-0 font-weight-bold text-muted text-uppercase">Add Rows</th>
+                    
                     
                                         </tr>
                                     </thead>
                                     
                                     <tbody class="table-tbody">
 
-                                        <% var i=0; var len=itemdata.length; itemdata.forEach((el)=>{  %>
+                                        <% var i=1; var len=itemdata.length; itemdata.forEach((el)=>{  %>
                                             <tr>
-                                                <!-- <td ><%= i+1 %></td> -->
-                                                <td > <select id="itemdropdown<%= i %>" class="form-control itemdropdown" name="option0" style="width: 100%;"> <option value="'+itemData[i].name+'"><%= el.name %></option> </select></td>
-                                                <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>
+                                                <td id="<%= i %>"> <select id="itemdropdown<%= i %>" class="form-control itemdropdown" name="option0" style="width: 100%; text-align: center;" > <option value="'+itemData[i].name+'"><%= el.name %></option> </select></td>
+                                                <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button></td>
 
-                                                <td ><input  id="qty<%= i %>" type="number" class="form-control qty" name="qty0" value="<%= el.qty %>"></td>
-                                                <td ><input id="rate<%= i %>" type="text" class="form-control rate" name="rate0" value="<%= el.rate %>"></td>
-                                                <td > <input type="text" id="amount<%= i %>" class="form-control amount" name="amount0" value="<%= el.amount %>"></td>
+                                                <td ><input  id="qty<%= i %>" type="number" class="form-control qty" name="qty0" value="<%= el.qty %>" style="text-align: center;"></td>
+                                                <td ><input id="rate<%= i %>" type="text" class="form-control rate" name="rate0" value="<%= el.rate %>" style="text-align: center;"></td>
+                                                <td > <input type="text" id="amount<%= i %>" class="form-control amount" name="amount0" value="<%= el.amount %>" style="text-align: center;"></td>
 
-                                                <%if (len == i+1) { %>
-                                                    <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
+                                                <%if (len == i) { %>
+                                                    <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
+                                                    <!-- <td style="text-align: center;">   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> -->
+
                                                     <% } %>
+                                                <%if (len != i) { %>
+                                                    <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button>  </td>
+                                                    <!-- <td style="text-align: center;">   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> -->
+                                                <% } %>   
 
-                                                </tr>
+                                            </tr>
 
                                             <% i++;   }) %>
 
@@ -247,6 +251,11 @@ $(function () {
 counttd=0
 sno=2
 
+$('#table-main .table-tbody tr').click(function () {
+        var tr_id = $(this).attr('id'); 
+       // alert(tr_id );
+    });
+
 $('#table-main .table-tbody').on('click','.addformtablerows',function(){
 
               var value = this.value;
@@ -257,13 +266,13 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
                  alert("enter qty") 
                 return
              }
-      
-
+             lines = $('#table-main tr').length;
+            alert($('#table-main tr').length)
             $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
 qty=0
     td='<tr>'
   //  td+='<td>'+sno+'</td>' 
-    td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' style='width: 100%;'>"+itemdropdown+" </select>"
+    td+="<td><select id='itemdropdown"+$('#table-main tr').length+"' class='form-control itemdropdown' name='option"+lines+"' style='width: 100%;'>"+itemdropdown+" </select>"
     td+=  '</td>'  
     td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
 
@@ -315,30 +324,54 @@ totalAmount=0
 ///////////////
 $('#table-main .table-tbody').on('click','.delrow',function(){       //delete buttons
 
-$(this).parents('tr').remove();
-counttd--
-$('#totalrows').text(counttd);
-sno--
-lines--
-$.fn.eachFunctiondel();
+    $(this).parents('tr').remove();
+    counttd--
+    $('#totalrows').text(counttd);
+    sno--
+    lines--
 
+   // var results = $('#table-main .table-tbody').parent().siblings(":first").text()
+  //  alert("TR ID " + results);
+
+  var $results = $("td:first-child");
+  var tableLines=1
+
+ $results.each(function(index, result){
+  // result is the DOM element we're looping over
+  $("#itemdropdown"+result.textContent).prop('id', 'itemdropdown'+tableLines);
+  $("#qty"+result.textContent).prop('id', 'qty'+tableLines);
+  $("#rate"+result.textContent).prop('id', 'rate'+tableLines);
+  $("#amount"+result.textContent).prop('id', 'amount'+tableLines);
+
+  tableLines++
+ 
+});
+
+// Or, you can access a specific element by index:
+console.log($results[0].textContent + ", " + $results[2].textContent);
+
+    $.fn.eachFunctiondel();
 
 });
 $.fn.eachFunctiondel=function(){
+    
+        var rowCount = $('#table-main tr').length-1;
+        console.log("check row after deletebutton",rowCount)
+      
 
-$('#table-main').find('.table-tbody .qty').each(function(){
+    $('#table-main').find('.table-tbody .qty').each(function(){
 
-if ($(this).val() != "") {totalqty+=parseInt($(this).val());} 
-})
-$('#table-main').find('.table-tbody .amount').each(function(){
-if ($(this).val() != "") {totalAmount+=parseInt($(this).val());}      
-})
-$('#totalqty').empty().append();
-$("#totalqty").append(totalqty);
-totalqty=0
-$('#totalamount').empty().append();
-$("#totalamount").append(totalAmount);
-totalAmount=0
+    if ($(this).val() != "") {totalqty+=parseInt($(this).val());} 
+    })
+    $('#table-main').find('.table-tbody .amount').each(function(){
+    if ($(this).val() != "") {totalAmount+=parseInt($(this).val());}      
+    })
+    $('#totalqty').empty().append();
+    $("#totalqty").append(totalqty);
+    totalqty=0
+    $('#totalamount').empty().append();
+    $("#totalamount").append(totalAmount);
+    totalAmount=0
 
 }
 
@@ -469,8 +502,8 @@ const form  = document.getElementById('#approveform');
             'amount'       : $('#totalamount').text(),
             'quantity'     :  $('#totalqty').text(),
                        };
-                       
-             for(var i=0;i<lines;i++)
+                      var liness= $('#table-main tr').length-1
+             for(var i=1;i<=liness;i++)
              {
                 postDataArray.push(
                     {
