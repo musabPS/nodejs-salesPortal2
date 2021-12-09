@@ -199,7 +199,10 @@ app.get('/customerrequestlist', (req,res)=>{
             index=i
          }
       }
-      req.body._id=parseInt(req.body.tranid.substring(2))
+      tranidstr=req.body.tranid
+      tranidstr = tranidstr.replace(/\s/g, '');
+
+      req.body._id=parseInt(tranidstr.substring(2))
       data[index]=req.body
      console.log("edit",data[index])
 })

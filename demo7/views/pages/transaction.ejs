@@ -19,7 +19,7 @@
 											<div class="col-md-9">
 												<div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
                                                     <h1 class="display-4 font-weight-boldest mb-10 opacity-80 text-white">Sale Order <span id="orderid"> </span> 
-                                                        <p class="display-4 font-weight-boldest   text-danger"> <%= salesOrderData[0].tranid %></p>
+                                                        <p class="display-4 font-weight-boldest   text-danger" id="tranid"> <%= salesOrderData[0].tranid %></p>
                                                     </h1>
 													<div class="d-flex flex-column align-items-md-end px-0">
 													
@@ -29,15 +29,15 @@
 												<div class="d-flex justify-content-between text-white pt-6">
 													<div class="d-flex flex-column flex-root">
 														<span class="font-weight-bolde mb-2r">Date</span>
-														<span class="opacity-70"><%= salesOrderData[0].trandate %></span>
+														<span class="opacity-70" id="trandate"><%= salesOrderData[0].trandate %></span>
 													</div>
 													<div class="d-flex flex-column flex-root">
 														<span class="font-weight-bolder mb-2">Location</span>
-														<span class="opacity-70"><%= salesOrderData[0].location %><input style="display: none;"  type="text" id="tranid" value="<%= salesOrderData[0].tranid %>"></span>
+														<span class="opacity-70"><select id="customerlocation" class="form-control customerlocationdropdown0" name="option" style="width:60%;"> <option value="<%= salesOrderData[0].customer%>" selected><%= salesOrderData[0].location%></option> </select></span>
 													</div>
 													<div class="d-flex flex-column flex-root">
 														<span class="font-weight-bolder mb-2">Customer</span>
-														<span class="opacity-70" > <select id="customerdropdown" class="form-control customerdropdown0" name="option" style="width:82%;"> <option value="<%= salesOrderData[0].customer%>"><%= salesOrderData[0].customer%></option> </select> </span>
+														<span class="opacity-70" > <select id="customerdropdown" class="form-control customerdropdown0" name="option" style="width:82%;"> <option value="<%= salesOrderData[0].customer%>" selected><%= salesOrderData[0].customer%></option> </select> </span>
 													</div>
 												</div>
 											</div>
@@ -439,6 +439,7 @@ const form  = document.getElementById('#approveform');
 		masterData=result
         setItems(result.Products)
         setCustomers(result.Customers)
+        setLocation(result.Locations)
        // result = JSON.parse(result);
         //loadGraphAPI(result[0],result[1],result[2],result[3]);
       }});
@@ -449,13 +450,15 @@ const form  = document.getElementById('#approveform');
             
              var postDataArray=[];
         var postForm = { //Fetch form data
-            'tranid'     :  $('#tranid').val(),
-            'customer'     : $('#customerdropdown').find(":selected").text(),
-            'amount'       : $('#totalamount').text(),
+            'tranid'       :  $('#tranid').text(),
+            'trandate'     :  $('#trandate').text(),
+            'customer'     :  $('#customerdropdown').find(":selected").text(),
+            'amount'       :  $('#totalamount').text(),
             'quantity'     :  $('#totalqty').text(),
+            'location'     :  $('#customerlocation').find(":selected").text(),
                        };
                       var liness= $('#table-main tr').length-1
-             for(var i=1;i<=liness;i++)
+             for(var i=1;i<$('#table-main tr').length;i++)
              {
                 postDataArray.push(
                     {
@@ -476,12 +479,12 @@ const form  = document.getElementById('#approveform');
             success   : function(data) 
                         {
                             console.log("sucess")
-                            Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="sales-orders">View all saleorder</a>'})
+                            Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
                             $("#trandate option[value='']").attr('selected', true)
                             $("#customer option[value='']").attr('selected', true)
                         }
         });
-        Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="sales-orders">View all saleorder</a>'})
+        Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
         event.preventDefault(); //Prevent the default submit
     });
       
@@ -513,15 +516,16 @@ function setCustomers(customerData)
     }
     $("#customerdropdown").append(dropdownData);  
 }
-// function setLocation(locationData)
-// {
-//     dropdownData='<option></option>'
-//     for(var i=0; i<locationData.length; i++)
-//     {
-//         dropdownData+='<option value="'+locationData[i].name+'">'+locationData[i].name+'</option>'
-//     }
-//     $("#customerlocation").append(dropdownData);  
-// }
+function setLocation(locationData)
+{
+    dropdownData=''
+    for(var i=0; i<locationData.length; i++)
+    {
+        dropdownData+='<option value="'+locationData[i].name+'">'+locationData[i].name+'</option>'
+    }
+    $("#customerlocation").append(dropdownData);  
+}
+
 $(document).ready(function () {
      
     });
