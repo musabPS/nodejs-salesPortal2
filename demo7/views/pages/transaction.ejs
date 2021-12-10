@@ -106,7 +106,7 @@
 
                                 </table>
                                 <button type="button" class="btn btn-primary flaticon2-send-1" id="btnsave" name="save" value="billdata" > Save</button>
-                                <button type="button" class="btn btn-primary flaticon2-send-1" id="btncancel" name="cancel"> Cancel</button>
+                                <button type="button" class="btn btn-primary flaticon2-send-1" id="btncancel" name="cancel" style="display: none;"> Cancel</button>
     
                             </div>
                            
@@ -427,8 +427,9 @@ const form  = document.getElementById('#approveform');
        }
        else
        {
-        $('#btnsave').text(' Save')
+               $('#btnsave').text(' Save')
               $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", false);
+              $("#btncancel").show();
        }
    
   
@@ -444,6 +445,7 @@ const form  = document.getElementById('#approveform');
             {
              
               $('#btnsave').text(' Save')
+              $("#btncancel").show();
               $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", false);
            }
           
@@ -454,6 +456,7 @@ const form  = document.getElementById('#approveform');
             $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", true);
             document.getElementsByName("save")[0].type = "button";
             $('#btnsave').text(' Edit')
+            $("#btncancel").hide();
         });
 
  
