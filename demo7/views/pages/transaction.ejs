@@ -49,7 +49,7 @@
                         
                         <div class="col-md-10">
                            
-                                <form method="POST">
+                                <form method="POST" id="tableform">
                             <div class="table-responsive">
                                
                                 <td style="display:none;"><input id="totalrows" class="form-control" value="0" name="totalrows" style="display:none;"></td>
@@ -416,6 +416,8 @@ const form  = document.getElementById('#approveform');
 });
  //////////////................ajax.......................///////////////
    $(document).ready(function(){
+
+    $("#tableform :input").prop("disabled", true);
        
     var url = window.location.href;
   console.log("cjsd",url)
