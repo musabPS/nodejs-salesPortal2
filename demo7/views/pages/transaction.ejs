@@ -417,20 +417,32 @@ const form  = document.getElementById('#approveform');
 });
  //////////////................ajax.......................///////////////
    $(document).ready(function(){
-    $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", true);
-    $("#btnsave").html(" Edit");
+    var url = window.location.href;
+    isurledit=url.search("edit");
+     console.log("cjsd",url)
+     if(isurledit<0)
+       {
+        $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", true);
+        $("#btnsave").html(" Edit");
+       }
+       else
+       {
+        $('#btnsave').text(' Save')
+              $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", false);
+       }
+   
   
         $('#btnsave').click(function () 
         {
             if($('#btnsave').text()==" Save")
             {
-              alert("save");
-              $('#btnsave').text('Save')
+             
+              $('#btnsave').text(' Save')
               document.getElementsByName("save")[0].type = "submit";
            }
            if($('#btnsave').text()==" Edit")
             {
-              alert("edit");
+             
               $('#btnsave').text(' Save')
               $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", false);
            }
@@ -439,17 +451,12 @@ const form  = document.getElementById('#approveform');
         });
         $('#btncancel').click(function () 
         {
-          
             $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", true);
             document.getElementsByName("save")[0].type = "button";
             $('#btnsave').text(' Edit')
         });
-    
-   
 
-   
-    var url = window.location.href;
-  console.log("cjsd",url)
+ 
     $.ajax({ 
             type      : 'POST', 
             url       : '/demo7/getsaleorder',
@@ -476,13 +483,10 @@ const form  = document.getElementById('#approveform');
       }});
 
 
-
-    
-
       $('form').submit(function(event) { //Trigger on form submit
         $('#name + .throw_error').empty(); //Clear the messages first
         $('#success').empty();
-        //Validate fields if required using jQuery
+
             
              var postDataArray=[];
         var postForm = { //Fetch form data
@@ -515,16 +519,22 @@ const form  = document.getElementById('#approveform');
             success   : function(data) 
                         {
                             console.log("sucess")
-                            Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
+                               
+                          
+                            Swal.fire({  icon: 'success',  title: 'Saved', button: "Aww yiss!" ,text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
                             $("#trandate option[value='']").attr('selected', true)
                             $("#customer option[value='']").attr('selected', true)
                         }
+                        
         });
-        Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
-        event.preventDefault(); //Prevent the default submit
-    });
-
-      
+       
+    
+          window.location.reload();
+         event.preventDefault();
+         //Prevent the default submit
+      });
+   
+ 
 });
 //////////////................ajax end.......................///////////////
 function setItems(itemData)

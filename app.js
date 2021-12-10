@@ -205,7 +205,8 @@ app.get('/customerrequestlist', (req,res)=>{
       req.body._id=parseInt(tranidstr.substring(2))
       data[index]=req.body
      console.log("edit",data[index])
-})
+     return true
+   })
 
  app.get('/sales-orders/:id/edit', async (req,res)=>{
     var {id} = req.params
