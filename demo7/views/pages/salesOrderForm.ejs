@@ -299,7 +299,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="assets/js/pages/features/forms/validation/form-widgets.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script>
 
 
@@ -396,7 +396,7 @@ $('#totalrows').val(counttd);
 
 $.fn.eachFunction=function(){
     
-    url=url.replace("create-sales-order", "getsaleorder");
+    
          
 $('#table-main').find('.table-tbody').each(function(){
         //Retrieves the text within <td>
@@ -534,11 +534,11 @@ const form  = document.getElementById('#approveform');
 
    $(document).ready(function(){
        
-    $("#tableform :input").prop("disabled", true);
-    var url = window.location.href;
 
+    var url = window.location.href;
+    url=url.replace("create-sales-order", "getsaleorder");
   
-   
+      
     
 
    var orderid = [{ //Fetch form data
@@ -587,6 +587,7 @@ const form  = document.getElementById('#approveform');
             'trandate'     : $('#trandate').val(),
             'amount'       : $('#totalamount').text(),
             'quantity'     :  $('#totalqty').text(),
+            'location'     : $('#customerlocation').find(":selected").text(),
                        };
                        
              for(var i=0;i<lines;i++)
@@ -610,10 +611,8 @@ const form  = document.getElementById('#approveform');
             contentType: "application/json; charset=utf-8",
             success   : function(data) 
                         {
-                            console.log(data)
-                            Swal.fire({  icon: 'success',  title: 'Saved',  text: 'Data Saved',  footer: '<a href="sales-orders">View all saleorder</a>'})
-                            $("#trandate option[value='']").attr('selected', true)
-                            $("#customer option[value='']").attr('selected', true)
+                           console.log("data length",data.length)
+                           window.location = '/sales-orders/' + data.length;
                         }
         });
         event.preventDefault(); //Prevent the default submit

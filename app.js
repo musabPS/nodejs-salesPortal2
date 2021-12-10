@@ -151,6 +151,7 @@ app.get('/customerrequestlist', (req,res)=>{
      req.body.tranid="SO"+req.body._id
    //  console.log("fnalreq.body",req.body);
      data.push(req.body)
+    // res.redirect('/sales-orders/'+req.body._id)
      res.send(data)
  })
  function getNextId(obj) {
