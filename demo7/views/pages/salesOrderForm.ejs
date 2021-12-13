@@ -152,7 +152,7 @@
                                             
                                                  <td style="text-align: center;"><button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button></td>
                                                 <td ><input  id="qty0" type="number" class="form-control qty" name="qty0" style="text-align: center;"></td>
-                                                <td style="text-align: center;"> <input id="rate0" type="text" class="form-control rate" name="rate0" style="text-align: center;"></td>
+                                                <td style="text-align: center;"> <input id="rate0" type="text" class="form-control rate" name="rate0" style="text-align: center;" disabled></td>
                                                 <td style="text-align: center;"><input type="text" id="amount0" class="form-control amount" name="amount0" disabled style="text-align: center;"></td>
                                                 <td style="text-align: center;">  <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
                                                 
@@ -344,6 +344,33 @@ $('#table-main .table-tbody').on('click','.delrow',function(){
 
 });
 
+    $('#table-main').on('change','.qty',function(){
+
+
+        $('#table-main').find('.table-tbody .qty').each(function(){
+
+            if ($(this).val() != "") {totalqty+=parseInt($(this).val());} 
+        })
+        
+        $('#table-main').find('.table-tbody .amount').each(function(){
+
+        if ($(this).val() != "") {totalAmount+=parseInt($(this).val());} 
+        })
+        $('#totalamount').empty().append();
+        $("#totalamount").append(totalAmount);
+        totalAmount=0
+        $('#totalqty').empty().append();
+        $("#totalqty").append(totalqty); 
+        totalqty=0
+
+    });
+    $('#table-main').on('change','.amount',function(){
+
+        alert("Amount")
+
+
+});
+
 $('#table-main .table-tbody').on('click','.addformtablerows',function(){
 
               var value = this.value;
@@ -368,19 +395,19 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
             
                $("#totalitems").text($('#table-main tr').length)
                $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
-qty=0
-td='<tr>'
-//td+='<td>'+sno+'</td>' 
-td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' required style='width: 100%;'>"+itemdropdown+" </select>"
-   
-td+=  '</td>'   
-td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
-td+='<td style="text-align: center;"><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" style="text-align: center;" required></td>'  
-td+=' <td style="text-align: center;"><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" style="text-align: center;" required></td>'  
-td+= '<td style="text-align: center;"><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" style="text-align: center;" disabled></td>'                                              
-td+='<td style="text-align: center;" id="addformtablerows'+lines+'" style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
-//td+='<td><button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
-td+=  '</tr>'                                                              
+    qty=0
+    td='<tr>'
+    //td+='<td>'+sno+'</td>' 
+    td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' required style='width: 100%;'>"+itemdropdown+" </select>"
+    
+    td+=  '</td>'   
+    td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
+    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" style="text-align: center;" required></td>'  
+    td+=' <td style="text-align: center;"><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" style="text-align: center;" required disabled></td>'  
+    td+= '<td style="text-align: center;"><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" style="text-align: center;" disabled></td>'                                              
+    td+='<td style="text-align: center;" id="addformtablerows'+lines+'" style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
+    //td+='<td><button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
+    td+=  '</tr>'                                                              
                                            
 // $('#table-main tbody').find('.addformtablerows').each(function(){
 
@@ -411,18 +438,18 @@ $('#itemdropdown'+parseInt(lines)).select2({
             placeholder: "Select Item"});
             
 
-$('#table-main').find('.table-tbody .qty').each(function(){
-if ($(this).val() != "") {totalqty+=parseInt($(this).val());}      
-})
-$('#table-main').find('.table-tbody .amount').each(function(){
-if ($(this).val() != "") {totalAmount+=parseInt($(this).val());}      
-})
-$('#totalqty').empty().append();
-$("#totalqty").append(totalqty);
-totalqty=0
-$('#totalamount').empty().append();
-$("#totalamount").append(totalAmount);
-totalAmount=0
+    $('#table-main').find('.table-tbody .qty').each(function(){
+    if ($(this).val() != "") {totalqty+=parseInt($(this).val());}      
+    })
+    $('#table-main').find('.table-tbody .amount').each(function(){
+    if ($(this).val() != "") {totalAmount+=parseInt($(this).val());}      
+    })
+        $('#totalqty').empty().append();
+        $("#totalqty").append(totalqty);
+        totalqty=0
+        $('#totalamount').empty().append();
+        $("#totalamount").append(totalAmount);
+        totalAmount=0
 
 }
 

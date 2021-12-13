@@ -76,8 +76,8 @@
                                                 <td id="<%= i %>"> <select id="itemdropdown<%= i %>" class="form-control itemdropdown" name="option0" style="width: 100%; text-align: center;" > <option value="'+itemData[i].name+'"><%= el.name %></option> </select></td>
                                                 <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button></td>
                                                 <td ><input  id="qty<%= i %>" type="number" class="form-control qty" name="qty0" value="<%= el.qty %>" style="text-align: center;"></td>
-                                                <td ><input id="rate<%= i %>" type="text" class="form-control rate" name="rate0" value="<%= el.rate %>" style="text-align: center;"></td>
-                                                <td > <input type="text" id="amount<%= i %>" class="form-control amount" name="amount0" value="<%= el.amount %>" style="text-align: center;"></td>
+                                                <td ><input id="rate<%= i %>" type="text" class="form-control rate" name="rate0" value="<%= el.rate %>" style="text-align: center;"  ></td>
+                                                <td > <input type="text" id="amount<%= i %>" class="form-control amount" name="amount0" value="<%= el.amount %>" style="text-align: center;"  ></td>
                                                 <%if (len == i) { %>
                                                     <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
                                                     <!-- <td style="text-align: center;">   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> -->
@@ -132,8 +132,8 @@
                                     </thead>
                                     <tbody >
                                         <tr class="font-weight-bolder">
-                                            <td id="totalqty" class="text-danger font-size-h3 font-weight-boldest" ><%= salesOrderData[0].amount %></td>
-                                            <td id="totalamount" class="text-danger font-size-h3 font-weight-boldest" ><%= salesOrderData[0].quantity %></td>
+                                            <td id="totalqty" class="text-danger font-size-h3 font-weight-boldest" ><%= salesOrderData[0].quantity %></td>
+                                            <td id="totalamount" class="text-danger font-size-h3 font-weight-boldest" ><%= salesOrderData[0].amount %></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -238,6 +238,27 @@ var lines=1
 $(function () {
 counttd=0
 sno=2
+
+$('#table-main').on('change','.qty',function(){
+
+
+$('#table-main').find('.table-tbody .qty').each(function(){
+
+    if ($(this).val() != "") {totalqty+=parseInt($(this).val());} 
+})
+
+$('#table-main').find('.table-tbody .amount').each(function(){
+
+if ($(this).val() != "") {totalAmount+=parseInt($(this).val());} 
+})
+$('#totalamount').empty().append();
+$("#totalamount").append(totalAmount);
+totalAmount=0
+$('#totalqty').empty().append();
+$("#totalqty").append(totalqty); 
+totalqty=0
+
+});
 $('#table-main .table-tbody tr').click(function () {
         var tr_id = $(this).attr('id'); 
        // alert(tr_id );
@@ -270,8 +291,8 @@ qty=0
     td+=  '</td>'  
     td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
     td+='<td><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'" ></td>'  
-    td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" ></td>'  
-    td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" ></td>'                                              
+    td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" disabled></td>'  
+    td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" disabled></td>'                                              
     td+='<td style="text-align: center;"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
     //td+='<td><button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> '
     td+=  '</tr>'                                                              
@@ -448,7 +469,7 @@ const form  = document.getElementById('#approveform');
              
               $('#btnsave').text(' Save')
               $("#btncancel").show();
-              $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", false);
+              $("#tableform :input:not([name=save],[name=cancel],[name=amount0],[name=rate0])").prop("disabled", false);
            }
           
 
@@ -525,8 +546,7 @@ const form  = document.getElementById('#approveform');
             success   : function(data) 
                         {
                             console.log("sucess")
-                               
-                          
+
                             Swal.fire({  icon: 'success',  title: 'Saved', button: "Aww yiss!" ,text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
                             $("#trandate option[value='']").attr('selected', true)
                             $("#customer option[value='']").attr('selected', true)
@@ -578,6 +598,9 @@ function setLocation(locationData)
     }
     $("#customerlocation").append(dropdownData);  
 }
+
+
+
 
 $(document).ready(function () {
      
