@@ -79,8 +79,13 @@
                                                 <td ><input id="rate<%= i %>" type="text" class="form-control psview rate" name="rate0" value="<%= el.rate %>" ></td>
                                                 <td > <input type="text" id="amount<%= i %>" class="form-control psview amount" name="amount0" value="<%= el.amount %>"  ></td>
                                               
+                                                <% if(i === 1){ %>
+                                                    <td style="text-align: center;" class="btnresponce btnremoveresponce">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
+
+                                                <% } else{ %>
                                                     <td style="text-align: center;" class="btnresponce btnremoveresponce">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>  <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
-                   
+
+                                                <% } %>
                                             </tr>
                                             <% i++;   }) %>
 
