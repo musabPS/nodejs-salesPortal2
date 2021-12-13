@@ -171,9 +171,10 @@ app.get('/customerrequestlist', (req,res)=>{
     })
    // console.log("salesorder data", salesOrderData)
      itemdata=salesOrderData[0].items
-     breadcrumbss="Sale Order List"
+     breadcrumbsName="Sale Order List"
+     breadcrumbsLink="/"
    // console.log("salesorder data", salesOrderData)
-    res.render('index', {route,itemdata,salesOrderData,breadcrumbss})
+    res.render('index', {route,itemdata,salesOrderData})
  })
 
  ///////////////////////////------------------saleorder view Start--------------/////////////////
