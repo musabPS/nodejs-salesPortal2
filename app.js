@@ -48,7 +48,8 @@ const authCheck = (req, res, next) => {
        req.user = "musab"
        let route = "partials/_content"
        type="detail"
-        res.render('index',{route,data,type})
+       breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+        res.render('index',{route,data,type,breadcrumbs})
    // res.redirect("index")
    }
     else{
@@ -72,7 +73,8 @@ const authCheck = (req, res, next) => {
  app.get('/create-sales-order', (req,res)=>{
   //  app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "pages/salesOrderForm"
-    res.render('index', {route})
+    breadcrumbs=masterdata.Breadcrumbs.SOVIEW
+    res.render('index', {route,breadcrumbs})
  })
 
  app.get('/create-sales-order/:name', (req,res)=>{
@@ -83,7 +85,8 @@ const authCheck = (req, res, next) => {
   
      let route = "pages/salesOrderForm"
      console.log("param",req.params)
-     res.render('index', {route})
+     breadcrumbs=masterdata.Breadcrumbs.SOCreateBYCustomer
+     res.render('index', {route,breadcrumbs})
   })
 
  app.get('/sales-orders', (req,res)=>{
@@ -92,7 +95,8 @@ const authCheck = (req, res, next) => {
    // console.log("trandata",data)
     headerData=["S#","SO #","Date","Quantity","Amount","Action"]
     type="summary"
-    res.render('index', {route,data,headerData,type}) 
+    breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+    res.render('index', {route,data,headerData,type,breadcrumbs}) 
  })
  app.get('/sales-orders-detail', (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
@@ -107,13 +111,15 @@ const authCheck = (req, res, next) => {
    let route = "pages/customertable"
   let type="customerlist"
     let customerData=masterdata.Customers
-   res.render('index', {route,customerData,type}) 
+    breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+   res.render('index', {route,customerData,type,breadcrumbs}) 
 })
 app.get('/customerrequestlist', (req,res)=>{
    let route = "pages/customertable"
     let type="customerrequest"
     let customerData=masterdata.Customers
-   res.render('index', {route,customerData,type}) 
+    breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+   res.render('index', {route,customerData,type,breadcrumbs}) 
 })
 
  app.get('/view',async (req,res)=>{
@@ -128,14 +134,17 @@ app.get('/customerrequestlist', (req,res)=>{
       console.log("invitmdata.itemfulfillments")
      let itmdata=invitmdata.itemfulfillments
      let trantype="Item Fulfillment"
-     res.render('index', {route,itmdata,trantype}) 
+     breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+     res.render('index', {route,itmdata,trantype,breadcrumbs}) 
  })
  app.get('/invoices', (req,res)=>{
     let route = "pages/itemfulfillment_table"
      
      let trantype="Invoice"
     let itmdata=invitmdata.invoice
-    res.render('index', {route,itmdata,trantype}) 
+    breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+
+    res.render('index', {route,itmdata,trantype,breadcrumbs}) 
  })
 
  //////////////////////...data s......////////////////////
@@ -159,7 +168,7 @@ app.get('/customerrequestlist', (req,res)=>{
       return o._id;
     })) + 1)
  }
- 
+  ///////////////////////////------------------saleorder view Start--------------/////////////////
  app.get('/sales-orders/:id', async (req,res)=>{
     app.use('/sales-orders',express.static(path.join(__dirname, './demo7/public')))
     var {id} = req.params
@@ -171,13 +180,12 @@ app.get('/customerrequestlist', (req,res)=>{
     })
    // console.log("salesorder data", salesOrderData)
      itemdata=salesOrderData[0].items
-     breadcrumbsName="Sale Order List"
-     breadcrumbsLink="/"
+    breadcrumbs=masterdata.Breadcrumbs.SOVIEW
    // console.log("salesorder data", salesOrderData)
-    res.render('index', {route,itemdata,salesOrderData})
+    res.render('index', {route,itemdata,salesOrderData,breadcrumbs})
  })
 
- ///////////////////////////------------------saleorder view Start--------------/////////////////
+
 
   app.get('/sales-orders/:id', async (req,res)=>{
     app.use('/sales-orders',express.static(path.join(__dirname, './demo7/public')))
@@ -229,7 +237,8 @@ app.get('/customerrequestlist', (req,res)=>{
 
     itemdata=salesOrderData[0].items
     let route = "pages/transaction"
-    res.render('index', {route,salesOrderData,itemdata})
+    breadcrumbs=masterdata.Breadcrumbs.SOVIEW
+    res.render('index', {route,salesOrderData,itemdata,breadcrumbs})
  })
 
     // app.put('/sales-orders/:id', async (req,res)=>{

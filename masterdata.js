@@ -13,6 +13,11 @@ module.exports={
           "name":"Singapore : South Coast"
       }
   ],
+  "Breadcrumbs":{
+  "SOVIEW" : {name:"Sale Order List",link:"/sales-orders"},
+  "SOCreateBYCustomer" : {name:"Customer Request",link:"/customerrequestlist"},
+  "noBreadcrumbs" : {name:"",link:""},
+  },
 
 "Customers":[
     {
