@@ -39,7 +39,57 @@ module.exports={
         "id":5,
         "name":"Jasim Khan",
         "location" : "Singapore : East Coast",
-    }
+    },
+    {
+      "id":6,
+      "name":"Hamzah Khan",
+      "location" : "Singapore : East Coast",
+  },
+  {
+      "id":7,
+      "name":"William",
+      "location" : "Singapore : East Coast",
+  },
+  {
+      "id":8,
+      "name":"Jason",
+      "location" : "Singapore : East Coast",
+  },
+  {
+      "id":9,
+      "name":"Basri",
+      "location" : "Singapore : East Coast",
+  },
+  {
+      "id":10,
+      "name":"D",
+      "location" : "Singapore : East Coast",
+  },
+  {
+   "id":11,
+   "name":"Dewantoto",
+   "location" : "Singapore : East Coast",
+},
+{
+   "id":12,
+   "name":"Wisnu",
+   "location" : "Singapore : East Coast",
+},
+{
+   "id":13,
+   "name":"Patrick",
+   "location" : "Singapore : East Coast",
+},
+{
+   "id":14,
+   "name":"Robby",
+   "location" : "Singapore : East Coast",
+},
+{
+   "id":15,
+   "name":"Tanna",
+   "location" : "Singapore : East Coast",
+}
 ],
 "Products": [
     {

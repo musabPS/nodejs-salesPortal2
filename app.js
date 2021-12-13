@@ -29,7 +29,7 @@ const authCheck = (req, res, next) => {
     if (!req.user) {
         return res.redirect('/login')
     }
-    next()
+   // next()
  }
 
  app.get('/login', (req,res)=>{
@@ -171,9 +171,13 @@ app.get('/customerrequestlist', (req,res)=>{
     })
    // console.log("salesorder data", salesOrderData)
      itemdata=salesOrderData[0].items
+     breadcrumbss="Sale Order List"
    // console.log("salesorder data", salesOrderData)
-    res.render('index', {route,itemdata,salesOrderData})
+    res.render('index', {route,itemdata,salesOrderData,breadcrumbss})
  })
+
+ ///////////////////////////------------------saleorder view Start--------------/////////////////
+
   app.get('/sales-orders/:id', async (req,res)=>{
     app.use('/sales-orders',express.static(path.join(__dirname, './demo7/public')))
     var {id} = req.params
@@ -186,8 +190,11 @@ app.get('/customerrequestlist', (req,res)=>{
    // console.log("salesorder data", salesOrderData)
      itemdata=salesOrderData[0].items
    // console.log("salesorder data", salesOrderData)
-    res.render('index', {route,itemdata,salesOrderData})
+ 
+    res.render('index', {route,itemdata,salesOrderData,breadcrumbss})
  })
+
+  /////////////////////////------------------saleorder view End--------------/////////////////
 
  app.post('/editsaleorder',async (req,res)=>{
    console.log("post route historyeqqweww", req.body)

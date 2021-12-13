@@ -21,8 +21,9 @@
                                                     <h1 class="display-4 font-weight-boldest mb-10 opacity-80 text-white">Sale Order <span id="orderid"> </span> 
                                                         <p class="display-4 font-weight-boldest   text-danger" id="tranid"> <%= salesOrderData[0].tranid %></p>
                                                     </h1>
+                                                     
 													<div class="d-flex flex-column align-items-md-end px-0">
-													
+														
 													</div>
 												</div>
 												<div class="border-bottom w-100 opacity-20"></div>
@@ -417,6 +418,7 @@ const form  = document.getElementById('#approveform');
 });
  //////////////................ajax.......................///////////////
    $(document).ready(function(){
+
     var url = window.location.href;
     isurledit=url.search("edit");
      console.log("cjsd",url)
@@ -453,10 +455,11 @@ const form  = document.getElementById('#approveform');
         });
         $('#btncancel').click(function () 
         {
-            $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", true);
-            document.getElementsByName("save")[0].type = "button";
-            $('#btnsave').text(' Edit')
-            $("#btncancel").hide();
+            window.location.reload();
+            // $("#tableform :input:not([name=save],[name=cancel])").prop("disabled", true);
+            // document.getElementsByName("save")[0].type = "button";
+            // $('#btnsave').text(' Edit')
+            // $("#btncancel").hide();
         });
 
  
