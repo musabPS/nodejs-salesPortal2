@@ -58,14 +58,14 @@
                                     <thead style="text-align: center;">
                                         <tr >
                                             
-                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase">Product</th>
-                                            <th class=" pl-0 font-weight-bold text-muted text-uppercase">Inventory Detail</th>
-                                            <th class=" font-weight-bold text-muted text-uppercase"> Qty</th>
-                                            <th class=" font-weight-bold text-muted text-uppercase">Rate</th>
-                                            <th class=" pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
-                                            <th class=" pr-0 font-weight-bold text-muted text-uppercase">Add Rows</th>
-                    
-                    
+                                            <th class="pl-0 font-weight-bold text-muted text-uppercase">Product</th>
+                                            <th class="pl-0 font-weight-bold text-muted text-uppercase">Inventory Detail</th>
+                                            <th class="font-weight-bold text-muted text-uppercase"> Qty</th>
+                                            <th class="font-weight-bold text-muted text-uppercase">Rate</th>
+                                            <th class="pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
+                                            <th class="pr-0 font-weight-bold text-muted text-uppercase">Add Rows</th>
+                                            
+
                                         </tr>
                                     </thead>
                                     
@@ -73,17 +73,20 @@
 
                                         <% var i=1; var len=itemdata.length; itemdata.forEach((el)=>{  %>
                                             <tr>
-                                                <td id="<%= i %>"> <select id="itemdropdown<%= i %>" class="form-control itemdropdown" name="option0" style="width: 100%; text-align: center;" > <option value="'+itemData[i].name+'"><%= el.name %></option> </select></td>
+                                                <td id="<%= i %>" style="width: 30%;"> <select id="itemdropdown<%= i %>" class="form-control psview itemdropdown" name="option0" style="width: 100%;" > <option value="'+itemData[i].name+'" ><%= el.name %></option> </select></td>
                                                 <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button></td>
-                                                <td ><input  id="qty<%= i %>" type="number" class="form-control qty" name="qty0" value="<%= el.qty %>" style="text-align: center;"></td>
-                                                <td ><input id="rate<%= i %>" type="text" class="form-control rate" name="rate0" value="<%= el.rate %>" style="text-align: center;"  ></td>
-                                                <td > <input type="text" id="amount<%= i %>" class="form-control amount" name="amount0" value="<%= el.amount %>" style="text-align: center;"  ></td>
+                                                <td ><input  id="qty<%= i %>" type="number" class="form-control psview qty" name="qty0" value="<%= el.qty %>" ></td>
+                                                <td ><input id="rate<%= i %>" type="text" class="form-control psview rate" name="rate0" value="<%= el.rate %>" ></td>
+                                                <td > <input type="text" id="amount<%= i %>" class="form-control psview amount" name="amount0" value="<%= el.amount %>"  ></td>
                                                 <%if (len == i) { %>
-                                                    <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
+                                                    <td style="text-align: center; width: 15%;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>  <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button> </td>
+                                                      
                                                     <!-- <td style="text-align: center;">   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> -->
                                                     <% } %>
                                                 <%if (len != i) { %>
-                                                    <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button>  </td>
+                                                    <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>  <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
+                                                  
+
                                                     <!-- <td style="text-align: center;">   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> -->
                                                 <% } %>   
                                             </tr>
@@ -314,20 +317,20 @@ $('#table-main').find('.table-tbody').each(function(){
         //Retrieves the text within <td>
      $(this).append(td);
 })
-$('#itemdropdown'+parseInt(lines)).select2({
-            placeholder: "Select Item"});
-$('#table-main').find('.table-tbody .qty').each(function(){
-if ($(this).val() != "") {totalqty+=parseInt($(this).val());}      
-})
-$('#table-main').find('.table-tbody .amount').each(function(){
-if ($(this).val() != "") {totalAmount+=parseInt($(this).val());}      
-})
-$('#totalqty').empty().append();
-$("#totalqty").append(totalqty);
-totalqty=0
-$('#totalamount').empty().append();
-$("#totalamount").append(totalAmount);
-totalAmount=0
+    $('#itemdropdown'+parseInt(lines)).select2({
+                placeholder: "Select Item"});
+    $('#table-main').find('.table-tbody .qty').each(function(){
+    if ($(this).val() != "") {totalqty+=parseInt($(this).val());}      
+    })
+    $('#table-main').find('.table-tbody .amount').each(function(){
+    if ($(this).val() != "") {totalAmount+=parseInt($(this).val());}      
+    })
+    $('#totalqty').empty().append();
+    $("#totalqty").append(totalqty);
+    totalqty=0
+    $('#totalamount').empty().append();
+    $("#totalamount").append(totalAmount);
+    totalAmount=0
 }
 ///////////////
 $('#table-main .table-tbody').on('click','.delrow',function(){       //delete buttons

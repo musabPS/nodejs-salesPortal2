@@ -81599,11 +81599,11 @@ code {
 .select2-container--default.select2-container--disabled .select2-selection--single {
   cursor: not-allowed;
   background-color: #ffffff;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 select.select2 {
-  opacity: 0;
+  opacity: 1;
 }
 
 .select2 > select.form-control {
@@ -84574,4 +84574,11 @@ only screen and (max-width: 760px),
 	.item-detail-table td:nth-of-type(5):before { content: "Amount"; }
   .item-detail-table td:nth-of-type(6):before { content: ""; }
 
+ 
+
+}
+.psview{
+  
+    text-align: center;
+    color:#3F4254
 }

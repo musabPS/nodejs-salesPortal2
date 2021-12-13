@@ -64,10 +64,12 @@ const authCheck = (req, res, next) => {
    res.redirect("/login")
  })
 
- app.get('/',authCheck, (req,res)=>{
+ app.get('/', (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "partials/_content"
-    res.render('index',{route})
+    breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+    type="detail"
+    res.render('index',{route,breadcrumbs,type,data})
  })
 
  app.get('/create-sales-order', (req,res)=>{
