@@ -84563,8 +84563,12 @@ only screen and (max-width: 760px),
 		border-bottom: 1px solid #eee; 
 		position: relative;
     text-align: center;
-
+    width:100%;
 	}
+  .btnresponce{
+    text-align: center;
+    width:100%;
+  }
 
   .item-detail-table	td:nth-of-type(1):before { content: "Product"; }
   .item-detail-table td:nth-of-type(2):before { content: "";}
@@ -84578,7 +84582,9 @@ only screen and (max-width: 760px),
 
 }
 .psview{
-  
     text-align: center;
     color:#3F4254
+}
+.btnremoveresponce{
+  width:20%;
 }

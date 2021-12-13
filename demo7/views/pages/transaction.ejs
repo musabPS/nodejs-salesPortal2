@@ -73,22 +73,14 @@
 
                                         <% var i=1; var len=itemdata.length; itemdata.forEach((el)=>{  %>
                                             <tr>
-                                                <td id="<%= i %>" style="width: 30%;"> <select id="itemdropdown<%= i %>" class="form-control psview itemdropdown" name="option0" style="width: 100%;" > <option value="'+itemData[i].name+'" ><%= el.name %></option> </select></td>
+                                                <td id="<%= i %>" > <select id="itemdropdown<%= i %>" class="form-control psview itemdropdown" name="option0" style="width: 100%;" > <option value="'+itemData[i].name+'" ><%= el.name %></option> </select></td>
                                                 <td style="text-align: center;">  <button id="inventorydetail0" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button></td>
                                                 <td ><input  id="qty<%= i %>" type="number" class="form-control psview qty" name="qty0" value="<%= el.qty %>" ></td>
                                                 <td ><input id="rate<%= i %>" type="text" class="form-control psview rate" name="rate0" value="<%= el.rate %>" ></td>
                                                 <td > <input type="text" id="amount<%= i %>" class="form-control psview amount" name="amount0" value="<%= el.amount %>"  ></td>
-                                                <%if (len == i) { %>
-                                                    <td style="text-align: center; width: 15%;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>  <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button> </td>
-                                                      
-                                                    <!-- <td style="text-align: center;">   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> -->
-                                                    <% } %>
-                                                <%if (len != i) { %>
-                                                    <td style="text-align: center;">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>  <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
-                                                  
-
-                                                    <!-- <td style="text-align: center;">   <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> -->
-                                                <% } %>   
+                                              
+                                                    <td style="text-align: center;" class="btnresponce btnremoveresponce">   <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button>  <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
+                   
                                             </tr>
                                             <% i++;   }) %>
 
