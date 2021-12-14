@@ -210,10 +210,13 @@ app.get('/customerrequestlist', (req,res)=>{
  app.post('/editsaleorder',async (req,res)=>{
    console.log("post route historyeqqweww", req.body)
    var index=0
-   
+   var tranid=req.body.tranid
+   tranid=tranid.replace(/ /g, '');
+   req.body.tranid=tranid
+   console.log("tranid", tranid)
       for(var i=0; i<data.length;i++)
       {
-         if(data[i].tranid==req.body.tranid)
+         if(data[i].tranid==tranid)
          {
             index=i
          }
