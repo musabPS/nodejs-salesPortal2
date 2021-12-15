@@ -67,58 +67,7 @@
                             
                                 <form method="POST" id="tableform">
 
-                                    <!-- <div id="kt_repeater_1">
-                                        <div class="form-group row">
-                                            <label class="col-lg-2 col-form-label text-right"></label>
-                                            <div data-repeater-list="" class="col-lg-12">
-                                                <div data-repeater-item="" class="form-group row align-items-center">
-                                                    <div class="col-md-2">
-                                                        <label>Item:</label>
-                                                        <select id="itemdropdown0" class="form-control itemdropdown" name="option0" > </select>
-                                                        <div class="d-md-none mb-2"></div>
-
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label>Item Desciption</label>
-                                                        <input  id="description" type="text" class="form-control description" name="discription">                                                        <div class="d-md-none mb-2"></div>
-                                                        <div class="d-md-none mb-2"></div>
-                                                    </div>
-        
-                                                    <div class="col-md-2">
-                                                        <label>Qty:</label>
-                                                        <input  id="qty0" type="number" class="form-control qty" name="qty0">
-                                                        <div class="d-md-none mb-2"></div>
-                                                       
-                                                   
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label>Rate:</label>
-                                                        <input  id="rate0" type="text" class="form-control rate" name="rate0">
-                                                        <div class="d-md-none mb-2"></div>
-                                                    </div>
-                                                 
-                                                           
-                                                    <div class="col-md-2">
-                                                        <label>Amount:</label>
-                                                        <input type="text" id="amount0" class="form-control amount" name="amount0">
-                                                        <div class="d-md-none mb-2"> </div>
-                                                    </div>
-                                               
-                                                    <div class="col-md-2">
-                                                    </br>
-                                                        <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
-                                                            <i class="la la-trash-o"></i></a>
-                                                        <a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
-                                                            <i class="la la-plus"></i>ADD</a>
-                                                            <div class="d-md-none mb-2"> </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="separator separator-solid separator-primary opacity-20"></div>
-                             
-                                    </div> -->
+                                    
 
 
                                     
@@ -154,7 +103,7 @@
                                                 <td ><input  id="qty0" type="number" class="form-control qty" name="qty0" style="text-align: center;"></td>
                                                 <td > <input id="rate0" type="text" class="form-control rate" name="rate0" style="text-align: center;" disabled></td>
                                                 <td ><input type="text" id="amount0" class="form-control amount" name="amount0" disabled style="text-align: center;"></td>
-                                                <td style="text-align: center;" class="btnresponce btnremoveresponce">  <button id="addformtablerows0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button></td>
+                                                <td style="text-align: center;" class="btnresponce btnremoveresponce">  <button id="btn_addrow0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button><button type="button" class="btn btn-light-danger font-weight-bold delrow" id="btn_removerow0" style="display: none;">-</button> </td>
                                                 
                                             </tr>
 
@@ -163,7 +112,7 @@
                                 </table>
                                 
                             </div> 
-                            <button type="submit" class="btn btn-primary" name="save" value="billdata" ><i class="flaticon2-send-1"></i> Save</button>
+                            <button id="btn_save" type="submit" class="btn btn-primary" name="save" value="billdata" ><i class="flaticon2-send-1"></i> Save</button>
                                     
                 </form>
            
@@ -201,12 +150,7 @@
                         <div class="col-md-9">
                             <div class="d-flex justify-content-between">
 
-                                <!-- <button type="submit" class="btn btn-light-success font-weight-bold headerapprove" >Accept</button>-->
-                                  
-                                <!-- <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button> -->
-                                <!-- <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Invoice</button> -->
-                               <!-- <button type="button" class="btn btn-hover-bg-dark btn-text-dark btn-hover-text-white border-0 font-weight-bold" onclick="window.open('${ds.attachfile}', 'test', 'width=600, height=400');">Attach Files</button>-->
-
+                           
                             </div>
                         </div>
                     </div>
@@ -216,32 +160,7 @@
                 </div>
                 
             </div>
-            <!-- end::Card-->
-        <!--begin::Card-->
-         <!-- begin::sideCard-->
-        <!--begin::Card-->
         
-        <!-- <div class="card card-custom bg-white" style="height: 30%; width: 26%; float: right;  margin-left: 1%; ">  
-            <div class="card-header border-0">
-                <div class="card-title">
-                    <span class="card-icon">
-                        <i class="flaticon2 "></i>
-                    </span>
-                    <h3 class="card-label  text-black">Summary</h3>
-                </div>
-               
-            </div>
-            <div class="separator separator-solid separator-grey opacity-20"></div>
-            <div class="card-body text-black "><p> Total Amount : <span id="totalamount" class="text-danger"> 0 </span>  </p><p>Total Quantity : <span id="totalqty" class="text-danger"> 0 </span></p>
-                 <p>Total Items : <span id="totalitems" class="text-danger"> 0 </span></p> 
-                <div class="separator separator-solid separator-grey opacity-50"></div>
-                <div class="separator separator-solid separator-grey opacity-50"></div>
-            </br>
-                <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();"> <i class="flaticon2-file-1"></i> Print Invoice</button>
-            </div>
-           
-          
-        </div> -->
 
         <!--end::Card-->
         </div>
@@ -380,35 +299,39 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
              $row = currentcell 
              if($("#qty"+$row.index()).val()=="")
              {
-                 
                 Swal.fire({  icon: 'warning',  title: 'Please Enter Quantity'  })
-
                 return
              }
              if($("#qty"+$row.index()).val()=="0" || $("#qty"+$row.index()).val()<0)
              {
-                 
                 Swal.fire({  icon: 'warning',  title: 'Quantity must be greater then 0'  })
-
                 return
              }
             
+             console.log("check lines", $row.index())
+
+           
+             
+            
+              
                $("#totalitems").text($('#table-main tr').length)
                $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
     qty=0
     td='<tr>'
     //td+='<td>'+sno+'</td>' 
-    td+="<td><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' required style='width: 100%;'>"+itemdropdown+" </select>"
+    td+="<td id='"+lines+"' ><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' required style='width: 100%;'>"+itemdropdown+" </select>"
     
     td+=  '</td>'   
     td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button" class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes"></i></button>'  
-    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="text" class="form-control qty" name="qty'+lines+'" style="text-align: center;" required></td>'  
+    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'" style="text-align: center;" required></td>'  
     td+=' <td style="text-align: center;"><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" style="text-align: center;" required disabled></td>'  
     td+= '<td style="text-align: center;"><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" style="text-align: center;" disabled></td>'                                              
-    td+='<td style="text-align: center;" id="addformtablerows'+lines+'" style="width:50px"><button type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
+    td+='<td style="text-align: center;"  style="width:30px"><button id="btn_addrow'+lines+'" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="btn_removerow'+lines+'" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
     //td+='<td><button  type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
     td+=  '</tr>'                                                              
-                                           
+    $("#btn_addrow"+$row.index()).hide()
+    $("#btn_removerow"+$row.index()).show()    
+    alert($row.index())                               
 // $('#table-main tbody').find('.addformtablerows').each(function(){
 
 //     $(this).append(td);
@@ -466,6 +389,34 @@ $.fn.eachFunctiondel();
 
 });
 $.fn.eachFunctiondel=function(){
+
+    var tableLines=0
+
+$("#table-main tbody tr td:first-child").each(function(event){
+
+  
+    $("#itemdropdown"+$(this).attr('id')).prop('id', 'itemdropdown'+tableLines);
+    $("#qty"+$(this).attr('id')).prop('id', 'qty'+tableLines);
+    $("#rate"+$(this).attr('id')).prop('id', 'rate'+tableLines);
+    $("#amount"+$(this).attr('id')).prop('id', 'amount'+tableLines);
+    $("#btn_addrow"+$(this).attr('id')).prop('id', 'btn_addrow'+tableLines);  
+    $("#btn_removerow"+$(this).attr('id')).prop('id', 'btn_removerow'+tableLines);
+    $("#"+$(this).attr('id')).prop('id',tableLines);
+    $('#itemdropdown'+tableLines).select2({
+                placeholder: "Select Item"});
+    
+    tableLines++
+
+})
+    lastRow=$('#table-main tr').length
+    alert("btn_addrow"+parseInt(lastRow-2))
+    $("#btn_addrow"+parseInt(lastRow-2)).show()
+    if(parseInt(lastRow-2)==0)
+    {
+        $("#btn_removerow"+parseInt(lastRow-2)).hide() 
+       
+    }
+   
 
 $('#table-main').find('.table-tbody .qty').each(function(){
 
@@ -633,19 +584,29 @@ const form  = document.getElementById('#approveform');
                     )
              }
              postForm.items=postDataArray
-             console.log("checks postDataArray",postForm)
+            
+             if($("#rate0").val()!=""){
+                     $.ajax({ 
+                            type      : 'POST', //Method type
+                            url       : '/getsaleorder', //Your form processing file URL
+                            data      : JSON.stringify(postForm), //Forms name
+                            contentType: "application/json; charset=utf-8",
+                            success   : function(data) 
+                                        {
 
-        $.ajax({ 
-            type      : 'POST', //Method type
-            url       : '/getsaleorder', //Your form processing file URL
-            data      : JSON.stringify(postForm), //Forms name
-            contentType: "application/json; charset=utf-8",
-            success   : function(data) 
-                        {
-                           console.log("data length",data.length)
-                           window.location = '/sales-orders/' + data.length;
-                        }
-        });
+                                        console.log("data length",data.length)
+                                        window.location = '/sales-orders/' + data.length;
+                                        }
+                        });
+
+             }
+             else
+             {
+                Swal.fire({  icon: 'warning',  title: 'Please Enter'  })
+             }
+
+        
+
         event.preventDefault(); //Prevent the default submit
     });
       

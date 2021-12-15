@@ -139,12 +139,7 @@ module.exports = [
           "text": "22164"
         }
       ],
-      "location": [
-        {
-          "value": "7",
-          "text": "Singapore : East Coast"
-        }
-      ],
+      "location": "Singapore : East Coast",
       "approvalstatus": [
         {
           "value": "1",

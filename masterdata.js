@@ -22,79 +22,55 @@ module.exports={
 "Customers":[
     {
         "id":1,
-        "name":"Hamzah Abdul Gani",
+        "name":"XY Company",
         "location" : "Singapore : East Coast",
     },
     {
         "id":2,
-        "name":"wei sheng",
+        "name":"Avito",
         "location" : "Singapore : East Coast",
     },
     {
         "id":3,
-        "name":"william",
+        "name":"Mojang",
         "location" : "Singapore : East Coast",
     },
     {
         "id":4,
-        "name":"john",
+        "name":"Shap UP",
         "location" : "Singapore : East Coast",
     },
     {
         "id":5,
-        "name":"Jasim Khan",
+        "name":"Backtub",
         "location" : "Singapore : East Coast",
     },
     {
       "id":6,
-      "name":"Hamzah Khan",
+      "name":"Rex",
       "location" : "Singapore : East Coast",
   },
   {
       "id":7,
-      "name":"William",
+      "name":"ByteAble",
       "location" : "Singapore : East Coast",
   },
   {
       "id":8,
-      "name":"Jason",
+      "name":"Hopper",
       "location" : "Singapore : East Coast",
   },
   {
       "id":9,
-      "name":"Basri",
+      "name":"Cordys",
       "location" : "Singapore : East Coast",
   },
   {
       "id":10,
-      "name":"D",
+      "name":"ABC Company",
       "location" : "Singapore : East Coast",
   },
-  {
-   "id":11,
-   "name":"Dewantoto",
-   "location" : "Singapore : East Coast",
-},
-{
-   "id":12,
-   "name":"Wisnu",
-   "location" : "Singapore : East Coast",
-},
-{
-   "id":13,
-   "name":"Patrick",
-   "location" : "Singapore : East Coast",
-},
-{
-   "id":14,
-   "name":"Robby",
-   "location" : "Singapore : East Coast",
-},
-{
-   "id":15,
-   "name":"Tanna",
-   "location" : "Singapore : East Coast",
-}
+
 ],
 "Products": [
     {

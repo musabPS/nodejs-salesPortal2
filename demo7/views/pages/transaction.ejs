@@ -80,29 +80,16 @@
                                                 <td > <input type="text" id="amount<%= i %>" class="form-control psview amount" name="amount0" value="<%= el.amount %>"  ></td>
                                               
                                                 <% if(i === len){ %>
-                                                    <td style="text-align: center;" class="btnresponce btnremoveresponce">   <button id="addformtablerows<%= i %>" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="delrows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
+                                                    <td style="text-align: center;" class="btnresponce btnremoveresponce">   <button id="btn_addrow<%= i %>" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="btn_removerow<%= i %>" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
 
                                                 <% } else{ %>
-                                                    <td style="text-align: center;" class="btnresponce btnremoveresponce"> <button id="addformtablerows<%= i %>" type="button" class="btn btn-light-primary font-weight-bold addformtablerows" style="display: none;">+</button>   <button id="delrows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
+                                                    <td style="text-align: center;" class="btnresponce btnremoveresponce"> <button id="btn_addrow<%= i %>" type="button" class="btn btn-light-primary font-weight-bold addformtablerows" style="display: none;">+</button>   <button id="btn_removerow<%= i %>" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>
 
                                                 <% } %>
                                             </tr>
                                             <% i++;   }) %>
 
-                                            <!-- <tr>
-                                                 <td>1</td>
-                                                 <td> <select id="itemdropdown" class="form-control itemdropdown" name="option0"> </select>
-                                                        
-                                                 </td>
-                                                <td><input  id="qty0" type="text" class="form-control qty" name="qty0"></td>
-                                                <td><input type="text" class="form-control " name="availableqty"></td>
-                                                <td><input id="rate0" type="text" class="form-control rate" name="rate0"></td>
-                                                <td><input type="text" id="amount0" class="form-control amount" name="amount0"></td>
-                                                <td><button id="addformtablerows" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> </tr>
-                                                
-                                            </tr> -->
-                                    
-  
+
                                           </tbody>
 
                                 </table>
@@ -268,7 +255,7 @@ $('#table-main .table-tbody tr').click(function () {
     });
     $('#tableform').on('click','.addfirstrow',function(){
       
-    $("#btn_addfirstrow").remove();
+    $("#btn_addfirstrow").hide();
     $("#btncancel").show();
     $("#btnsave").show();
 
@@ -280,7 +267,7 @@ $('#table-main .table-tbody tr').click(function () {
     td+= '<td><input id="qty1" type="number" class="form-control qty" name="qty0" ></td>'  
     td+= ' <td><input id="rate1" type="text" class="form-control rate" name="rate0" disabled></td>'  
     td+= '<td><input id="amount1" type="text" class="form-control amount" name="amount0" disabled></td>'                                              
-    td+= '<td style="text-align: center;" class="btnresponce btnremoveresponce"><button id="addformtablerows1" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
+    td+= '<td style="text-align: center;" class="btnresponce btnremoveresponce"><button id="btn_addrow1" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="btn_removerow0" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
     td+= '</tr>'
 
     counttd=1
@@ -305,12 +292,13 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
                 Swal.fire({  icon: 'warning',  title: 'Quantity must be greater then 0'  })
                 return
              }
-             $('#addformtablerows'+parseInt($row.index()+1)).hide();
+
+             
              lines = $('#table-main tr').length;
             
              $(this).parent($('#table-main tbody #amount'+$row.index()+'').val($("#rate"+$row.index()).val() * $("#qty"+$row.index()).val()))
     qty=0
-    td='<tr>'
+    td="<tr>"
   //  td+='<td>'+sno+'</td>' 
     td+="<td id='"+lines+"'><select id='itemdropdown"+$('#table-main tr').length+"' class='form-control itemdropdown' name='option"+lines+"' style='width: 100%;'>"+itemdropdown+" </select>"
     td+=  '</td>'  
@@ -318,10 +306,10 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
     td+='<td><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'" ></td>'  
     td+=' <td><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" disabled></td>'  
     td+= '<td><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" disabled></td>'                                              
-    td+='<td style="text-align: center;"><button id="addformtablerows'+lines+'" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
+    td+='<td style="text-align: center;"><button id="btn_addrow'+lines+'" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="btn_removerow"'+lines+'" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
     //td+='<td><button id="addformtablerows" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td> '
-    td+=  '</tr>'                                                              
-                                           
+    td+=  "</tr>"                                                              
+    $('#btn_addrow'+parseInt($row.index()+1)).hide();                    
     // $('#table-main tbody').find('.addformtablerows').each(function(){
     //     $(this).append(td);
     // })
@@ -356,9 +344,18 @@ console.log("lines",lines)
     totalAmount=0
 }
 ///////////////
-$('#table-main .table-tbody').on('click','.delrow',function(){       //delete buttons
+$('#table-main .table-tbody').on('click','.delrow',function(){ 
+    var value = this.value;
+    var $cell = $(this).parent();
+    var $row = $cell.parent(); 
+        
+
+    var rowCount = $('#table-main tr').length-1;
+
+    // $.fn.rowcheck();
     $(this).parents('tr').remove();
-    
+    console.log("checkline",$(this).closest("tr"))
+    $.fn.eachResults();
 
     counttd--
     $('#totalrows').text(counttd);
@@ -366,38 +363,72 @@ $('#table-main .table-tbody').on('click','.delrow',function(){       //delete bu
     lines--
    // var results = $('#table-main .table-tbody').parent().siblings(":first").text()
   //  alert("TR ID " + results);
-  var $results = $("td:first-child");
-  var tableLines=1
-  var rowCount = $('#table-main tr').length-1;
-     $('#addformtablerows'+rowCount).show();
-    
-        console.log("check row after deletebutton",rowCount)
-        if(rowCount==0)
-        {
-            $("#btn_addfirstrow").show();
-            $("#btncancel").hide();
-            $("#btnsave").hide();
-        }
-      
- $results.each(function(index, result)
- {
-     
-     console.log("check",result.id)
   
-  $("#itemdropdown"+result.id).prop('id', 'itemdropdown'+tableLines);
-   $("#qty"+result.id).prop('id', 'qty'+tableLines);
-   $("#rate"+result.id).prop('id', 'rate'+tableLines);
-   $("#amount"+result.id).prop('id', 'amount'+tableLines);
-   $("#"+result.id).prop('id',tableLines);
-   $('#itemdropdown'+tableLines).select2({
-               placeholder: "Select Item"});
-   tableLines++
- 
- });
+     
+        
   // Or, you can access a specific element by index:
 
     $.fn.eachFunctiondel();
 });
+
+// $.fn.rowcheck = function(){
+
+    
+    // $("#table-main").find('tr', function(){
+        
+    // })
+
+// }
+
+$.fn.eachResults = function(){
+    var tableLines=1
+
+    $("#table-main tbody tr td:first-child").each(function(event){
+
+      
+        $("#itemdropdown"+$(this).attr('id')).prop('id', 'itemdropdown'+tableLines);
+        $("#qty"+$(this).attr('id')).prop('id', 'qty'+tableLines);
+        $("#rate"+$(this).attr('id')).prop('id', 'rate'+tableLines);
+        $("#amount"+$(this).attr('id')).prop('id', 'amount'+tableLines);
+        $("#btn_addrow"+$(this).attr('id')).prop('id', 'btn_addrow'+tableLines);  
+        $("#btn_removerow"+$(this).attr('id')).prop('id', 'btn_removerow'+tableLines);
+        $("#"+$(this).attr('id')).prop('id',tableLines);
+        $('#itemdropdown'+tableLines).select2({
+                    placeholder: "Select Item"});
+        tableLines++
+
+    })
+    lastRow=parseInt($('#table-main tr').length-1)
+   alert('btn_addrow'+lastRow)
+    $('#btn_addrow'+lastRow).show();
+    
+    if(lastRow<=0)
+    {
+        $("#btn_addfirstrow").show();
+        $("#btncancel").hide();
+        $("#btnsave").hide();
+    }
+
+//     var tableLines=1
+//     var $results = $("td");
+
+//     $results.each(function(index, result)
+//  {
+ 
+//     console.log("result",result)
+//    $("#itemdropdown"+result.id).prop('id', 'itemdropdown'+tableLines);
+//    $("#qty"+result.id).prop('id', 'qty'+tableLines);
+//    $("#rate"+result.id).prop('id', 'rate'+tableLines);
+//    $("#amount"+result.id).prop('id', 'amount'+tableLines);
+//    $("#"+result.id).prop('id',tableLines);
+//    $('#itemdropdown'+tableLines).select2({
+//                placeholder: "Select Item"});
+//    tableLines++
+ 
+//  });
+
+}
+
 $.fn.eachFunctiondel=function(){
     
         var rowCount = $('#table-main tr').length-1;
