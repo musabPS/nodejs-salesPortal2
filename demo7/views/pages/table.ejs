@@ -1,3 +1,4 @@
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
@@ -96,9 +97,9 @@
                     <!--begin::Search Form-->
                     <div class="mb-7">
                         <div class="row align-items-center">
-                            <div class="col-lg-12 col-xl-12">
+                            <div class="col-lg-9 col-xl-8">
                                 <div class="row align-items-center">
-                                    <div class="col-md-12 my-2 my-md-0">
+                                    <div class="col-md-4 my-2 my-md-0">
                                         <div class="input-icon">
                                             <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
                                             <span>
@@ -106,178 +107,86 @@
                                             </span>
                                         </div>
                                     </div>
-                                    
-                                  
+                                    <div class="col-md-4 my-2 my-md-0">
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                            <select class="form-control" id="kt_datatable_search_status">
+                                                <option value="">All</option>
+                                                <option value="1">Pending</option>
+                                                <option value="2">Delivered</option>
+                                                <option value="3">Canceled</option>
+                                                <option value="4">Success</option>
+                                                <option value="5">Info</option>
+                                                <option value="6">Danger</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 my-2 my-md-0">
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
+                                            <select class="form-control" id="kt_datatable_search_type">
+                                                <option value="">All</option>
+                                                <option value="1">Online</option>
+                                                <option value="2">Retail</option>
+                                                <option value="3">Direct</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
+                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                            </div>
                         </div>
-                    </br>
-                    <% if (type=="detail") { %>
-
-                        <div class="row align-items-center">
-                            <div class="col-md-4 my-2 my-md-0">
-                                <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Order#:</label>
-                                    <select class="form-control" id="kt_datatable_search_soid">
-                                        <option value="">All</option>
-                                        <option value="SO1">SO1</option>
-                                        <option value="SO2">SO2</option>
-                                        <option value="SO3">SO3</option>
-                                        <option value="SO4">SO4</option>
-                                        <option value="SO5">SO5</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 my-2 my-md-0">
-                                <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Customer:</label>
-                                    <select class="form-control" id="kt_datatable_search_customer">
-                                        <option value="">All</option>
-                                        <option value="sghuhds">sghuhds</option>
-                                        <option value="2">sghuhds2</option>
-                                        <option value="3">sghuhds4</option>
-                                        <option value="4">sghuhds5</option>
-                                        <option value="5">sghuhds7</option>
-                                        <option value="6">sghuhds8</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- <div class="col-md-4 my-2 my-md-0">
-                                <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Date:</label>
-                                    <select class="form-control" id="kt_datatable_search_date2">
-                                        <option value="">All</option>
-                                        <option value="9/23/2021">9/23/2021</option>
-                                        <option value="9/27/2021">9/27/2021</option>
-                                        <option value="9/28/2021">9/28/2021</option>
-                                    </select>
-                                </div>
-                            </div> -->
-                            <div class="col-md-4 my-2 my-md-0">
-                                <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Location:</label>
-                                    <select class="form-control" id="kt_datatable_search_location">
-                                        <option value="">All</option>
-                                        <option value="Singapore : East Coast">Singapore : East Coast</option>
-                                        <option value="Singapore : West Coast">Singapore : West Coast</option>
-                                        <option value="Singapore : South Coast2">Singapore : South Coast</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </br>
-                        <div class="row align-items-center">
-
-                          
-
-                            <div class="col-md-4 my-2 my-md-0">
-                                <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Items:</label>
-                                    <select class="form-control" id="kt_datatable_search_item">
-                                        <option value="">All</option>
-                                        <option value="shing shing wooden door">shing shing wooden door</option>
-                                        <option value="Test Coffee - 5 Kg">Test Coffee - 5 Kg</option>
-                                        <option value="ABC Item 001-Sales">ABC Item 001-Sales</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <% } %>
                     </div>
                     <!--end::Search Form-->
                     <!--end: Search Form-->
                     <!--begin: Datatable-->
 
-                    <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
-                        <thead>
-                            <tr>
+                   
 
-                                <% if (type=="detail") { %>
-                                   
-                                    <th title="Field #2">SO #</th>
-                                    <th title="Field #3">Customer</th>
-                                    <th title="Field #4">Location</th>
-                                    <th title="Field #5">Date</th>
-                                    <th title="Field #4">Item</th>
-                                    <th title="Field #5">Order Qty</th>
-                                    <th title="Field #5">In transit Qty</th>
-                                    <th title="Field #5">Delivered Qty</th>
-                                    <th title="Field #6">Amount</th>
-                                    <th title="Field #6">Action</th>
-                                    
-                                 <% } %>
-                                 <% if (type=="summary") { %>
-                                    
+                        <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                            <thead>
+                                <tr>
+                                    <th title="Field #1">S#</th>
                                     <th title="Field #3">SO #</th>
                                     <th title="Field #4">Date</th>
                                     <th title="Field #5">Quantity</th>
                                     <th title="Field #6">Amount</th>
                                     <th title="Field #6">Action</th>
-                                 <% } %>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <%var linecount=0; if (type=="detail") { %>
-
-                                <% data.forEach((el)=>{  %>
+                                <% var i=0; tranData.forEach((el)=>{ i++; %>
                                     <tr>
-                                        <% for(let count = 0; count < el.items.length; count++ ){ linecount++; %>
-                                            
-                                        
-                                            <td> <a href= "/sales-orders/<%= el._id %>" > <%= el.tranid %>  </a> </td>
-                                            <td><%= el.customer %></td>
-                                            <td><%= el.location[0].text %></td>
-                                            <td><%= el.trandate %></td>
-                                            <td><%= el.items[count].name %></td>
-                                            <td><%= el.items[count].qty %></td>
-                                            <td><%= el.quantity %></td>
-                                            <td><%= el.quantity %></td>
-                                            <td><%= el.amount %></td>
-                                            <td><a href= "/sales-orders/<%= el._id %>/edit" >    <i class="flaticon2-pen text-primary"></i> &nbsp;&nbsp;&nbsp; &nbsp;</a> <i class="flaticon-delete text-danger"></i></td>
-                                            
-                                            </tr>
-                                        <% } %>
-                             
-                                    <%}) %>
-
-
-                             <% } %>
-
-                             <% if (type=="summary") { %>
-                                <% data.forEach((el)=>{  %>
-                                    <tr>
-                                       
-                                        <td> <a href= "/sales-orders/<%= el._id %>" > <%= el.tranid %>  </a> </td>
-                                        <td><%= el.trandate %></td>
-                                        <td><%= el.quantity %></td>
-                                        <td><%= el.amount %></td>
-                                        <td>
-               
-                                            
-                                            <a href= "/sales-orders/<%= el._id %>/edit" >    <i class="flaticon2-pen text-primary"></i> &nbsp;&nbsp;&nbsp; &nbsp;</a> <a href= "#" ><i class="flaticon-delete text-danger"></i></a> </td>
+                                        <td><a> <%= el.values.tranid  %> </td>
+                                        <td> <a href= "/sales-orders/<%= el.tranid %>" > <%= el.values.tranid %>  </a> </td>
+                                        <td><%= el.values.trandate %></td>
+                                        <td><%= el.values.quantity %></td>
+                                        <td><%= el.values.amount %></td>
+                                        <td><a href= "/sales-orders/<%= el._id %>/edit" ><i class="flaticon2-edit"></i><a>  <i class="flaticon2-rubbish-bin-delete-button"></i></td>
                                         
                                         </tr>
                                     <%}) %>
-                             <% } %>
-    
-                        </tbody>
-                    </table>
+                               
+                                   
+                            </tbody>
+                        </table>
                         
-                    </div>
                     <!--end: Datatable-->
                 </div>
             </div>
             <!--end::Card-->
         </div>
         <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
 
+<script>    
 
-    <script>
-        
-    </script>
+  var lrr = "<%=tranData%>"
+  console.log("check",lrr)
+</script>

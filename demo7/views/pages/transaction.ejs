@@ -399,7 +399,7 @@ $.fn.eachResults = function(){
 
     })
     lastRow=parseInt($('#table-main tr').length-1)
-   alert('btn_addrow'+lastRow)
+  
     $('#btn_addrow'+lastRow).show();
     
     if(lastRow<=0)
@@ -409,23 +409,6 @@ $.fn.eachResults = function(){
         $("#btnsave").hide();
     }
 
-//     var tableLines=1
-//     var $results = $("td");
-
-//     $results.each(function(index, result)
-//  {
- 
-//     console.log("result",result)
-//    $("#itemdropdown"+result.id).prop('id', 'itemdropdown'+tableLines);
-//    $("#qty"+result.id).prop('id', 'qty'+tableLines);
-//    $("#rate"+result.id).prop('id', 'rate'+tableLines);
-//    $("#amount"+result.id).prop('id', 'amount'+tableLines);
-//    $("#"+result.id).prop('id',tableLines);
-//    $('#itemdropdown'+tableLines).select2({
-//                placeholder: "Select Item"});
-//    tableLines++
- 
-//  });
 
 }
 
@@ -574,68 +557,68 @@ const form  = document.getElementById('#approveform');
         });
  
    $.ajax(
-     {
-      url: "/data",
-      headers: { 'Access-Control-Allow-Origin': '*' }, 
-      success: function(result){
-		console.log("checkdata",result.Products);
-		masterData=result
-        setItems(result.Products)
-        setCustomers(result.Customers)
-        setLocation(result.Locations)
-       // result = JSON.parse(result);
-        //loadGraphAPI(result[0],result[1],result[2],result[3]);
+            {
+            url: "/data",
+            headers: { 'Access-Control-Allow-Origin': '*' }, 
+            success: function(result){
+                console.log("checkdata",result.Products);
+                masterData=result
+                setItems(result.Products)
+                setCustomers(result.Customers)
+                setLocation(result.Locations)
+            // result = JSON.parse(result);
+                //loadGraphAPI(result[0],result[1],result[2],result[3]);
       }});
 
 
       $('form').submit(function(event) { //Trigger on form submit
-        $('#name + .throw_error').empty(); //Clear the messages first
-        $('#success').empty();
+                $('#name + .throw_error').empty(); //Clear the messages first
+                $('#success').empty();
 
-            
-             var postDataArray=[];
-        var postForm = { //Fetch form data
-            'tranid'       :  $('#tranid').text(),
-            'trandate'     :  $('#trandate').text(),
-            'customer'     :  $('#customerdropdown').find(":selected").text(),
-            'amount'       :  $('#totalamount').text(),
-            'quantity'     :  $('#totalqty').text(),
-            'location'     :  $('#customerlocation').find(":selected").text(),
-                       };
-                      var liness= $('#table-main tr').length-1
-             for(var i=1;i<$('#table-main tr').length;i++)
-             {
-                postDataArray.push(
-                    {
-                         'rate': $("#rate"+i).val(),'qty': $("#qty"+i).val(),
-                         'amount': $("#amount"+i).val(),
-                         'name': $('#itemdropdown'+i).find(":selected").text(),
-                         
-                    }
-                    )
-             }
-             postForm.items=postDataArray
-             console.log("checks postDataArray",postForm)
-        $.ajax({ 
-            type      : 'POST', //Method type
-            url       : '/editsaleorder', //Your form processing file URL
-            data      : JSON.stringify(postForm), //Forms name
-            contentType: "application/json; charset=utf-8",
-            success   : function(data) 
+                
+                var postDataArray=[];
+                var postForm = { //Fetch form data
+                'tranid'       :  $('#tranid').text(),
+                'trandate'     :  $('#trandate').text(),
+                'customer'     :  $('#customerdropdown').find(":selected").text(),
+                'amount'       :  $('#totalamount').text(),
+                'quantity'     :  $('#totalqty').text(),
+                'location'     :  $('#customerlocation').find(":selected").text(),
+                        };
+                        var liness= $('#table-main tr').length-1
+                for(var i=1;i<$('#table-main tr').length;i++)
+                {
+                    postDataArray.push(
                         {
-                            console.log("sucess")
-
-                            Swal.fire({  icon: 'success',  title: 'Saved', button: "Aww yiss!" ,text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
-                            $("#trandate option[value='']").attr('selected', true)
-                            $("#customer option[value='']").attr('selected', true)
+                            'rate': $("#rate"+i).val(),'qty': $("#qty"+i).val(),
+                            'amount': $("#amount"+i).val(),
+                            'name': $('#itemdropdown'+i).find(":selected").text(),
+                            
                         }
-                        
-        });
-       
-    
-          window.location.reload();
-         event.preventDefault();
-         //Prevent the default submit
+                        )
+                }
+                postForm.items=postDataArray
+                console.log("checks postDataArray",postForm)
+            $.ajax({ 
+                type      : 'POST', //Method type
+                url       : '/editsaleorder', //Your form processing file URL
+                data      : JSON.stringify(postForm), //Forms name
+                contentType: "application/json; charset=utf-8",
+                success   : function(data) 
+                            {
+                                console.log("sucess")
+
+                                Swal.fire({  icon: 'success',  title: 'Saved', button: "Aww yiss!" ,text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
+                                $("#trandate option[value='']").attr('selected', true)
+                                $("#customer option[value='']").attr('selected', true)
+                            }
+                            
+            });
+        
+        
+            window.location.reload();
+            event.preventDefault();
+            //Prevent the default submit
       });
    
  

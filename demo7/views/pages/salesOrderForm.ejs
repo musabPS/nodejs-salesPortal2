@@ -331,7 +331,7 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
     td+=  '</tr>'                                                              
     $("#btn_addrow"+$row.index()).hide()
     $("#btn_removerow"+$row.index()).show()    
-    alert($row.index())                               
+   // alert($row.index())                               
 // $('#table-main tbody').find('.addformtablerows').each(function(){
 
 //     $(this).append(td);
@@ -409,7 +409,7 @@ $("#table-main tbody tr td:first-child").each(function(event){
 
 })
     lastRow=$('#table-main tr').length
-    alert("btn_addrow"+parseInt(lastRow-2))
+   // alert("btn_addrow"+parseInt(lastRow-2))
     $("#btn_addrow"+parseInt(lastRow-2)).show()
     if(parseInt(lastRow-2)==0)
     {
