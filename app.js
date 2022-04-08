@@ -11,6 +11,7 @@ const invitmdata = require('./invoice_itemfulldata.js')
 const bodyParser = require('body-parser');
 var nsrestlet = require('nsrestlet');
 const { json } = require('express/lib/response')
+var moment = require('moment');
 
 // console.log(data)
 let publicDirectoryPath = path.join(__dirname, './demo7/public')
@@ -43,7 +44,7 @@ app.use(methodOverride('_method'))
 
 
 const authCheck = (req, res, next) => {
-    if (!req.user) {
+    if (!req.user) { 
         return res.redirect('/login')
     }
    // next()
@@ -123,8 +124,8 @@ const authCheck = (req, res, next) => {
 
  app.post('/getcustomeraddress', (req,res)=>{
     // app.set('views', path.join(__dirname,'./demo7/views'))
-     //var body = req.body
-    // console.log("req.body", body)
+     var body = req.body
+     console.log("req.body", body)
 
      var urlSettings = {
       url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
@@ -148,7 +149,7 @@ const authCheck = (req, res, next) => {
   
 
    app.set('views', path.join(__dirname,'./demo7/views'))
-   let route = "pages/table"
+   let route = "pages/transactionTable"
    console.log(data)  
  //  console.log("body parser from app script",req.body)
     let  data2=""
@@ -167,19 +168,16 @@ const authCheck = (req, res, next) => {
              tranData=JSON.parse(body)
              console.log("messaged1")
              console.log("message", tranData[0].values)
-             console.log("messaged2")
-       //     console.log("message", data2[0])
+    
        headerData=["S#","SO #","Date","Quantity","Amount","Action"]
        breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
        type="summary"
+       listName="Sale Order"
 
-        res.render('index', {route,tranData,headerData,type,breadcrumbs}) 
-         //  res.render('index', {route,tranData})
-          
-           //res.send("OK")
+        res.render('index', {route,headerData,type,breadcrumbs,tranData,listName}) 
+
        }
-      // console.log("erorr", error);
-      // res.send("There was an error")
+
      });
 
  })
@@ -298,11 +296,11 @@ app.get('/customerrequestlist', (req,res)=>{
     var {id} = req.params
     let route = "pages/transaction"
     var salesOrderData = data.filter((el)=>{
-        if(el._id == id){
+        if(el._id == 1){
             return el
         }
     })
-   // console.log("salesorder data", salesOrderData)
+    console.log("id", id)
      itemdata=salesOrderData[0].items
     breadcrumbs=masterdata.Breadcrumbs.SOVIEW
    // console.log("salesorder data", salesOrderData)
@@ -311,62 +309,61 @@ app.get('/customerrequestlist', (req,res)=>{
 
 
 
-  app.get('/sales-orders/:id', async (req,res)=>{
-    app.use('/sales-orders',express.static(path.join(__dirname, './demo7/public')))
-    var {id} = req.params
-    let route = "pages/transaction"
-    var salesOrderData = data.filter((el)=>{
-        if(el._id == id){
-            return el
-        }
-    })
-   // console.log("salesorder data", salesOrderData)
-     itemdata=salesOrderData[0].items
-   // console.log("salesorder data", salesOrderData)
- 
-    res.render('index', {route,itemdata,salesOrderData,breadcrumbss})
- })
-
   /////////////////////////------------------saleorder view End--------------/////////////////
 
- app.post('/editsaleorder',async (req,res)=>{
-   console.log("post route historyeqqweww", req.body)
-   var index=0
-   var tranid=req.body.tranid
-   tranid=tranid.replace(/ /g, '');
-   req.body.tranid=tranid
-   console.log("tranid", tranid)
-      for(var i=0; i<data.length;i++)
-      {
-         if(data[i].tranid==tranid)
-         {
-            index=i
-         }
-      }
-      tranidstr=req.body.tranid
-      tranidstr = tranidstr.replace(/\s/g, '');
 
-      req.body._id=parseInt(tranidstr.substring(2))
-      data[index]=req.body
-     console.log("edit",data[index])
-     return true
-   })
 
  app.get('/sales-orders/:id/edit', async (req,res)=>{
     var {id} = req.params
     app.use('/sales-orders/'+id ,express.static(path.join(__dirname, './demo7/public')))
+    console.log("Req",req.params)
 
-    var salesOrderData = data.filter((el)=>{
-        if(el._id == id){
-            return el
-        }
-    })
+    var urlSettings = {
+      url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
+   }
+   var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
+ 
+   myRestlet.get({type:'getSOHeaderData',orderId: id ,userid: userid}, function(error, body)
+   {
+     if (!error) {
 
-    itemdata=salesOrderData[0].items
-    let route = "pages/transaction"
-    breadcrumbs=masterdata.Breadcrumbs.SOVIEW
-    res.render('index', {route,salesOrderData,itemdata,breadcrumbs})
+       body = JSON.parse(body)
+       body.soHeaderInfo[0].values.trandate1=moment(new Date(body.soHeaderInfo[0].values.trandate)).format("YYYY-MM-DD");
+       console.log("saveid", body.soHeaderInfo)
+       let route = "pages/transaction"
+       let soHeader     = body.soHeaderInfo
+       let customerList = JSON.parse(body.customerlist)
+       breadcrumbs=masterdata.Breadcrumbs.SOVIEW
+       res.render('index', {route,soHeader,breadcrumbs,customerList})
+     
+     }
+ 
+   });
+
+ 
  })
+
+ app.post('/sales-orders/:id/itemdetail', async (req,res)=>{
+  var {id} = req.params
+  app.use('/sales-orders/'+id ,express.static(path.join(__dirname, './demo7/public')))
+  console.log("Reqgg",req.params)
+
+  var urlSettings = {
+    url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
+ }
+ var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
+
+ myRestlet.get({type:'itemDetail',orderId: id}, function(error, body)
+ {
+   if (!error) {
+     console.log("itemDetail",body)
+     res.send(body)
+   }
+
+ });
+
+
+})
 
  app.post("/createSaleOrder_netsuite", (req,res)=>{
    console.log("Req",req.body)
@@ -390,17 +387,7 @@ app.get('/customerrequestlist', (req,res)=>{
 
 })
 
-    // app.put('/sales-orders/:id', async (req,res)=>{
-    //     var {id} = req.params
-    //     let route = "pages/salesOrderForm"
-    //     res.redirect(`/sales-orders/${campground._id}`)
-    // })
-
-    // app.delete('/sales-orders/:id',async(req,res)=>{
-    //     var {id} = req.params
-    //     res.redirect('/view')
-    // })
-
+    
 
  app.get('/demo1', (req,res)=>{
     app.set('views', path.join(__dirname,'./demo1/views'))
