@@ -13,11 +13,14 @@ var nsrestlet = require('nsrestlet');
 const { json } = require('express/lib/response')
 var moment = require('moment');
 
+require('./models/mongoose')
+
 // console.log(data)
 let publicDirectoryPath = path.join(__dirname, './demo7/public')
 
 const app = express()
-
+const saleOrder = require('./models/sale-order-model')
+const saloeOrderRouter= require('./routes/sale-order-route')
 
 const accountSettings = {
    accountId: "TSTDRV925863",
@@ -49,6 +52,9 @@ const authCheck = (req, res, next) => {
     }
    // next()
  }
+
+ app.use(saloeOrderRouter)
+
 
  app.get('/login', (req,res)=>{
     res.render("pages/login")
@@ -90,37 +96,7 @@ const authCheck = (req, res, next) => {
     res.render('index',{route,breadcrumbs,type,data})
  })
 
- app.get('/create-sales-order', (req,res)=>{
-  //  app.set('views', path.join(__dirname,'./demo7/views'))
-    let route = "pages/salesOrderForm"
-
-
-    var urlSettings = {
-      url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
-   }
-   var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
-
-   myRestlet.get({userid: userid ,type:'getcustomerdropdown'}, function(error, body)
-   {
-     if (!error) {
-      //   console.log("message", JSON.parse(body))
-           createDataLoad=JSON.parse(body)
-         //   console.log("messaged1")
-         //   console.log("message", createDataLoad)
-         //   console.log("messaged2")
-     //     console.log("message", data2[0])
-     customerData     = JSON.parse(createDataLoad.customerlist)
-
-     breadcrumbs=masterdata.Breadcrumbs.SOVIEW
-      res.render('index', {route,customerData,breadcrumbs}) 
-     }
-
-   });
-
-
-  //  breadcrumbs=masterdata.Breadcrumbs.SOVIEW
-    //res.render('index', {route,breadcrumbs})
- })
+ 
 
  app.post('/getcustomeraddress', (req,res)=>{
     // app.set('views', path.join(__dirname,'./demo7/views'))
@@ -145,42 +121,8 @@ const authCheck = (req, res, next) => {
    //  res.render('index', {route,breadcrumbs})
   })
 
- app.get('/sales-orders', (req,res)=>{
-  
+ 
 
-   app.set('views', path.join(__dirname,'./demo7/views'))
-   let route = "pages/transactionTable"
-   console.log(data)  
- //  console.log("body parser from app script",req.body)
-    let  data2=""
-   
-    var urlSettings = {
-       url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
-    }
-    var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
-   // var body = req.body
-    console.log("req.body", req.body)
-    myRestlet.get({userid: userid, type:'getsaleorderlist'}, function(error, body)
-     {
-       if (!error) {
-
-        //   console.log("message", JSON.parse(body))
-             tranData=JSON.parse(body)
-             console.log("messaged1")
-             console.log("message", tranData[0].values)
-    
-       headerData=["S#","SO #","Date","Quantity","Amount","Action"]
-       breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
-       type="summary"
-       listName="Sale Order"
-
-        res.render('index', {route,headerData,type,breadcrumbs,tranData,listName}) 
-
-       }
-
-     });
-
- })
  app.get('/sales-orders-detail', (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "pages/table"
@@ -371,7 +313,7 @@ app.get('/customerrequestlist', (req,res)=>{
 
    var urlSettings = {
      url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
-  }
+   }
   var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
 
   myRestlet.get({type:'createSaleOrder',sodata: JSON.stringify(req.body)}, function(error, body)
@@ -394,8 +336,33 @@ app.get('/customerrequestlist', (req,res)=>{
     res.render('index')
  }) 
 
+ app.get('/itemList', (req,res)=>{
+
+  let route = "pages/itemTable"
+  let type="itemList"
+  let customerData=masterdata.Customers
+  breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+ res.render('index', {route,customerData,type,breadcrumbs}) 
+
+}) 
+app.get('/itemFrom&internalid=:id', (req,res)=>{
+
+  var {id} = req.params
+    console.log("Req",req.params)
+
+    let route = "pages/itemForm"
+    breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+    res.render('index', {route,breadcrumbs})
+ 
+  
+
+}) 
+
+
  const port =  process.env.PORT || 3000
  app.listen(port, () => {
     console.log(`Serving on port ${port}`)
  }) 
+
+
 
