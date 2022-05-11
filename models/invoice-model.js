@@ -6,7 +6,7 @@ const itemFulfillmentSchema = new mongoose.Schema({
         trim:true,
         required : true
     },
-    ifNumber:{
+    invoiceNumber:{
         type:String,
         required:true,
         trim:true
@@ -46,6 +46,6 @@ const itemFulfillmentSchema = new mongoose.Schema({
     }
 })
 
-const ItemFulfillment = mongoose.model('ItemFulfillment', itemFulfillmentSchema)
+const ItemFulfillment = mongoose.model('Invoice', itemFulfillmentSchema)
 
 module.exports = ItemFulfillment

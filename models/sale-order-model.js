@@ -8,7 +8,6 @@ const saleOrderSchema = new mongoose.Schema({
     },
     soNumber:{
          type:String,
-         required:true,
          trim:true
      },
      date:{
@@ -59,6 +58,6 @@ const saleOrderSchema = new mongoose.Schema({
      }
 })
 
-const saleOrder = mongoose.model('saleorder', saleOrderSchema)
+const saleOrder = mongoose.model('SaleOrder', saleOrderSchema)
 
 module.exports = saleOrder 

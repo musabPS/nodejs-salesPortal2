@@ -9,6 +9,7 @@ mongoose.connect( mongodbAtlas ,{
 
 }).then(()=>{
     console.log("Mongo connection open")
+
 })
 .catch(err=>{
     console.log(err)

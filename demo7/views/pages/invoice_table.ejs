@@ -154,9 +154,10 @@
                                
                             <%  tranData.forEach((el)=>{  %>
                                 <tr>
-                                    <td><a> <%=el.soNumber%> </td>
+                                    
+                                    <td><a> <%=el.invoiceNumber%> </td>
                                     <td><a> <%=el.customerName%> </td>
-                                    <td><%= moment(el.date).format("MM-DD-YYYY") %></td>
+                                    <td><%=moment(el.date).format("MM-DD-YYYY") %></td>
                                     <td><%=el.quantity %></td>
                                     <td><%= el.amount %></td>
                                     <td><%= el.status %></td>
