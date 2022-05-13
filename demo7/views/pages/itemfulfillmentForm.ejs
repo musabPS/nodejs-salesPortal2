@@ -228,7 +228,6 @@ var itemdropdown=''
 var masterData=''
 var lines=document.getElementById("table-main")
 lines=lines.rows.length;
-var ProductData="";
 
     
 
@@ -597,9 +596,9 @@ const form  = document.getElementById('#approveform');
     }
 
     
-  
+   
     var url = window.location.href;
-    isurledit="edit"
+    isurledit="Edit"
     
      console.log("cjsd",url)
      if(isurledit<0)
@@ -691,9 +690,8 @@ $('#table-main .table-tbody').on('click','#btn_addrow72',function ()
         $('#name + .throw_error').empty(); //Clear the messages first
                 $('#success').empty();
                 var loc=window.location.href
-                var url = new URL(loc).href;
-                urlSplit=url.split('=')
-                var orderInternalId = urlSplit[1];
+                var url = new URL(loc);
+                var orderInternalId = url.searchParams.get("orderid");
                 
                 var postDataArray=[];
 
@@ -719,7 +717,7 @@ $('#table-main .table-tbody').on('click','#btn_addrow72',function ()
                                 {
 
                                     itemobject.name=$(this).val()
-                                 // postDataArray.push({'name':  $(this).val()})
+                               // postDataArray.push({'name':  $(this).val()})
 
                                 });
 
@@ -729,8 +727,6 @@ $('#table-main .table-tbody').on('click','#btn_addrow72',function ()
                                     {
                                         itemobject.qty=$(this).val()
                                        // postDataArray.push({'qty':  $(this).val()})
-
-                                       console.log("checkqty",itemobject.qty)
                                     }
                                     if(index==1)
                                     {
@@ -792,7 +788,7 @@ $('#table-main .table-tbody').on('click','#btn_addrow72',function ()
                    
             $.ajax({ 
                 type      : 'POST', //Method type
-                url       : '/editSaleOrder_netsuite', //Your form processing file URL
+                url       : '${ds.links.customscript_sl_sp_view_salesorder}', //Your form processing file URL
                 data      : JSON.stringify(postForm), //Forms name
                 contentType: "application/json; charset=utf-8",
                 success   : function(data) 
@@ -892,7 +888,7 @@ function setLocation(locationData)
 
         var loc=window.location.href
         var url = new URL(loc);
-        var viewType = url.searchParams.get("type");
+        var viewType = url.searchParams.get("t");
 
 
         if(viewType=="edit")
@@ -1189,7 +1185,7 @@ function setLocation(locationData)
 
            $.ajax({ 
                 type      : 'POST', //Method type
-                url       : '/sales-orders/'+urlSplit[1]+'/itemdetail', //Your form processing file URL
+                url       : '/itemfulfillmentDetail&id='+urlSplit[1], //Your form processing file URL
                 data      : JSON.stringify(postForm), //Forms name
                 contentType: "application/json; charset=utf-8",
                 success   : function(data) 

@@ -17,7 +17,7 @@ const router = express.Router()
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
 app.use(router)
-const SaleOrder = require('../models/sale-order-model')
+const SaleOrder = require('../models/sale-order-model') 
 const accountSettings = {
   accountId: "TSTDRV925863",
   tokenKey: "6aa795846f7c09f0389b64ee9c09b7a094ec7122ba1f7dc84bbd6dbe3ab1cee3",
@@ -125,6 +125,8 @@ router.get('/create-sales-order', (req,res)=>{
 
  })
 
+ 
+
  router.post("/getsaleorder", (req,res)=>{   //get data from ajax
   console.log("Req",req.body)
   req.body._id=getNextId(data)
@@ -211,16 +213,41 @@ var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
 
 myRestlet.get({type:'createSaleOrder',sodata: JSON.stringify(req.body)}, function(error, body)
 {
-  if (!error) {
+  if (!error)
+   {
    
-  console.log("saveid",body)
-   //res.send(body)
+   console.log("createSaleOrder_netsuite",body)
+   res.send(JSON.stringify(body))
+   //res.sendStatus(status)
   }
 
 });
 
 
 })
+router.post("/editSaleOrder_netsuite", (req,res)=>{
+
+  console.log("Req","")
+  console.log("Req",req.body)
+ 
+ 
+  var urlSettings = {
+    url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
+  }
+ var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
+ 
+ myRestlet.get({type:'editSaleOrder',sodata: JSON.stringify(req.body)}, function(error, body)
+ {
+   if (!error) {
+    
+   console.log("saveid",body)
+    res.send(body)
+   }
+ 
+ });
+ 
+ 
+ })
 
 router.get('/sales-orders-detail', (req,res)=>{
   // app.set('views', path.join(__dirname,'./demo7/views'))

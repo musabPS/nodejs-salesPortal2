@@ -26,29 +26,25 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
 app.use(router)
 
-const PurchaseRequests = require('../models/purchaseRequests-model')
+//const itemFulfillments = require('../models/itemFulfillments-model')
+const saleorders= require('../models/sale-order-model')
 const itemFulfillments = require('../models/itemFulfillments-model')
-const invoice = require('../models/invoices-model')
-const payments = require('../models/payments-model')
-
-
-
-
+const invoices =  require('../models/invoice-model')
+const customers =  require('../models/customer-model')
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
 app.use(router)
 
 
-router.post('/createPurchaseRequest', async (req, res) => {
+router.post('/createSaleOrderMongo', async (req, res) => {
     try {
-
         console.log("reg", req.body)
         var obj = req.body.netsuiteData[0]
-        const purchaseRequests = new PurchaseRequests(obj)
-        await purchaseRequests.save();
+        const saleorder = new saleorders(obj)
+        await saleorder.save();
 
-        console.log("objId", purchaseRequests._id)
+        console.log("objId", saleorder.id)
 
         let currentDate = new Date()
         let currentDateTime = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
@@ -56,10 +52,10 @@ router.post('/createPurchaseRequest', async (req, res) => {
             success: true,
             currentDateTime: currentDateTime,
             type: "Create",
-            mongoObjId: purchaseRequests._id
-
+            mongoObjId: saleorder.id
         }
 
+        console.log("mongoo data hit");
 
         res.send(JSON.stringify(response)) 
     }
@@ -82,7 +78,8 @@ router.post('/createPurchaseRequest', async (req, res) => {
     }
 
 })
-router.post('/updatePurchaseRequest', async (req, res) => {
+
+router.post('/updateSaleOrderMongo', async (req, res) => {
     var data = []
     try {
 
@@ -94,7 +91,7 @@ router.post('/updatePurchaseRequest', async (req, res) => {
         delete obj.internalId;
 
 
-        data = PurchaseRequests.updateOne(filter, obj, function (err, res) {
+        data = saleorders.updateOne(filter, obj, function (err, res) {
             if (err) throw err;
             console.log("1 document update", res);
             responceData = res
@@ -127,69 +124,65 @@ router.post('/updatePurchaseRequest', async (req, res) => {
 })
 
 
-router.post('/DeletePurchaseRequest', async (req, res) => {
-    var data = []
-    try {
+// router.post('/DeletePurchaseRequest', async (req, res) => {
+//     var data = []
+//     try {
 
+//         console.log("reg", req.body)
+//         var obj = req.body.netsuiteData[0]
+
+//         const filter = { internalId: obj.internalId };
+//         console.log("checkresponce ", filter)
+//         // delete obj.internalId;
+
+
+//         // data = PurchaseRequests.updateOne(filter, obj, function (err, res) {
+//         //     if (err) throw err;
+//         //     console.log("1 document update", res);
+//         //     responceData = res
+
+//         //     console.log("checkresponce ", data)
+//         // });
+
+//          // Delete the document by its _id
+//         await PurchaseRequests.deleteOne({ internalId : internalId });
+
+//         res.send()
+//     }
+//     catch (e) {
+
+//         // let response = {
+//         //     success: false,
+//         //     type: "Delete",
+//         //     error: e
+//         // }
+
+//         res.send(JSON.stringify("Error Delete!"))
+//     }
+// })
+
+
+router.post('/createItemFulfillmentsMongo', async (req, res) => {
+    try {
         console.log("reg", req.body)
         var obj = req.body.netsuiteData[0]
+        const itemFulfillment = new itemFulfillments(obj)
+        await itemFulfillment.save();
 
-        const filter = { internalId: obj.internalId };
-        console.log("checkresponce ", filter)
-        // delete obj.internalId;
-
-
-        // data = PurchaseRequests.updateOne(filter, obj, function (err, res) {
-        //     if (err) throw err;
-        //     console.log("1 document update", res);
-        //     responceData = res
-
-        //     console.log("checkresponce ", data)
-        // });
-
-         // Delete the document by its _id
-        await PurchaseRequests.deleteOne({ internalId : internalId });
-
-        res.send()
-    }
-    catch (e) {
-
-        // let response = {
-        //     success: false,
-        //     type: "Delete",
-        //     error: e
-        // }
-
-        res.send(JSON.stringify("Error Delete!"))
-    }
-})
-
-
-router.post('/createItemFulfillments', async (req, res) => {
-    try {
-
-        console.log("reg", req.body)
-        var obj = req.body.netsuiteData[0]
-
-        obj.ifNumber=obj.poNumber
-        delete obj.poNumber;
-        const purchaseRequests = new itemFulfillments(obj)
-        await purchaseRequests.save();
-
-        console.log("objId", purchaseRequests._id)
+        console.log("objId", itemFulfillment.id)
 
         let currentDate = new Date()
-        let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
+        let currentDateTime = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
         let response = {
             success: true,
             currentDateTime: currentDateTime,
             type: "Create",
-            mongoObjId: purchaseRequests._id
-
+            mongoObjId: itemFulfillment.id
         }
 
+        console.log("mongoo data hit");
 
-        res.send(JSON.stringify(response))
+        res.send(JSON.stringify(response)) 
     }
     catch (e) {
         let currentDate = new Date()
@@ -207,12 +200,14 @@ router.post('/createItemFulfillments', async (req, res) => {
 
 
         console.log(e)
+        
     }
 
 })
 
-router.post('/updateItemFulfillments', async (req, res) => {
 
+
+router.post('/updateItemFulfillmentsMongo', async (req, res) => {
     var data = []
     try {
 
@@ -254,33 +249,32 @@ router.post('/updateItemFulfillments', async (req, res) => {
 
         res.send(JSON.stringify(response))
     }
-
 })
 
-router.post('/createBill', async (req, res) => {
 
+
+
+router.post('/createInvoiceMongo', async (req, res) => {
     try {
-
         console.log("reg", req.body)
         var obj = req.body.netsuiteData[0]
+        const invoice = new invoices(obj)
+        await invoice.save();
 
-        const bill = new invoice(obj)
-        await bill.save();
+        console.log("objId", invoice.id)
 
-        console.log("objId", bill._id)
-
-         let currentDate = new Date()
-         let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
-         let response = {
+        let currentDate = new Date()
+        let currentDateTime = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
+        let response = {
             success: true,
             currentDateTime: currentDateTime,
             type: "Create",
-            mongoObjId: bill._id
-
+            mongoObjId: invoice.id
         }
 
+        console.log("mongoo data hit");
 
-        res.send(JSON.stringify(response))
+        res.send(JSON.stringify(response)) 
     }
     catch (e) {
         let currentDate = new Date()
@@ -298,20 +292,25 @@ router.post('/createBill', async (req, res) => {
 
 
         console.log(e)
+        
     }
 
 })
 
-router.post('/updateBill', async (req, res) => {
+
+router.post('/updateInvoiceMongo', async (req, res) => {
+    var data = []
     try {
 
-         console.log("reg", req.body)
-         var obj = req.body.netsuiteData[0]
-         const filter = { internalId: obj.internalId };
-         console.log("checkresponce ", filter)
-         delete obj.internalId;
+        console.log("reg", req.body)
+        var obj = req.body.netsuiteData[0]
 
-         data = invoice.updateOne(filter, obj, function (err, res) {
+        const filter = { internalId: obj.internalId };
+        console.log("checkresponce ", filter)
+        delete obj.internalId;
+
+
+        data = invoices.updateOne(filter, obj, function (err, res) {
             if (err) throw err;
             console.log("1 document update", res);
             responceData = res
@@ -319,14 +318,12 @@ router.post('/updateBill', async (req, res) => {
             console.log("checkresponce ", data)
         });
 
-        
-
-         let currentDate = new Date()
-         let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
-         let response = {
+        let currentDate = new Date()
+        let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
+        let response = {
             success: true,
             currentDateTime: currentDateTime,
-            type: "update",
+            type: "Update"
 
         }
 
@@ -334,12 +331,48 @@ router.post('/updateBill', async (req, res) => {
         res.send(JSON.stringify(response))
     }
     catch (e) {
+
+        let response = {
+            success: false,
+            type: "Update",
+            error: e
+        }
+
+        res.send(JSON.stringify(response))
+    }
+})
+
+
+
+router.post('/createCustomerMongo', async (req, res) => {
+    try {
+        console.log("reg", req.body)
+        var obj = req.body.netsuiteData[0]
+        const customer = new customers(obj)
+        await customer.save();
+
+        console.log("objId", customer.id)
+
+        let currentDate = new Date()
+        let currentDateTime = moment(currentDate).format('YYYY-MM-DD HH:mm:ss');
+        let response = {
+            success: true,
+            currentDateTime: currentDateTime,
+            type: "Create",
+            mongoObjId: customer.id
+        }
+
+        console.log("mongoo data hit");
+
+        res.send(JSON.stringify(response)) 
+    }
+    catch (e) {
         let currentDate = new Date()
         let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
         let response = {
             success: false,
             currentDateTime: currentDateTime,
-            type: "update",
+            type: "Create",
             error: e
 
         }
@@ -349,29 +382,38 @@ router.post('/updateBill', async (req, res) => {
 
 
         console.log(e)
+        
     }
 
 })
 
-router.post('/createpayment',async(req,res)=>{
 
+router.post('/updateCustomerMongo', async (req, res) => {
+    var data = []
     try {
 
         console.log("reg", req.body)
         var obj = req.body.netsuiteData[0]
 
-        const bill = new payments(obj)
-        await bill.save();
+        const filter = { internalId: obj.internalId };
+        console.log("checkresponce ", filter)
+        delete obj.internalId;
 
-        console.log("objId", bill._id)
 
-         let currentDate = new Date()
-         let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
-         let response = {
+        data = customers.updateOne(filter, obj, function (err, res) {
+            if (err) throw err;
+            console.log("1 document update", res);
+            responceData = res
+
+            console.log("checkresponce ", data)
+        });
+
+        let currentDate = new Date()
+        let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
+        let response = {
             success: true,
             currentDateTime: currentDateTime,
-            type: "Create",
-            mongoObjId: bill._id
+            type: "Update"
 
         }
 
@@ -379,25 +421,63 @@ router.post('/createpayment',async(req,res)=>{
         res.send(JSON.stringify(response))
     }
     catch (e) {
-        let currentDate = new Date()
-        let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
+
         let response = {
             success: false,
-            currentDateTime: currentDateTime,
-            type: "Create",
+            type: "Update",
             error: e
-
         }
 
-
         res.send(JSON.stringify(response))
-
-
-        console.log(e)
     }
+})
+
+
+// router.post('/createpayment',async(req,res)=>{
+
+//     try {
+
+//         console.log("reg", req.body)
+//         var obj = req.body.netsuiteData[0]
+
+//         const bill = new payments(obj)
+//         await bill.save();
+
+//         console.log("objId", bill._id)
+
+//          let currentDate = new Date()
+//          let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
+//          let response = {
+//             success: true,
+//             currentDateTime: currentDateTime,
+//             type: "Create",
+//             mongoObjId: bill._id
+
+//         }
+
+
+//         res.send(JSON.stringify(response))
+//     }
+//     catch (e) {
+//         let currentDate = new Date()
+//         let currentDateTime = moment(currentDate).format('MM/DD/YYYY hh:mm:ss A');
+//         let response = {
+//             success: false,
+//             currentDateTime: currentDateTime,
+//             type: "Create",
+//             error: e
+
+//         }
+
+
+//         res.send(JSON.stringify(response))
+
+
+//         console.log(e)
+//     }
  
 
-})
+// })
 
 
 module.exports = router

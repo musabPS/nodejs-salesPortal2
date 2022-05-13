@@ -1107,12 +1107,12 @@ $(document).ready(function () {
                     contentType: "application/json; charset=utf-8",
                     success   : function(data) 
                                 {
-                                    
+                                    console.log(data)
                                     console.log("sucess")
                                     Swal.close();
 
                                     Swal.fire({  icon: 'success',  title: 'Saved', button: "Aww yiss!" ,text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
-                                 
+                                    window.location.replace('sales-orders&id='+data);
                                 }
                                 
                 });
