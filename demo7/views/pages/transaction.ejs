@@ -194,7 +194,7 @@
     </div>
     
     <div class="modal-footer">
-        <h5>Item Description : <span id="modalspan_itemdescription" style="text-align: left;" >Test Product Description</span></h5>
+       
     </div>
     
     </div>
@@ -467,6 +467,8 @@ $.fn.eachResults = function(){
         //  $('#itemdropdown'+tableLines).select2({
         //              placeholder: "Please Select Item"});
         // tableLines++
+
+
     })
 
     
@@ -832,12 +834,14 @@ $('#table-main .table-tbody').on('click','#btn_addrow72',function ()
  
 });
 //////////////................ajax end.......................///////////////
+
 $.ajax(
      {
-      url: "/data",
+      url: "/dropdownitems",
       headers: { 'Access-Control-Allow-Origin': '*' }, 
       success: function(result){
         setItems(result)
+     
       }});
 
     function setItems(itemData)
@@ -1003,35 +1007,55 @@ function setLocation(locationData)
                }
            ]
        })
+
        console.log("inventorydetail",inventorydetailarray)
        $('#table-main').on('click','.inventorydetail',function()
      {
       
-       var value = this.value;
-        var $cell2 = $(this).parent();
-        var $row2 = $cell2.parent();
-        let inventorydetailrow = inventorydetailarray.find(inventorydetailarray => inventorydetailarray.row === $row2.index());
-        $('.modeltable .modeltable-body').empty().append()
-        for(var k=0; k<inventorydetailrow.location.length; k++)
-        {
-           mtd=''
-           for (const [key, value] of Object.entries(inventorydetailrow.location[0])) 
-           {
-               mtd+='<tr>'
-               mtd+='<td>'+key+'</td>'
-               mtd+='<td>'+value+'</td>'
-               mtd+='</tr>'
-           }
-           
-        }
-        
-           // console.log(inventorydetailrow.location)
-           //  mtd='<tr>'
-           //  mtd+='<td>'+inventorydetailrow.location[k]+'</td>'
-           //  mtd+='<td>'+inventorydetailrow.location[k]+'</td>'
-           //  mtd+='</tr>'
-        
-        $('.modeltable .modeltable-body').append(mtd);
+        var value = this.value;
+             var $cell2 = $(this).parent();
+             var $row2 = $cell2.parent();
+           //  let inventorydetailrow = inventorydetailarray.find(inventorydetailarray => inventorydetailarray.row === $row2.index());
+             var itemName=$('#itemdropdown'+$row2.index()).find(":selected").text()
+
+             var post ={
+                item : itemName
+             }
+             
+             $.ajax({ 
+                            type      : 'POST', //Method type
+                            url       : '/inventordetail', //Your form processing file URL
+                            data      : JSON.stringify(post), //Forms name
+                            contentType: "application/json; charset=utf-8",
+                            success   : function(data) 
+                                        {
+                                            //empty modal content//
+                                            $('.modeltable .modeltable-body').empty().append();
+                                            $('#modalspan_itemname').empty().append();
+                                            $('#modalspan_itemdescription').empty().append()
+                                            if(data.length>0)
+                                            {
+                                                console.log("data length",JSON.parse(data))
+                                                var inventoryData=JSON.parse(data)
+                                                modaltable=''
+                                               
+                                                for(var i=0; i<inventoryData.length; i++)
+                                                {
+                                                    console.log("location",inventoryData.length)
+                                                    modaltable+='<tr>'
+                                                    modaltable+='<td>'+inventoryData[i].values["GROUP(inventorylocation)"][0].text+'</td>'
+                                                    modaltable+='<td>'+inventoryData[i].values["MAX(locationquantityonhand)"]+'</td>'
+                                                    modaltable+='</tr>'
+                                                }
+                                                
+                                                $('.modeltable .modeltable-body').append(modaltable);
+                                                $('#modalspan_itemname').append(inventoryData[0].values["GROUP(itemid)"]);
+                                                $('#modalspan_itemdescription').append(inventoryData[0].values["GROUP(salesdescription)"]);
+                                                
+                                            }
+
+                                        }
+                        });
         
      });
    })
@@ -1043,17 +1067,19 @@ function setLocation(locationData)
             var value = this.value;
              var $cell2 = $(this).parent();
              var $row2 = $cell2.parent();
-             let inventorydetailrow = inventorydetailarray.find(inventorydetailarray => inventorydetailarray.row === $row2.index());
-             var selectedRowIndex=parseInt($row2.index())+1
-            // var itemName=$('#itemdropdown'+$row2.index()).find(":selected").text()
-            var itemName=$('#table-main  tr:eq('+selectedRowIndex+') td:eq(0) select').find(":selected").text()
-             
+           //  let inventorydetailrow = inventorydetailarray.find(inventorydetailarray => inventorydetailarray.row === $row2.index());
+             var itemName=$('#itemdropdown'+$row2.index()).find(":selected").text()
 
+             var post ={
+                item : itemName
+             }
+               
+             
              
              $.ajax({ 
                             type      : 'POST', //Method type
-                            url       : '${ds.links.customscript_sl_sp_inventory_details}&itemname='+itemName, //Your form processing file URL
-                            data      : '{item:12345}', //Forms name
+                            url       : '/inventordetail', //Your form processing file URL
+                            data      : JSON.stringify(post), //Forms name
                             contentType: "application/json; charset=utf-8",
                             success   : function(data) 
                                         {
@@ -1150,7 +1176,7 @@ function setLocation(locationData)
 
           $('#load_btn_container').click(function () 
         {
-            alert("check")
+         
           
            if($('.btn_loaditems').html()=='Item Details<i class="fas fa-caret-down text-white icon-2x" style="float:right;"></i>')
            {
@@ -1166,7 +1192,7 @@ function setLocation(locationData)
            $('.btn_loaditems').append('Item Details<i class="fas fa-caret-down text-white icon-2x" style="float:right;"></i>');
            $('#table_container').css('display','block');
            $('#table-main').empty();
-           $('#table-main').append('<div class="col-md-10"><p text-xl-left></p> <p style="text-align: center">Please wait.. </p><p></p> <div style=" " class=" spinner spinner-primary spinner-lg mr-45  spinner-center"></div>   </div>');
+           $('#table-main').append('<div class="col-md-12"><p text-xl-left></p> <p style="text-align: center">Please wait.. </p><p></p> <div style=" " class=" spinner spinner-primary spinner-lg mr-45  spinner-center"></div>   </div>');
          
 
            var loc=window.location.href

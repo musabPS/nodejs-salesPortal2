@@ -54,7 +54,7 @@ app.use(router)
 //   next()
 // }
 
-router.get("/data", (req,res)=>{
+router.get("/dropdownitems", (req,res)=>{
     // console.log("Req",req)
 
 

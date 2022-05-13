@@ -419,7 +419,6 @@
       var Result = salesorderSearchObj.run();
       var ResultRange = Result.getRange(0, 999);
       var jsonResult = JSON.stringify(ResultRange);
-      log.debug("checksale",jsonResult)
       return jsonResult
 
      }
@@ -575,68 +574,68 @@
               if(datain.type == "createSaleOrder")
               { 
                 
-               log.debug("checkData",datain)
-               saleOrderParse = JSON.parse(datain.sodata)
-
-               log.debug("checkData",saleOrderParse)
-
-                var salesOrder = record.create({
-                  type: record.Type.SALES_ORDER, 
-                  isDynamic: true,
-                });
-
-
-                salesOrder.setValue({fieldId:'entity', value:saleOrderParse.customer})
-                salesOrder.setValue({fieldId:'shipaddress', value:saleOrderParse.billingaddress})
-                salesOrder.setValue({fieldId:'billaddress', value:saleOrderParse.shipingaddress})
+         log.debug("checkData",datain)
+                saleOrderParse = JSON.parse(datain.sodata)
+ 
+                log.debug("checkData",saleOrderParse)
+ 
+                 var salesOrder = record.create({
+                   type: record.Type.SALES_ORDER, 
+                   isDynamic: true,
+                 });
+ 
+ 
+                 salesOrder.setValue({fieldId:'entity', value:saleOrderParse.customer})
+                 salesOrder.setValue({fieldId:'shipaddress', value:saleOrderParse.billingaddress})
+                 salesOrder.setValue({fieldId:'billaddress', value:saleOrderParse.shipingaddress})
+                
+                 var itemCount = salesOrder.getLineCount({"sublistId" : "item"});
+                 log.debug("totalline",itemCount)
+ 
+                 for(var i=0;i<saleOrderParse.items.length; i++)
+                 {
+                     if(!saleOrderParse.items[i].name)
+                     {
+                       continue;
+                     }
+         
+                     log.debug("checklineoption",saleOrderParse.items[i])
+                   
+                   salesOrder.selectNewLine({ 
+                       sublistId: 'item',
+                       line : i          
+                   });
+         
+                   salesOrder.setCurrentSublistValue({   
+                       sublistId: 'item',
+                       fieldId: 'item',
+                       value:  saleOrderParse.items[i].name
+                   });
+         
+                   salesOrder.setCurrentSublistValue({   
+                       sublistId: 'item',
+                       fieldId: 'quantity',
+                       value: saleOrderParse.items[i].qty
+                   });
+                   salesOrder.setCurrentSublistValue({   
+                     sublistId: 'item',
+                     fieldId: 'rate',
+                     value: saleOrderParse.items[i].rate
+                 });
                
-                var itemCount = salesOrder.getLineCount({"sublistId" : "item"});
-                log.debug("totalline",itemCount)
-
-                for(var i=0;i<saleOrderParse.items.length; i++)
-                {
-                    if(!saleOrderParse.items[i].name)
-                    {
-                      continue;
-                    }
-        
-                    log.debug("checklineoption",saleOrderParse.items[i])
-                  
-                  salesOrder.selectNewLine({ 
-                      sublistId: 'item',
-                      line : i          
-                  });
-        
-                  salesOrder.setCurrentSublistValue({   
-                      sublistId: 'item',
-                      fieldId: 'item',
-                      value:  saleOrderParse.items[i].name
-                  });
-        
-                  salesOrder.setCurrentSublistValue({   
-                      sublistId: 'item',
-                      fieldId: 'quantity',
-                      value: saleOrderParse.items[i].qty
-                  });
-                  salesOrder.setCurrentSublistValue({   
-                    sublistId: 'item',
-                    fieldId: 'rate',
-                    value: saleOrderParse.items[i].rate
-                });
-              
-                  salesOrder.commitLine({  
-                      sublistId: 'item'
-                  });
-        
-                }
-        
-                  saveid =  salesOrder.save({                  
-                  ignoreMandatoryFields: true    
-                      });
-
-                      log.debug("checkSaveid",saveid)
-
-                 return saveid
+                   salesOrder.commitLine({  
+                       sublistId: 'item'
+                   });
+         
+                 }
+         
+                   saveid =  salesOrder.save({                  
+                   ignoreMandatoryFields: true    
+                       });
+ 
+                       log.debug("checkSaveid",saveid)
+ 
+                  return saveid
       
               }
               
@@ -647,23 +646,16 @@
                  
                 var salesOrder = record.load({
                   type: record.Type.SALES_ORDER, 
-                  id:postJson.internalid,
+                  id: postJson.internalid,
                   isDynamic: true
-                });
-
-                var itemCount = salesOrder.getLineCount({"sublistId" : "item"});
-                log.debug("totalline",itemCount)
-
-               //  for(var j=0; j<itemCount-1; j++)
-               //  {
-               //    salesOrder.removeLine({ sublistId: 'item', line: 0 });
-               //  }
+               });
       
-                salesOrder.setValue({fieldId:'entity', value:postJson.customer})
-                salesOrder.setValue({fieldId:'shipaddress', value:postJson.billingaddress})
-                salesOrder.setValue({fieldId:'billaddress', value:postJson.shipingaddress})
-                log.debug("loadsaleorder",salesOrder)
-               
+               salesOrder.setValue({fieldId:'entity', value:postJson.customer})
+               salesOrder.setValue({fieldId:'shipaddress', value:postJson.billingaddress})
+               salesOrder.setValue({fieldId:'billaddress', value:postJson.shipingaddress})
+               log.debug("loadsaleorder",salesOrder)
+               var itemCount = salesOrder.getLineCount({"sublistId" : "item"});
+               log.debug("totalline",itemCount)
       
               for(var i=0;i<postJson.items.length; i++)
               {
@@ -694,38 +686,112 @@
                   sublistId: 'item',
                   fieldId: 'rate',
                   value: postJson.items[i].rate
-                });
+              });
             
-                salesOrder.commitLine({
-
+                salesOrder.commitLine({  
                     sublistId: 'item'
                 });
       
               }
       
-                saveid =  salesOrder.save({                  
-                       ignoreMandatoryFields: true    
+                saveid=  salesOrder.save({                  
+                ignoreMandatoryFields: true    
                     });
       
-                 var salesOrderde = record.load({
-                   type: record.Type.SALES_ORDER,
-                   id: postJson.internalid,
-                   isDynamic: true
-                 });
-         
-                 for(var j=0; j<itemCount; j++)
-                 {
-                   salesOrderde.removeLine({ sublistId: 'item', line: 0 });
-                 }
-                 saveid =  salesOrderde.save({                  
-                   ignoreMandatoryFields: true    
-                       });
+              var salesOrderde = record.load({
+                type: record.Type.SALES_ORDER,
+                id: postJson.internalid,
+                isDynamic: true
+              });
+      
+              for(var j=0; j<itemCount; j++)
+              {
+                salesOrderde.removeLine({ sublistId: 'item', line: 0 });
+              }
+              saveid =  salesOrderde.save({                  
+                ignoreMandatoryFields: true    
+                    });
       
               log.debug("saleorderid",saveid)
 
               return JSON.stringify(saveid)
 
             }
+
+            if(datain.type == "edititemfulfillment")
+            {
+              log.debug("checkData",datain)
+              postJson = JSON.parse(datain.sodata)
+               
+              var salesOrder = record.load({
+                type: 'itemfulfillment', 
+                id: postJson.internalid,
+                isDynamic: true
+             });
+    
+            //  salesOrder.setValue({fieldId:'entity', value:postJson.customer})
+            //  salesOrder.setValue({fieldId:'shipaddress', value:postJson.billingaddress})
+            //  salesOrder.setValue({fieldId:'billaddress', value:postJson.shipingaddress})
+
+             log.debug("loadsaleorder",salesOrder)
+             var itemCount = salesOrder.getLineCount({"sublistId" : "item"});
+             log.debug("totalline",itemCount)
+    
+             for(var i=0;i<postJson.items.length; i++)
+            {
+                if(!postJson.items[i].name)
+                {
+                  continue;
+                }
+    
+                log.debug("checklineoption",postJson.items[i])
+              
+              salesOrder.selectNewLine({ 
+                  sublistId: 'item',
+                  line : i          
+              });
+    
+          
+    
+              salesOrder.setCurrentSublistValue({   
+                  sublistId: 'item',
+                  fieldId: 'quantity',
+                  value: postJson.items[i].quantity
+              });
+           
+          
+              salesOrder.commitLine({  
+                  sublistId: 'item'
+              });
+    
+            }
+    
+                saveid =  salesOrder.save({                  
+                ignoreMandatoryFields: true    
+                  });
+
+                  log.debug("savebeforeremove",saveid)
+    
+              var salesOrderde = record.load({
+              type: record.Type.SALES_ORDER,
+              id: postJson.internalid,
+              isDynamic: true
+             });
+    
+             for(var j=0; j<itemCount; j++)
+             {
+              salesOrderde.removeLine({ sublistId: 'item', line: 0 });
+             }
+             saveid =  salesOrderde.save({                  
+              ignoreMandatoryFields: true    
+                  });
+    
+            log.debug("saleorderid",saveid)
+
+            return JSON.stringify(saveid)
+
+          }
+
           //var data= getData()
         //     var Record = record.load({
         //     type: 'purchaseorder',

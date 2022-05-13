@@ -19,7 +19,7 @@ const itemFulfillmentRouter = require('./routes/itemfulfillment-route')
 const invoideRouter =  require('./routes/invoice-route')
 const customerRouter = require('./routes/customer-route')
 const itemRouter    = require('./routes/item-route')
-
+const dbUpdate   =    require('./routes/dbUpdate-route')
 
 
 app.use(express.urlencoded({extended:true}))
@@ -40,6 +40,7 @@ app.use(methodOverride('_method'))
  app.use(invoideRouter)
  app.use(customerRouter)
  app.use(itemRouter)
+ app.use(dbUpdate)
 
 
  app.get('/login', (req,res)=>{

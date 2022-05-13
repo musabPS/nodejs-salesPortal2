@@ -714,15 +714,11 @@ $('input:checkbox').not(this).prop('checked', this.checked);
 
    $.ajax(
      {
-      url: "/data",
+      url: "/dropdownitems",
       headers: { 'Access-Control-Allow-Origin': '*' }, 
       success: function(result){
         setItems(result)
-        //setCustomers(result.Customers)
-      //  setLocation(result.Locations)
-       // result = JSON.parse(result);
-     //  setItems()
-        //loadGraphAPI(result[0],result[1],result[2],result[3]);
+     
       }});
     
       

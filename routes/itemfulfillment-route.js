@@ -133,5 +133,28 @@ myRestlet.get({type:'getItemfulfillmentItemDetail',orderId: id ,userid: userid},
 
 
 })
+router.post("/editItemfulfillmet_netsuite", (req,res)=>{
+
+  console.log("Req","")
+  console.log("Req",req.body)
+ 
+ 
+  var urlSettings = {
+    url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
+  }
+ var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
+ 
+ myRestlet.get({type:'edititemfulfillment',sodata: JSON.stringify(req.body)}, function(error, body)
+ {
+   if (!error) {
+    
+   console.log("saveid",body)
+    res.send(body)
+   }
+ 
+ });
+ 
+ 
+ })
 
 module.exports = router

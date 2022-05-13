@@ -690,8 +690,10 @@ $('#table-main .table-tbody').on('click','#btn_addrow72',function ()
         $('#name + .throw_error').empty(); //Clear the messages first
                 $('#success').empty();
                 var loc=window.location.href
-                var url = new URL(loc);
-                var orderInternalId = url.searchParams.get("orderid");
+                var url = new URL(loc).href;
+                urlSplit=url.split('=')
+                console.log("url",urlSplit)       
+                var orderInternalId =urlSplit[1]
                 
                 var postDataArray=[];
 
@@ -788,7 +790,7 @@ $('#table-main .table-tbody').on('click','#btn_addrow72',function ()
                    
             $.ajax({ 
                 type      : 'POST', //Method type
-                url       : '${ds.links.customscript_sl_sp_view_salesorder}', //Your form processing file URL
+                url       : '/editItemfulfillmet_netsuite', //Your form processing file URL
                 data      : JSON.stringify(postForm), //Forms name
                 contentType: "application/json; charset=utf-8",
                 success   : function(data) 
@@ -830,7 +832,7 @@ $('#table-main .table-tbody').on('click','#btn_addrow72',function ()
 //////////////................ajax end.......................///////////////
 $.ajax(
      {
-      url: "/data",
+      url: "/dropdownitems",
       headers: { 'Access-Control-Allow-Origin': '*' }, 
       success: function(result){
         setItems(result)
