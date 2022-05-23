@@ -52,16 +52,16 @@ app.use(methodOverride('_method'))
     let credentials = { username:"musab@point-star.com", password:"1" }
     console.log("post route history", req.body )
     const {username, password}=req.body 
-   // const user= await User.findOne({username})
-   // console.log("post route history", user )
-   if(req.body.username==credentials.username && req.body.password == credentials.password){
+    // const user= await User.findOne({username})
+    // console.log("post route history", user )
+    if(req.body.username==credentials.username && req.body.password == credentials.password){
        console.log("ifff")
        req.user = "musab"
        let route = "partials/_content"
        type="detail"
        breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
         res.render('index',{route,data,type,breadcrumbs})
-   // res.redirect("index")
+    // res.redirect("index")
    }
     else{
        let message =  "Username or password is incorrect"
@@ -96,15 +96,7 @@ app.use(methodOverride('_method'))
     res.render('index')
  }) 
 
- app.get('/itemList', (req,res)=>{
-
-  let route = "pages/itemTable"
-  let type="itemList"
-  let customerData=masterdata.Customers
-  breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
- res.render('index', {route,customerData,type,breadcrumbs}) 
-
-}) 
+ 
 
 
 

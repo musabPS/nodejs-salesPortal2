@@ -12,165 +12,162 @@
                         <h3 class="card-label"> </h3>
                         
                     </div> 
-                    <div class="card-toolbar">
-                        <!--begin::Dropdown-->
-                        <div class="dropdown dropdown-inline mr-2">
-                            <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="svg-icon svg-icon-md">
-                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24" />
-                                        <path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3" />
-                                        <path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000" />
-                                    </g>
-                                </svg>
-                                <!--end::Svg Icon-->
-                            </span>Export</button>
-                            <!--begin::Dropdown Menu-->
-                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                <!--begin::Navigation-->
-                                <ul class="navi flex-column navi-hover py-2">
-                                    <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-icon">
-                                                <i class="la la-print"></i>
-                                            </span>
-                                            <span class="navi-text">Print</span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-icon">
-                                                <i class="la la-copy"></i>
-                                            </span>
-                                            <span class="navi-text">Copy</span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-icon">
-                                                <i class="la la-file-excel-o"></i>
-                                            </span>
-                                            <span class="navi-text">Excel</span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a id="export_csv" href="#" class="navi-link" onclick="tableToCSV()">
-                                            <span class="navi-icon">
-                                                <i class="la la-file-text-o"></i>
-                                            </span>
-                                            <span class="navi-text">CSV</span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
-                                            <span class="navi-icon">
-                                                <i class="la la-file-pdf-o"></i>
-                                            </span>
-                                            <span class="navi-text">PDF</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <!--end::Navigation-->
-                            </div>
-                            <!--end::Dropdown Menu-->
-                        </div>
-                        <!--end::Dropdown-->
-                        <!--begin::Button-->
-                        
-                        <!--end::Button-->
-                    </div>
+
+                    <button type="button" class="btn  position-relative" id="button-cart">
+                        <i class="flaticon2-shopping-cart-1 text-primary icon-2x"> </i>
+                        <span class="position-absolute top-200 start-100 translate-middle badge rounded-pill bg-danger text-white" id="countcart"></span>
+
+                       
+                      </button>
+            
+                    
                 </div>
-                <div class="card-body">
+                <div class="card-body ">
                     <!--begin: Search Form-->
                     <!--begin::Search Form-->
-                    <form class="mb-15" method="POST" id="tableform">
-                    <div class="mb-0 mt-0">
+                    <form class="mb-6" method="POST" id="tableform">
 
                         <div class="row align-items-center">
-                            <div class="col-lg-10 col-xl-8">
+                            <div class="col-lg-9 col-xl-8">
                                 <div class="row align-items-center">
-                                    
-                                    <div class="col-md-6 my-2 my-md-0">
-                                        <div class="d-flex align-items-center">
-                                            <label class="mr-4 mb-0 d-none d-md-block">Date From:</label>
-                                            <input type="date" class="form-control" name="start" placeholder="From" value="${ds.startDate}"/>
+                                    <div class="col-md-4 my-2 my-md-0 py-2">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Item" id="search-item" >
+                                            <span>
+                                                <i class="flaticon2-open-box text-muted"></i>
+                                            </span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 my-2 my-md-0">
-                                        <div class="d-flex align-items-center">
-                                            <label class="mr-5 mb-0 d-none d-md-block">Date To:</label>
-                                            <input type="date" class="form-control" name="end" id="end" placeholder="To" value="${ds.endDate}" />
 
+                                    <div class="col-md-4 my-2 my-md-0 py-2">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Description" id="search-description">
+                                            <span>
+                                                <i class="flaticon-interface-11 text-muted"></i>
+                                            </span>
                                         </div>
                                     </div>
+                                    <div class="col-md-4 my-2 my-md-0 py-2">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Model" id="search-model">
+                                            <span>
+                                                <i class="flaticon-tool text-muted"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 my-2 my-md-0 py-2">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Category" id="search-category">
+                                            <span>
+                                                <i class="flaticon-layers text-muted"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 my-2 my-md-0 py-2">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Group" id="search-group">
+                                            <span>
+                                                <i class="flaticon-notes text-muted"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 my-2 my-md-0 py-2">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Brand" id="search-brand">
+                                            <span>
+                                                <i class="flaticon2-tag text-muted"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 my-2 my-md-0 py-2">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Type" id="search-type">
+                                            <span>
+                                                <i class="flaticon-suitcase text-muted"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                             <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                                <button type="submit" name="btn" class="btn btn-primary btn-primary">Search</button>
-
+                                <button type="button" class="btn btn-light-primary" id="searchitems">Search</button>
+                                <button type="button" class="btn btn-light-danger">Reset</button>
                             </div>
                         </div>
-                    </div>
+                   
                 </form>
 
 
 
 
-
-
-                    <div class="mb-7">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12 col-xl-12">
-                                
-                            </div>
-                            
-                        </div>
-                    </br> 
-                    <div class="input-icon">
-                        <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
-                        <span>
-                            <i class="flaticon2-search-1 text-muted btn-hover-text-white"></i>
-                        </span>
-                    </div>
-                    </div>
                     <!--end::Search Form-->
                     <!--end: Search Form-->
                     <!--begin: Datatable-->
 
-                    <table class="table-hover-bg-primary pt-10 table-striped" id="kt_datatable" style="display: none;">
-                        <thead>
-                            <tr>
 
-                                <th title="Field #3">SO #</th>
-                                <th title="Field #3">item Name</th>
-                                <th title="Field #4">Description</th>
-                                <th title="Field #5">Quantity</th>
-                                <th title="Field #6">Model</th>
-                                <th title="Field #7">Price</th>
-                                <th title="Field #8">Action</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="content d-flex flex-column flex-column-fluid " id="kt_content">
+						<!--begin::Entry-->
+						<div class="d-flex flex-column-fluid">
+							<!--begin::Container-->
+							<div class="container">
+							
+							
+								<!--begin::Row-->
+								<div class="row" id="itemscard">
 
-                            <tr>
-                                <td><a> 1 </td>
-                                <td> <a href= "/itemFrom&internalid=1" > 1  </a> </td>
-                                <td>Test</td>
-                                <td>Description</td>
-                                <td>Quantity</td>
-                                <td>dd</td>
-                                
-                                </tr>
-                             
-                            </tbody>
-                       
-                    </table>
-                        
-                    </div>
+
+                                    <%  var i=0; itemData.forEach((el)=>{ i++ %>
+                                        <div class="col-xs-4 col-xl-4 mb-2 py-4">
+                                            <!--begin::Iconbox-->
+                                            <div class="card card-custom wave wave-primary mb-8 mb-lg-0">
+                                                <div class="card-body ">
+                                                    <div class="mr-8">
+                                                        <img src="https://gaido.com.my/wp-content/uploads/2014/09/bearing_x-thumb3-1.png" style="height: 10rem; width:100%">
+                                                    </div>
+                                                    <div class="separator separator-solid separator-dark opacity-10 py-md-2"></div>
+    
+                                                    <div class="d-flex align-items-center p-5">
+                                                        
+                                                        <div class="d-flex flex-column">
+                                                            <a href="/itemFrom&internalid=1" class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3"><%=el.name%></a>
+                                                            <div class="text-dark-75">D: F/w BRG</div>
+                                                            <div class="text-dark-75">B: NSK</div>
+                                                            <div class="text-dark-75">Q: 2.00</div>
+                                                          
+                                                            <div class="separator separator-primary opacity-10 py-md-2"></div>
+                                                            <div class="input-group ">
+    
+                                                                <div class="input-group-prepend qtyicon bg-light-secondary">
+                                                                    <button  class="bg-light-secondary btn   inventorydetail text-left" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes  text-primary text-align-left"></i></button>
+
+                                                                    <span class="input-group-text bg-light-secondary">
+                                                                        <i class="flaticon2-shopping-cart bg-light-secondary"></i>
+                                                                    </span>
+                                                                </div>
+                                                                <input type="number" class="form-control " id="<%= i %>" internalid="<%=el.internalId%>" rate="<%=el.basePrice%>" placeholder="0" value="" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Iconbox-->
+                                            
+                                        </div>
+                                        <%}) %> 
+
+             
+									
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Container-->
+						</div>
+						<!--end::Entry-->
+					</div>
+
                     <!--end: Datatable-->
                 </div>
             </div>
@@ -178,188 +175,270 @@
         </div>
         <!--end::Container-->
 
-
-    <script>
-    "use strict";
-var KTDatatablesExtensionButtons = function() {
-
-	var initTable1 = function() {
-
-		// begin first table
-		var table = $('#kt_datatable').DataTable({
-			responsive: true,
-			// Pagination settings
-			dom: `<'row'<'col-sm-6 text-left'f><'col-sm-6 text-right'B>>
-			<'row'<'col-sm-12'tr>>
-			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
-
-			buttons: [
-				'print',
-				'copyHtml5',
-				'excelHtml5',
-				'csvHtml5',
-				'pdfHtml5',
-			],
-			columnDefs: [
-				{
-					width: '75px',
-					targets: 6,
-					render: function(data, type, full, meta) {
-						var status = {
-							1: {'title': 'Pending', 'class': 'label-light-primary'},
-							2: {'title': 'Delivered', 'class': ' label-light-danger'},
-							3: {'title': 'Canceled', 'class': ' label-light-primary'},
-							4: {'title': 'Success', 'class': ' label-light-success'},
-							5: {'title': 'Info', 'class': ' label-light-info'},
-							6: {'title': 'Danger', 'class': ' label-light-danger'},
-							7: {'title': 'Warning', 'class': ' label-light-warning'},
-						};
-						if (typeof status[data] === 'undefined') {
-							return data;
-						}
-						return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline">' + status[data].title + '</span>';
-					},
-				},
-				{
-					width: '75px',
-					targets: 7,
-					render: function(data, type, full, meta) {
-						var status = {
-							1: {'title': 'Online', 'state': 'danger'},
-							2: {'title': 'Retail', 'state': 'primary'},
-							3: {'title': 'Direct', 'state': 'success'},
-						};
-						if (typeof status[data] === 'undefined') {
-							return data;
-						}
-						return '<span class="label label-' + status[data].state + ' label-dot mr-2"></span>' +
-							'<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
-					},
-				},
-			],
-		});
-
-	};
-
-	var initTable2 = function() {
-
-		// begin first table
-		var table = $('#kt_datatable').DataTable({
-			responsive: true,
-
-			buttons: [
-				'print',
-				'copyHtml5',
-				'excelHtml5',
-				'csvHtml5',
-				'pdfHtml5',
-			],
-			processing: true,
-			serverSide: true,
-			ajax: {
-				url: HOST_URL + '/api/datatables/demos/server.php',
-				type: 'POST',
-				data: {
-					// parameters for custom backend script demo
-					columnsDef: [
-						'OrderID', 'Country',
-						'ShipCity', 'ShipAddress', 'CompanyAgent', 'CompanyName',
-						'Status', 'Type'],
-				},
-			},
-			columns: [
-				{data: 'OrderID'},
-				{data: 'Country'},
-				{data: 'ShipCity'},
-				{data: 'ShipAddress'},
-				{data: 'CompanyAgent'},
-				{data: 'CompanyName'},
-				{data: 'Status'},
-				{data: 'Type'},
-			],
-			columnDefs: [
-				{
-					targets: 6,
-					render: function(data, type, full, meta) {
-						var status = {
-							1: {'title': 'Pending', 'class': 'label-light-primary'},
-							2: {'title': 'Delivered', 'class': ' label-light-danger'},
-							3: {'title': 'Canceled', 'class': ' label-light-primary'},
-							4: {'title': 'Success', 'class': ' label-light-success'},
-							5: {'title': 'Info', 'class': ' label-light-info'},
-							6: {'title': 'Danger', 'class': ' label-light-danger'},
-							7: {'title': 'Warning', 'class': ' label-light-warning'},
-						};
-						if (typeof status[data] === 'undefined') {
-							return data;
-						}
-						return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline">' + status[data].title + '</span>';
-					},
-				},
-				{
-					targets: 7,
-					render: function(data, type, full, meta) {
-						var status = {
-							1: {'title': 'Online', 'state': 'danger'},
-							2: {'title': 'Retail', 'state': 'primary'},
-							3: {'title': 'Direct', 'state': 'success'},
-						};
-						if (typeof status[data] === 'undefined') {
-							return data;
-						}
-						return '<span class="label label-' + status[data].state + ' label-dot mr-2"></span>' +
-							'<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
-					},
-				},
-			],
-		});
-
-		$('#export_print').on('click', function(e) {
-			e.preventDefault();
-			table.button(0).trigger();
-		});
-
-		$('#export_copy').on('click', function(e) {
-			e.preventDefault();
-			table.button(1).trigger();
-		});
-
-		$('#export_excel').on('click', function(e) {
-			e.preventDefault();
-			table.button(2).trigger();
-		});
-
-		$('#export_csv').on('click', function(e) {
-            alert("csv clicked");
-			e.preventDefault();
-			table.button(3).trigger();
-            alert("csv clicked");
-		});
-
-		$('#export_pdf').on('click', function(e) {
-			e.preventDefault();
-			table.button(4).trigger();
-		});
-
-	};
-
-	return {
-
-		//main function to initiate the module
-		init: function() {
-			initTable1();
-			initTable2();
-		},
-
-	};
-
-}();
-
-jQuery(document).ready(function() {
-	KTDatatablesExtensionButtons.init();
-});
+        <!-- Modal -->
+<div class="modal fade" id="inventorydetailmodel" role="dialog">
+    <div class="modal-dialog">
     
-    </script>
+    <!-- Modal content-->
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title">Inventory Detail</h5>
+    </br>
+    
+    
+    </div>
+    <div class="modal-body">
+    
+        <h5 class="modal-title" style="padding-bottom: 2px;">Item Name : <span id="modalspan_itemname" style="font-size: 5;"></span></h5>
+       
+        <div class="separator separator-solid separator-primary opacity-20" ></div>
+    
+            <table class="table modeltable"  id="" >
+            <thead>
+            <tr>
+            
+                <th scope="col">Location</th>
+                <th scope="col">Quantity</th>
+            </tr>
+            </thead>
+            <tbody class="modeltable-body">
+            
+            </tbody>
+    
+            </table>
+    
+    </div>
+    
+    <div class="modal-footer">
+       
+    </div>
+    
+    </div>
+    
+    </div>
+    </div>
+
+    <!-- END  Modal -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+            var totalItems='<%- itemDataLength%>'
+            var selectItems=[]
+            var item=[]
+            var countQty=0
+
+
+
+
+//
+
+// var Nodata ="<tr><th colspan='10' style='font-weight:normal;'>No Data Available In Table</th></tr>"
+// $('#table-main tbody').append(Nodata);
+
+
+$(function () {
+
+            $(".qtyicon").click(function(e)
+            {
+               
+                var id=$(this).next().attr("id")
+                var itemInternalId=$(this).next().attr("internalid")
+
+                console.log("itemInternalId",itemInternalId)
+
+               var inputClass = $(this).find("span i").attr("class")
+
+               if(inputClass.indexOf("text-primary") >= 0)
+               {
+                 $(this).find("span i").attr("class","flaticon2-shopping-cart")
+                 $(this).next().prop( "disabled", true );
+
+                 if(! $('#'+id).val())
+                 {
+                    const index = item.indexOf(id);
+                    if (index > -1) {
+                        item.splice(index, 1);
+                    }
+
+                    console.log("itemid",item)
+                 }
+                 else
+                 {
+                   lastValue = $('#countcart').text()-parseInt($('#'+id).val())
+                    $('#countcart').text(lastValue)
+                    const index = item.indexOf(id);
+                    if (index > -1) {
+                        item.splice(index, 1);
+                    }
+
+                 }
+                 
+               }
+
+               if(inputClass.indexOf("text-primary") < 0)
+               {
+                 $(this).find("span i").attr("class","flaticon2-shopping-cart text-primary")
+                 $(this).next().prop( "disabled", false );
+               
+                 if(! $('#'+id).val())
+                 {
+                    item.push(id)
+                      console.log("itemidfirst",item)
+                 }
+                 else
+                 {
+                   lastValue = parseInt($('#countcart').text())+parseInt($('#'+id).val())
+                 
+                    $('#countcart').text(lastValue)
+
+                     item.push(id)
+                      console.log("itemidfirst",item)
+
+                  
+                 }
+                 
+               }
+
+                 $(this).next().change(function()
+                 {
+                  for(var i=1; i <=totalItems; i++)
+                  {
+                      if(!parseInt($('#'+i).val()))
+                      {
+                          continue
+                      }
+                      else
+                      {
+                        countQty+=parseInt($('#'+i).val())
+
+                      }
+                  }
+                  $('#countcart').text(countQty)
+                  countQty=0
+                  });
+                
+                 // $(selectClass).removeClass('');
+
+                 // var selectClass=$(this).find("span i").attr("class")
+                 // 
+                 //cart
+                  // $("#container li.name input.name_val").val();
+           
+             });
+
+        });
+
+
+
+             $("#button-cart").click(function(){
+                     // alert("");
+                     console.log("finalItem",item)
+                     var items=[]
+                       for(var i=0; i <item.length; i++)
+                       {
+                         let element = document.getElementById(item[i]); 
+                         let itemInternalId = element.getAttribute("internalid"); 
+                         let itemRate = element.getAttribute("rate"); 
+                         console.log("itemInternalIdss",itemInternalId)
+                         items.push({
+                             'itemInternalId'       : itemInternalId,
+                             'itemQuantity'         : element.value,
+                             'itemId'               : item[i],
+                             'itemRate'             : itemRate
+
+                            })
+                          
+                        console.log("finalIteminloop",items)
+                       }
+
+                       console.log("finalItem",items)
+                       localStorage.setItem("itemDetail", JSON.stringify(items));
+
+                       location.replace("/create-sales-order?&c=1")
+                      
+            });
+
+            $("#searchitems").click(function(e)
+            {
+                var itemCard=''
+
+                var postForm = { //Fetch form data
+                'name'         :  $('#search-item').val(),
+               // 'description'  :  $('#search-description').val(),
+                // 'model'        :  $('#search-model').val(),
+                // 'category'     :  $('#search-category').val(),
+                // 'group'        :  $('#search-group').val(),
+                // 'brand'        :  $('#search-brand').val(),
+                // 'type'         :  $('#search-type').val(),
+                        };
+
+                $.ajax({
+                        type      : 'POST', //Method type
+                        url       : '/search_items', //Your form processing file URL
+                        data      : JSON.stringify(postForm), //Forms name
+                        contentType: "application/json; charset=utf-8",
+                        success   : function(data) 
+                                    {
+                                        console.log(data)
+
+                                        $('#itemscard').empty();
+                                        totalItems=data.length
+                                        for(var i=0; i<data.length; i++)
+                                        {
+                                            console.log(data[i])
+                                            itemCard+=' <div class="col-xs-4 col-xl-4 mb-2 py-4">'
+                                            
+                                            +'<div class="card card-custom wave wave-primary mb-8 mb-lg-0">'
+                                              +'<div class="card-body ">'
+                                                    +'<div class="mr-8">'
+                                                        +'<img src="https://gaido.com.my/wp-content/uploads/2014/09/bearing_x-thumb3-1.png" style="height: 10rem; width:100%">'
+                                                        +'</div>'
+                                                        +'<div class="separator separator-solid separator-dark opacity-10 py-md-2"></div>'
+    
+                                                        + '<div class="d-flex align-items-center p-5">'
+                                                        
+                                                            + '<div class="d-flex flex-column">'
+                                                                + '<a href="/itemFrom&internalid=1" class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">'+data[i].name+'</a>'
+                                                                + '<div class="text-dark-75">D: F/w BRG</div>'
+                                                                + '<div class="text-dark-75">B: NSK</div>'
+                                                                +'<div class="text-dark-75">Q: 2.00</div>'
+                                                                
+                                                                + '<div class="separator separator-primary opacity-10 py-md-2"></div>'
+                                                                + '<div class="input-group ">'
+    
+                                                                    +  '<div class="input-group-prepend qtyicon bg-light-secondary">'
+                                                                        +  '<button  class="bg-light-secondary btn   inventorydetail text-left" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes  text-primary text-align-left"></i></button>'
+
+                                                                        + '<span class="input-group-text bg-light-secondary">'
+                                                                            +  '<i class="flaticon2-shopping-cart bg-light-secondary"></i>'
+                                                                            +  '</span>'
+                                                                            + '</div>'
+                                                                            +  '<input type="number" class="form-control " id="'+i+'" internalid="'+data[i].internalId+'" rate="'+data[i].basePrice+'" placeholder="0" value="" disabled>'
+                                                                            +  '</div>'
+                                                                            + '</div>'
+                                                                            +  '</div>'
+                                                                            +  '</div>'
+                                                                            + '</div>'
+                                           
+                                                                     + '</div>'
+
+                                        }
+
+                                        console.log(itemCard)
+
+                                        $('#itemscard').toggleClass(itemCard);
+
+
+                                    }
+                                    
+                    });
+            });
+
+            
+        </script>
+
+
 
 <script type="text/javascript">
     function tableToCSV() {
@@ -421,4 +500,9 @@ jQuery(document).ready(function() {
             temp_link.click();
             document.body.removeChild(temp_link);
         }
+
+
+       
+
+
 </script>

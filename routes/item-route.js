@@ -34,12 +34,8 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
 app.use(router)
 
-// const Invoice = require('../models/invoices-model')
-// const ItemFulfillments = require('../models/itemFulfillments-model')
+ const Item = require('../models/items-model')
 
-//const PurchaseRequests = require('../models/purchaseRequests')
-// const ItemFulfillments = require('../models/itemFulfillments')
-// const Invoices = require('./models/invoices')
 
 
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -96,6 +92,39 @@ router.get("/dropdownitems", (req,res)=>{
 
 
 })
+
+router.get('/itemList', async (req,res)=>{
+
+  let route = "pages/itemTable"
+  let type="itemList"
+  itemData = await Item.find({})
+
+  console.log(itemData)
+ let listName  ="Items"
+
+ itemDataLength = itemData.length
+ breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+
+ res.render('index', {route,type,breadcrumbs,itemData,itemDataLength}) 
+
+}) 
+
+router.post("/search_items", async (req,res)=>{
+
+  console.log("Req","")
+  console.log("Req",req.body)
+  var filterObject=req.body
+
+   itemData = await Item.find(filterObject).lean()
+
+   console.log(itemData)
+  let listName  ="Items"
+
+   itemDataLength = itemData.length
+    res.send(itemData)
+
+ })
+
 
 
 module.exports = router

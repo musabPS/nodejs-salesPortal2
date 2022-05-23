@@ -645,7 +645,7 @@ $('input:checkbox').not(this).prop('checked', this.checked);
                                     }
                                    
                                   //  $('#itemdropdown'+parseInt(exceltablelength-1)).find(":selected").text(cells[0])
-                                //  alert('#itemdropdown'+parseInt(exceltablelength-1))
+                                 //  alert('#itemdropdown'+parseInt(exceltablelength-1))
                                     document.getElementById("qty"+parseInt(exceltablelength-1)).value = cells[1];
                                   
                                     document.getElementById("rate"+parseInt(exceltablelength-1)).value = cells[2];
@@ -718,6 +718,7 @@ $('input:checkbox').not(this).prop('checked', this.checked);
       headers: { 'Access-Control-Allow-Origin': '*' }, 
       success: function(result){
         setItems(result)
+        cartData()
      
       }});
     
@@ -758,6 +759,79 @@ function setLocation(locationData)
     }
     $("#customerlocation").append(dropdownData);  
 }
+function cartData()
+   {
+    var loc=window.location.href
+                    var url = new URL(loc);
+                    var cart = url.searchParams.get("c");
+                      
+                    if(cart==1)
+                    {
+                      let localStorageData =  localStorage.getItem("itemDetail");
+
+                      if(localStorageData)
+                      {
+                        //document.getElementById("excelcheckbox").click();
+                       
+                        isSelectDestroy=true
+                        var rowCount = $('#table-main tr').length-1;
+
+                      for(var i=0; i<rowCount; i++){$('#itemdropdown'+i).select2('destroy')}
+                      
+              
+                
+                       // showdiz()
+                        localStorageData= JSON.parse(localStorageData) 
+                        console.log("localStorageData",localStorageData)
+                        console.log("productData.length",productData.length)
+                                    for(var j=0; j<localStorageData.length; j++)
+                                    {
+
+                                        for(var i=0; i<productData.length; i++)
+                                                {
+
+                                                    $('#itemdropdown'+parseInt(exceltablelength-1)).val( parseInt(localStorageData[j].itemInternalId));
+                                                    // if(productData[i].itemid==cells[0])
+                                                    // {
+                                                    //    // alert('#itemdropdown'+parseInt(exceltablelength-1))
+                                                    //     $('#itemdropdown'+parseInt(exceltablelength-1)).val(productData[i].id[0].value);
+                                                    //     console.log("ProductData", productData[i])
+                                                    //     // if(productData[i].itemtype[0].value=="InvtPart")  //check for inventory item
+                                                    //     // {
+                                                       $('#inventorydetail'+parseInt(exceltablelength-1)).prop("disabled", false);
+                                                    //     // }
+                                                        
+                                                    // }
+                                                        // else
+                                                        // {
+                                                        //     $('#itemdropdown'+parseInt(exceltablelength-1)).val();
+                                                        // }
+                                                //  ProductData[i].id[0].value+'">'+ProductData[i].itemid
+                                                }
+                                                document.getElementById("qty"+parseInt(exceltablelength-1)).value = localStorageData[j].itemQuantity;
+                                  
+                                                 document.getElementById("rate"+parseInt(exceltablelength-1)).value = localStorageData[j].itemRate;
+                              
+                                                 document.getElementById("amount"+parseInt(exceltablelength-1)).value = (localStorageData[j].itemQuantity * localStorageData[j].itemRate).toFixed(2)
+                                
+                                               document.getElementById("btn_addrow"+parseInt(exceltablelength-1)).click()
+                                               exceltablelength++
+                                      }
+
+
+                                    //excelcheckbox
+                                      //  $('#itemdropdown'+parseInt(exceltablelength-1)).find(":selected").text(cells[0])
+                                      //  alert('#itemdropdown'+parseInt(exceltablelength-1))
+                                    
+                                    
+ 
+                      }
+                      ;
+                      for(var i=0; i<$('#table-main tr').length-1; i++){$('#itemdropdown'+i).select2({ placeholder: "Select Item"});}
+                      isSelectDestroy=false
+                    }
+
+        }
 
 $(document).ready(function () {
 
@@ -1112,6 +1186,8 @@ $(document).ready(function () {
                                 }
                                 
                 });
+
+
    
 
  
@@ -1120,10 +1196,78 @@ $(document).ready(function () {
 
 
 
-             
+   function cartData()
+   {
+    var loc=window.location.href
+                    var url = new URL(loc);
+                    var cart = url.searchParams.get("c");
+                    alert(cart)  
+                    if(cart==1)
+                    {
+                      let localStorageData =  localStorage.getItem("itemDetail");
+
+                      if(localStorageData)
+                      {
+                        document.getElementById("excelcheckbox").click();
+                       // showdiz()
+                        localStorageData= JSON.parse(localStorageData) 
+                        console.log("localStorageData",localStorageData)
+                        console.log("productData.length",productData.length)
+                                    for(var j=0; j<localStorageData.length; j++)
+                                    {
+
+                                        for(var i=0; i<productData.length; i++)
+                                                {
+
+                                                    $('#itemdropdown'+parseInt(exceltablelength-1)).val( parseInt(localStorageData[j].itemInternalId));
+                                                    // if(productData[i].itemid==cells[0])
+                                                    // {
+                                                    //    // alert('#itemdropdown'+parseInt(exceltablelength-1))
+                                                    //     $('#itemdropdown'+parseInt(exceltablelength-1)).val(productData[i].id[0].value);
+                                                    //     console.log("ProductData", productData[i])
+                                                    //     // if(productData[i].itemtype[0].value=="InvtPart")  //check for inventory item
+                                                    //     // {
+                                                    //     //     $('#inventorydetail'+parseInt(exceltablelength-1)).prop("disabled", false);
+                                                    //     // }
+                                                        
+                                                    // }
+                                                        // else
+                                                        // {
+                                                        //     $('#itemdropdown'+parseInt(exceltablelength-1)).val();
+                                                        // }
+                                                //  ProductData[i].id[0].value+'">'+ProductData[i].itemid
+                                                }
+                                                document.getElementById("qty"+parseInt(exceltablelength-1)).value = localStorageData[j].itemQuantity;
+                                  
+                                                // document.getElementById("rate"+parseInt(exceltablelength-1)).value = localStorageData;
+                              
+                                                // document.getElementById("amount"+parseInt(exceltablelength-1)).value = localStorageData;
+                                
+                                               document.getElementById("btn_addrow"+parseInt(exceltablelength-1)).click()
+                                               exceltablelength++
+                                      }
+
+                                    //excelcheckbox
+                                      //  $('#itemdropdown'+parseInt(exceltablelength-1)).find(":selected").text(cells[0])
+                                      //  alert('#itemdropdown'+parseInt(exceltablelength-1))
+                                    
+                                    
+ 
+                      }
+                       
+                    }
+
+        }
+                   
 
 
     });
+
+
+    ///fetchfrom cart
+ 
+                   
+
 
 
 
