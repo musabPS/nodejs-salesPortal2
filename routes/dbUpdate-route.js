@@ -347,7 +347,7 @@ router.post('/updateInvoiceMongo', async (req, res) => {
 router.post('/createCustomerMongo', async (req, res) => {
     try {
         console.log("reg", req.body)
-        var obj = req.body.netsuiteData[0]
+        var obj = req.body.netsuiteData
         const customer = new customers(obj)
         await customer.save();
 
