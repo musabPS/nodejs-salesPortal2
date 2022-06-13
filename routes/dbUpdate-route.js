@@ -393,7 +393,7 @@ router.post('/updateCustomerMongo', async (req, res) => {
     try {
 
         console.log("reg", req.body)
-        var obj = req.body.netsuiteData[0]
+        var obj = req.body.netsuiteData
 
         const filter = { internalId: obj.internalId };
         console.log("checkresponce ", filter)
