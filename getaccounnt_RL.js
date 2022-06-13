@@ -753,16 +753,16 @@
     
           
     
-              salesOrder.setCurrentSublistValue({   
-                  sublistId: 'item',
-                  fieldId: 'quantity',
-                  value: postJson.items[i].quantity
-              });
+            //   salesOrder.setCurrentSublistValue({   
+            //       sublistId: 'item',
+            //       fieldId: 'quantity',
+            //       value: postJson.items[i].qty
+            //   });
            
           
-              salesOrder.commitLine({  
-                  sublistId: 'item'
-              });
+            //   salesOrder.commitLine({  
+            //       sublistId: 'item'
+            //   });
     
             }
     

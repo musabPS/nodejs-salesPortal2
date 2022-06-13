@@ -126,5 +126,15 @@ router.post("/search_items", async (req,res)=>{
  })
 
 
+ router.get('/itemFrom&internalid=:id', (req,res)=>{
+
+  var {id} = req.params
+    console.log("Req",req.params)
+
+    let route = "pages/itemForm"
+    breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
+    res.render('index', {route,breadcrumbs})
+
+}) 
 
 module.exports = router
