@@ -468,9 +468,7 @@
          [
             ["type","anyof","ItemShip"], 
             "AND", 
-            ["mainline","is","mainline"], 
-            "AND", 
-            ["taxline","is","F"],
+            ["mainline","is","T"], 
             "AND", 
             ["internalid","anyof",internalId]
          ],
@@ -484,20 +482,60 @@
       });
       
       
+
       var Result = salesorderSearchObj.run();
       var ResultRange = Result.getRange(0, 999);
       var jsonResult = JSON.stringify(ResultRange);
+
+      log.debug
       return jsonResult
 
-    
+      
+     }
+
+     function getLoginDetail(email,password)
+     {
+      var employeeSearchObj = search.create({
+         type: "employee",
+         filters:
+         [
+            ["custentity_ps_textsaleportalpassword","is",password], 
+            "AND", 
+            ["custentity_ps_checkboxissaleportalaccess","is","T"], 
+            "AND", 
+            ["email","is",email]
+         ],
+         columns:
+         [
+            search.createColumn({
+               name: "entityid",
+               sort: search.Sort.ASC,
+               label: "Name"
+            }),
+            search.createColumn({name: "internalid", label: "Internal ID"}),
+            search.createColumn({name: "email", label: "Email"})
+         ]
+      });
+      var Result = employeeSearchObj.run();
+      var ResultRange = Result.getRange(0, 999);
+      var jsonResult = JSON.stringify(ResultRange);
+
+      return jsonResult
      }
 
 
  
-       function get (datain) {
+       function get (datain) 
+       {
  
            log.debug("checkhit",datain)
                //getData()
+               if(datain.type == "login")
+               { 
+                  log.debug("checklogin",datain)
+                  var loginDetail=  getLoginDetail(datain.email,datain.password)
+                   return loginDetail
+               }
  
               if(datain.type == "getsaleorderlist")
               { 
@@ -551,7 +589,7 @@
               {   
  
                  var itemfulFillment_customerList={
-                   customerlist :  getCustomerData(datain.userid),
+                   customerlist :  getCustomerData(datain.userId),
                    soHeaderInfo :  getItemFulfillmentHeaderData(datain.orderId)
                  }
                  log.debug("itemfulFillment_customerList",itemfulFillment_customerList)

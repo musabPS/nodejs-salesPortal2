@@ -13,7 +13,6 @@ const customersSchema = new mongoose.Schema({
     salePersonId: {
         type: Number,
         trim:true,
-        required : true
     },
     salePerson:{
         type:String,

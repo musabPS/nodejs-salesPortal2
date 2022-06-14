@@ -22,7 +22,7 @@ const configrationsSchema = new mongoose.Schema({
          trim:true
      },
      tokenSecret:{
-         type:Number,
+         type:String,
          trim:true
      },
      consumerKey:{

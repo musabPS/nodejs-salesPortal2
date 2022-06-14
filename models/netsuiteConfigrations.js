@@ -34,10 +34,12 @@ app.use(router)
 
 const configration = require('../models/configration-model')
 
-     async function asyncTask () {
+     async function getNetsuiteConfigrations () {
         try {
             var configArray=[]
             configrationData = await configration.findOne({companyId: 1})
+
+           
 
             configArray.push({
                 accountId: configrationData.accountId,
@@ -50,11 +52,12 @@ const configration = require('../models/configration-model')
             configArray.push({
                 url: configrationData.restletUrl,
             })
-      
+
+          
           return configArray
         } catch (err) {
          console.log("Error",err);
         }
       }
 
-module.exports.configrationData = asyncTask()
+module.exports = getNetsuiteConfigrations

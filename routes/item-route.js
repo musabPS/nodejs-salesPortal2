@@ -17,12 +17,9 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, './views'))
 const invitmdata = require('../invoice_itemfulldata.js')
 const masterdata = require('../masterdata.js')
-const accountSettings = {
-  accountId: "TSTDRV925863",
-  tokenKey: "6aa795846f7c09f0389b64ee9c09b7a094ec7122ba1f7dc84bbd6dbe3ab1cee3",
-  tokenSecret: "2e4c10d0f4f04b4677dd622bbe30febd095445b4c3be6e76cae6674ca8491014",
-  consumerKey: "a00aa59a331a17fb8e80b0c19f1fc670059d88b9515820f56cf075599363032c",
-  consumerSecret: "2b25e96ffe13ea48e93f2efb06b0e7d2eb7b417fd3a3a84c68fbd5a393b2f6c6" };
+
+
+
 
 app.use('/', express.static(path.join(__dirname, './public')))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -35,29 +32,35 @@ router.use(bodyParser.json());
 app.use(router)
 
  const Item = require('../models/items-model')
+ const netsuiteConfigration = require('../models/netsuiteConfigrations')
 
+ let accountSettings={}
+ let url={}
+ netsuiteConfigration().then(function(resp){ 
+   accountSettings=resp[0]
+   url=resp[1]
+ 
+ })
 
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
 app.use(router)
 
-// const authCheck = (req, res, next) => {
-//   if (!req.session.user_id) {
-//     return res.redirect('/login')
+const authCheck = (req, res, next) => {
+  if (! req.session.user_id) {
+    return res.redirect('/login')
 
-//   }
-//   next()
-// }
+  }
+   next()
+}
 
 router.get("/dropdownitems", (req,res)=>{
     // console.log("Req",req)
 
 
-    var urlSettings = {
-      url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
-   }
-   var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
+  
+   var myRestlet = nsrestlet.createLink(accountSettings, url)
 
    myRestlet.get({type:'getitemlist'}, function(error, body)
    {
@@ -75,10 +78,8 @@ router.get("/dropdownitems", (req,res)=>{
    console.log("Req",req.body)
 
 
-   var urlSettings = {
-     url: 'https://tstdrv925863.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=432&deploy=1'
-  }
-  var myRestlet = nsrestlet.createLink(accountSettings, urlSettings)
+ 
+  var myRestlet = nsrestlet.createLink(accountSettings, url)
 
   myRestlet.get({type:'inventordetail',itemname:req.body.item}, function(error, body)
   {
@@ -93,7 +94,7 @@ router.get("/dropdownitems", (req,res)=>{
 
 })
 
-router.get('/itemList', async (req,res)=>{
+router.get('/itemList', authCheck, async (req,res)=>{
 
   let route = "pages/itemTable"
   let type="itemList"

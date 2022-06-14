@@ -31,18 +31,18 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
 app.use(router)
 
-// const authCheck = (req, res, next) => {
-//   if (!req.session.user_id) {
-//     return res.redirect('/login')
+const authCheck = (req, res, next) => {
+  if (! req.session.user_id) {
+    return res.redirect('/login')
 
-//   }
-//   next()
-// }
-
-
+  }
+   next()
+}
 
 
-router.get('/invoices', async (req,res)=>{
+
+
+router.get('/invoices', authCheck,async (req,res)=>{
   let route = "pages/invoice_table"
    
   headerData=["Invoice#","Customer","Date","Quantity","Amount","Status"]
