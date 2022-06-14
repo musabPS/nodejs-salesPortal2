@@ -47,7 +47,7 @@ router.get('/invoices', authCheck,async (req,res)=>{
    
   headerData=["Invoice#","Customer","Date","Quantity","Amount","Status"]
 
-  let tranData = await invoice.find({})
+  let tranData = await invoice.find({salePersonId:req.session.user_id})
    let listName ="Invoice"
   let itmdata=invitmdata.invoice
   breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs

@@ -94,9 +94,10 @@ router.post('/getcustomeraddress', async (req,res)=>{
    let route = "pages/customertable"
     let type="customerlist"
 
+    console.log("req.session.user_id",req.session.user_id)
 
-    customerData = await customer.find({})
-    console.log(customerData)
+    customerData = await customer.find({salePersonId:req.session.user_id})
+    console.log("data",customerData)
 
 
       breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs

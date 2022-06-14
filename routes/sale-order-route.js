@@ -62,7 +62,7 @@ router.get('/sales-orders', authCheck,async (req,res)=>{
      type="summary"
      listName="Sale Order"
   
-     tranData = await SaleOrder.find({})
+     tranData = await SaleOrder.find({salePersonId:req.session.user_id})
 
         console.log(tranData)
         console.log(tranData[0].customerName)

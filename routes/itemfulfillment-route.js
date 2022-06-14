@@ -55,7 +55,6 @@ app.use(router)
   }
    next()
 }
-  userId=1603
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json());
@@ -69,7 +68,7 @@ app.use(router)
     let route = "pages/itemfulfillment_table"
      console.log("invitmdata.itemfulfillments")
 
-     tranData = await ItemFulfillments.find({})
+     tranData = await ItemFulfillments.find({salePersonId:req.session.user_id})
 
      console.log(tranData[0])
      headerData=["IF#","Customer","Date","Quantity","Amount","Status","Action"]
