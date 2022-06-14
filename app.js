@@ -58,6 +58,14 @@ app.use(session({
  app.use(dbUpdate)
 
 
+ const authCheck = (req, res, next) => {
+   if (! req.session.user_id) {
+     return res.redirect('/login')
+ 
+   }
+    next()
+ }
+
  app.get('/login', (req,res)=>{
     res.render("pages/login")
  })
@@ -140,7 +148,7 @@ app.use(session({
    res.redirect("/login")
  })
 
- app.get('/', (req,res)=>{
+ app.get('/',authCheck , (req,res)=>{
    // app.set('views', path.join(__dirname,'./demo7/views'))
     let route = "partials/_content"
     breadcrumbs=masterdata.Breadcrumbs.noBreadcrumbs
