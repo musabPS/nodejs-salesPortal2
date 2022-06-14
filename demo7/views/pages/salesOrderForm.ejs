@@ -175,7 +175,7 @@
                                                 </td>
                                             
                                                 <td  style="text-align: center;"> <button  id="inventorydetail0"  type="button"  class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel" disabled><i class="fas fa-boxes"></i></button></td>
-                                                <td ><input  id="qty0" type="number" class="form-control qty" name="qty0" style="text-align: center;"></td>
+                                                <td ><input  id="qty0" type="number" class="form-control qty" name="qty0" style="text-align: center;" min="0"></td>
                                                 <td > <input id="rate0" type="text" class="form-control rate" name="rate0" style="text-align: center;"></td>
                                                 <td ><input type="text" id="amount0" class="form-control amount" name="amount0"  style="text-align: center;"></td>
                                                 <td style="text-align: center;" class="btnresponce btnremoveresponce">  <button id="btn_addrow0" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button><button type="button" class="btn btn-light-danger font-weight-bold delrow" id="btn_removerow0" style="display: none;">-</button> </td>
@@ -469,7 +469,7 @@ $('#table-main .table-tbody').on('click','.addformtablerows',function(){
     
     td+=  '</td>'   
     td+='<td style="text-align: center;">  <button id="inventorydetail'+lines+'" type="button"  class="btn btn-light-danger font-weight-bold inventorydetail" data-toggle="modal" data-target="#inventorydetailmodel" disabled><i class="fas fa-boxes"></i></button>'  
-    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'" style="text-align: center;" required></td>'  
+    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'" style="text-align: center;" min="0" required></td>'  
     td+=' <td style="text-align: center;"><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'" style="text-align: center;" required ></td>'  
     td+= '<td style="text-align: center;"><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'" style="text-align: center;" ></td>'                                              
     td+='<td style="text-align: center;"  style="width:30px"><button id="btn_addrow'+lines+'" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="btn_removerow'+lines+'" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'

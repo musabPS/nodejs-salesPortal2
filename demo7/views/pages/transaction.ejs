@@ -296,7 +296,7 @@ $('#table-main .table-tbody tr').click(function () {
     td+="<td id='"+lines+"'><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' style='width: 100%;'>"+itemdropdown+" </select>"
     td+=  '</td>'  
     td+='<td style="text-align: center;"> <i class="fas fa-window-minimize"></i> </td>'  
-    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'"  style="text-align: center;"></td>'  
+    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="number" class="form-control qty" min="0" name="qty'+lines+'"  style="text-align: center;"></td>'  
     td+=' <td style="text-align: center;"><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'"  style="text-align: center;"></td>'  
     td+= '<td style="text-align: center;"><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'"  style="text-align: center;"></td>'                                              
     td+='<td style="text-align: center; width: 90pt"><button id="btn_addrow'+lines+'" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="btn_removerow'+lines+'" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
@@ -365,7 +365,7 @@ $('#table-main').on('click','.addformtablerows',function(){
     td+="<td id='"+lines+"'><select id='itemdropdown"+lines+"' class='form-control itemdropdown' name='option"+lines+"' style='width: 100%;'>"+itemdropdown+" </select>"
     td+=  '</td>'  
     td+='<td style="text-align: center;"> <i class="fas fa-window-minimize"></i> </td>'  
-    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="number" class="form-control qty" name="qty'+lines+'"  style="text-align: center;"></td>'  
+    td+='<td style="text-align: center;"><input id="qty'+lines+'" type="number" class="form-control qty" min="0" name="qty'+lines+'"  style="text-align: center;"></td>'  
     td+=' <td style="text-align: center;"><input id="rate'+lines+'" type="text" class="form-control rate" name="rate'+lines+'"  style="text-align: center;"></td>'  
     td+= '<td style="text-align: center;"><input id="amount'+lines+'" type="text" class="form-control amount" name="amount'+lines+'"  style="text-align: center;"></td>'                                              
     td+='<td style="text-align: center; width: 90pt"><button id="btn_addrow'+lines+'" type="button" class="btn btn-light-primary font-weight-bold addformtablerows">+</button> <button id="btn_removerow'+lines+'" type="button" class="btn btn-light-danger font-weight-bold delrow">-</button></td>'
@@ -1254,7 +1254,7 @@ function setLocation(locationData)
                                         {
                                             tableData+='<td style="text-align: center;"> <i class="fas fa-window-minimize"></i> </td>'
                                         }
-                                        tableData+='<td style="text-align: center;"><input id="qty'+i+'" type="number" class="form-control qty" name="qty'+i+'"  style="text-align: center;" value="'+dataParse[i].values.quantity+'" disabled></td>'  
+                                        tableData+='<td style="text-align: center;"><input id="qty'+i+'" type="number" class="form-control qty" name="qty'+i+'" min="0"  style="text-align: center;" value="'+dataParse[i].values.quantity+'" disabled></td>'  
                                         tableData+=' <td style="text-align: center;"><input id="rate'+i+'" type="text" class="form-control rate" name="rate'+i+'"  style="text-align: center;" value="'+dataParse[i].values.rate+'" disabled></td>'  
                                         tableData+= '<td style="text-align: center;"><input id="amount'+i+'" type="text" class="form-control amount" name="amount'+i+'"  style="text-align: center;" value="'+dataParse[i].values.amount+'" disabled></td>'                                              
                                        
