@@ -923,7 +923,9 @@ $(document).ready(function () {
         })
 
         $('#table-main').on('click','.inventorydetail',function()
-          {
+          { 
+              				
+		
               
           
             var value = this.value;
@@ -936,7 +938,11 @@ $(document).ready(function () {
                 item : itemName
              }
                
-             
+             KTApp.blockPage({
+				overlayColor: '#000000',
+				state: 'primary',
+				message: 'Please wait...'
+				});
              
              $.ajax({ 
                             type      : 'POST', //Method type
@@ -945,6 +951,7 @@ $(document).ready(function () {
                             contentType: "application/json; charset=utf-8",
                             success   : function(data) 
                                         {
+                                            KTApp.unblockPage();	
                                             //empty modal content//
                                             $('.modeltable .modeltable-body').empty().append();
                                             $('#modalspan_itemname').empty().append();
@@ -1080,7 +1087,14 @@ $(document).ready(function () {
                  
 
 
-                            
+                         
+                KTApp.blockPage({
+				overlayColor: '#000000',
+				state: 'primary',
+				message: 'Please wait...'
+				});
+
+                
                    $('#name + .throw_error').empty(); //Clear the messages first
                     $('#success').empty();
                     var loc=window.location.href
@@ -1152,22 +1166,7 @@ $(document).ready(function () {
                     postForm.items=postDataArray
                     console.log("checks postDataArray",postForm)
 
-                let timerInterval
-                            Swal.fire({
-                            title: '',
-                            timerProgressBar: true,
-                            didOpen: () => {
-                                Swal.showLoading()
-                            },
-                            willClose: () => {
-                                clearInterval(timerInterval)
-                            }
-                            }).then((result) => {
-                            /* Read more about handling dismissals below */
-                            if (result.dismiss === Swal.DismissReason.timer) {
-                                console.log('I was closed by the timer')
-                            }
-                            })
+              
 
 
                     
@@ -1180,10 +1179,11 @@ $(document).ready(function () {
                                 {
                                     console.log(data)
                                     console.log("sucess")
-                                    Swal.close();
-
+                                    
+                                    KTApp.unblockPage();	
                                     Swal.fire({  icon: 'success',  title: 'Saved', button: "Aww yiss!" ,text: 'Data Saved',  footer: '<a href="/sales-orders">View all saleorder</a>'})
                                     window.location.replace('sales-orders&id='+data);
+
                                 }
                                 
                 });

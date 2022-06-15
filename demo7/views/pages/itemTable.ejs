@@ -147,7 +147,7 @@
                                                                         <i class="flaticon2-shopping-cart bg-light-secondary"></i>
                                                                     </span>
                                                                 </div>
-                                                                <input type="number" class="form-control " id="<%= i %>" internalid="<%=el.internalId%>" rate="<%=el.basePrice%>" placeholder="0" value="" disabled>
+                                                                <input type="number" class="form-control " id="<%= i %>" internalid="<%=el.internalId%>" rate="<%=el.basePrice%>" placeholder="0" value="" min="0" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -414,7 +414,7 @@ $(function () {
                                                                             +  '<i class="flaticon2-shopping-cart bg-light-secondary"></i>'
                                                                             +  '</span>'
                                                                             + '</div>'
-                                                                            +  '<input type="number" class="form-control " id="'+i+'" internalid="'+data[i].internalId+'" rate="'+data[i].basePrice+'" placeholder="0" value="" disabled>'
+                                                                            +  '<input type="number" class="form-control " id="'+i+'" internalid="'+data[i].internalId+'" rate="'+data[i].basePrice+'" placeholder="0" value=""  min="0" disabled>'
                                                                             +  '</div>'
                                                                             + '</div>'
                                                                             +  '</div>'
