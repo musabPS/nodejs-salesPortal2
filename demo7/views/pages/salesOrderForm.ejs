@@ -1088,11 +1088,7 @@ $(document).ready(function () {
 
 
                          
-                KTApp.blockPage({
-				overlayColor: '#000000',
-				state: 'primary',
-				message: 'Please wait...'
-				});
+               
 
                 
                    $('#name + .throw_error').empty(); //Clear the messages first
@@ -1167,7 +1163,11 @@ $(document).ready(function () {
                     console.log("checks postDataArray",postForm)
 
               
-
+                    KTApp.blockPage({
+				overlayColor: '#000000',
+				state: 'primary',
+				message: 'Please wait...'
+				});
 
                     
                 $.ajax({ 

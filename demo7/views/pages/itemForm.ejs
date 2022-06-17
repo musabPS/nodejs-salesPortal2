@@ -2,6 +2,170 @@
 
 
 
+<style>
+ 
+/*****************globals*************/
+
+
+img {
+  max-width: 100%; }
+
+.preview {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  @media screen and (max-width: 996px) {
+    .preview {
+      margin-bottom: 20px; } 
+    }
+
+.preview-pic {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.preview-thumbnail.nav-tabs {
+  border: none;
+  margin-top: 15px; }
+  .preview-thumbnail.nav-tabs li {
+    width: 18%;
+    margin-right: 2.5%; }
+    .preview-thumbnail.nav-tabs li img {
+      max-width: 100%;
+      display: block; }
+    .preview-thumbnail.nav-tabs li a {
+      padding: 0;
+      margin: 0; }
+    .preview-thumbnail.nav-tabs li:last-of-type {
+      margin-right: 0; }
+
+.tab-content {
+  overflow: hidden; }
+  .tab-content img {
+    width: 100%;
+    -webkit-animation-name: opacity;
+            animation-name: opacity;
+    -webkit-animation-duration: .3s;
+            animation-duration: .3s; }
+
+
+
+@media screen and (min-width: 997px) {
+  .wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; } }
+
+.details {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.colors {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.product-title, .price, .sizes, .colors {
+  text-transform: UPPERCASE;
+  font-weight: bold; }
+
+.checked, .price span {
+  color: #ff9f1a; }
+
+.product-title, .rating, .product-description, .price, .vote, .sizes {
+  margin-bottom: 15px; }
+
+.product-title {
+  margin-top: 0; }
+
+.size {
+  margin-right: 10px; }
+  .size:first-of-type {
+    margin-left: 40px; }
+
+.color {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 2em;
+  width: 2em;
+  border-radius: 2px; }
+  .color:first-of-type {
+    margin-left: 20px; }
+
+.add-to-cart, .like {
+  background: #ff9f1a;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  -webkit-transition: background .3s ease;
+          transition: background .3s ease; }
+  .add-to-cart:hover, .like:hover {
+    background: #b36800;
+    color: #fff; }
+
+.not-available {
+  text-align: center;
+  line-height: 2em; }
+  .not-available:before {
+    font-family: fontawesome;
+    content: "\f00d";
+    color: #fff; }
+
+.orange {
+  background: #ff9f1a; }
+
+.green {
+  background: #85ad00; }
+
+.blue {
+  background: #0076ad; }
+
+.tooltip-inner {
+  padding: 1.3em; }
+
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+/*# sourceMappingURL=style.css.map */
+
+  </style>
+
 
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
@@ -14,7 +178,7 @@
             <div class="card card-custom overflow-hidden">
                 <div class="card-body p-0">
                   <!--end::Header-->
-					<!--begin::Content-->
+				             	<!--begin::Content-->
 					
                     
 										<!-- begin: Invoice-->
@@ -26,36 +190,55 @@
                                                         
                                                     </h1>
                                                      
-													<div class="d-flex flex-column align-items-md-end px-0">
-														
-													</div>
+                                        <button type="button" class="btn  position-relative" id="button-cart">
+                                            <i class="flaticon2-shopping-cart-1 text-primary icon-2x"> </i>
+                                            <span class="position-absolute top-200 start-100 translate-middle badge rounded-pill bg-danger text-white" id="countcart"></span>
+                                        </button>
 												</div>
-												<div class="text-center">
-                          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" class="d-block w-100" alt="...">
+                         
+                            <div class="container-fliud">
+                              <div class=" row">
+                                <div class="preview col-md-6">
+                                  
+                                  <div class="preview-pic tab-content">
+                                    <div class="tab-pane active" id="pic-1"><img src="https://gaido.com.my/wp-content/uploads/2019/10/drive_shaft-thumb2.png" /></div>
+                                    <div class="tab-pane" id="pic-2"><img src="https://gaido.com.my/wp-content/uploads/2019/10/drive_shaft-thumb1.png" /></div>
+                                    <div class="tab-pane" id="pic-3"><img src="https://gaido.com.my/wp-content/uploads/2019/10/drive_shaft-thumb1.png" /></div>
+                                    <div class="tab-pane" id="pic-4"><img src="https://gaido.com.my/wp-content/uploads/2019/10/drive_shaft-thumb2.png" /></div>
+                                  </div>
+                                  <ul class="preview-thumbnail nav nav-tabs">
+                                    <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="https://gaido.com.my/wp-content/uploads/2019/10/drive_shaft-thumb2.png" /></a></li>
+                                    <li><a data-target="#pic-2" data-toggle="tab"><img src="https://gaido.com.my/wp-content/uploads/2019/10/drive_shaft-thumb1.png" /></a></li>
+                                    <li><a data-target="#pic-3" data-toggle="tab"><img src="https://gaido.com.my/wp-content/uploads/2019/10/drive_shaft-thumb1.png" /></a></li>
+                                    <li><a data-target="#pic-4" data-toggle="tab"><img src="https://gaido.com.my/wp-content/uploads/2019/10/drive_shaft-thumb2.png" /></a></li>
+                                  </ul>
+                                  
+                                </div>
+                                <div class="details col-md-6">
+                                  <h3 class="product-title">What is a Drive Shaft?</h3>
+                                 
+                                  <p class="product-description">The drive shaft is a mechanical component that transfers torque from the engine to the end of the vehicle before it reaches the wheels</p>
+                                  <h4 class="price">current price: <span>$180</span></h4>
+                                  
+                                  
+                                 
+                                  <div class="action">
+                                    <div class="input-group mt-5">
+    
+                                      <div class="input-group-prepend qtyicon bg-light-secondary">
+                                          <button  class="bg-light-secondary btn   inventorydetail text-left" data-toggle="modal" data-target="#inventorydetailmodel"><i class="fas fa-boxes  text-primary text-align-left"></i></button>
+
+                                       
+                                      </div>
+                                      <input type="number" class="form-control " id="itemqty" internalid="0" rate="0" placeholder="0" value="" min="0" >
+                                  </div>
+                                  
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                            <button class="carousel-control-prev btn btn-icon btn-dark btn-sm mr-1 mx-auto " type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            </button>
-                            <button class="carousel-control-next btn btn-icon btn-dark btn-sm mr-1" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            </button>
-                          </div>
-                                                   
-                                                    <!-- <img src="https://gaido.com.my/wp-content/uploads/2014/09/bearing_x-thumb3-1.png" alt="hg" width="300" height="300"> -->
-                                                   
-                                               
-                                                <div class="separator separator-solid separator-primary opacity-20 "></div>
-                                                </div>
+                          
+               
 
                                                 <div class="border-bottom w-100 opacity-20"></div>
                      
@@ -194,6 +377,154 @@
 <script src="assets/js/pages/features/forms/validation/form-widgets.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+  <script>
+    var totalItems=0
+    var selectItems=[]
+    var item=[]
+    var countQty=0
 
+    var loc=window.location.href
+        var url = new URL(loc);
+
+    var path=url.pathname
+    var internalid=path.split("=")[1]
+    console.log("check",internalid)
+    var isCartData= localStorage.getItem("itemDetail");
+    var cardDataQuantity=0 
+    var cardData=0
+    var isItemFound=false
+    var itemFoundIndex=0
+    if(isCartData)
+    {
+      cardData=JSON.parse(isCartData)
+      console.log("cardQty",cardData)
+      for(var i=0; i<cardData.length; i++)
+      {
+
+        if(internalid==cardData[i].itemInternalId)
+        {
+          $("#itemqty").val(cardData[i].itemQuantity)
+          isItemFound=true
+          itemFoundIndex=i
+        }
+        cardDataQuantity+=parseInt(cardData[i].itemQuantity)
+        
+      }
+    }
+    
+    $('#countcart').text(cardDataQuantity)
+
+    $(".qtyicon").click(function(e)
+    {
+       
+        var id=$(this).next().attr("id")
+       var inputClass = $(this).find("span i").attr("class")
+
+       if(inputClass.indexOf("text-primary") >= 0)
+       {
+         $(this).find("span i").attr("class","flaticon2-shopping-cart")
+         $(this).next().prop( "disabled", true );
+
+         if(! $('#'+id).val())
+         {
+            const index = item.indexOf(id);
+            if (index > -1) {
+                item.splice(index, 1);
+            }
+
+            console.log("itemid",item)
+         }
+         else
+         {
+           lastValue = $('#countcart').text()-parseInt($('#'+id).val())
+            $('#countcart').text(lastValue)
+            const index = item.indexOf(id);
+            if (index > -1) {
+                item.splice(index, 1);
+            }
+
+         }
+         
+       }
+
+       if(inputClass.indexOf("text-primary") < 0)
+       {
+         $(this).find("span i").attr("class","flaticon2-shopping-cart text-primary")
+         $(this).next().prop( "disabled", false );
+       
+         if(! $('#'+id).val())
+         {
+            item.push(id)
+              console.log("itemidfirst",item)
+         }
+         else
+         {
+           lastValue = parseInt($('#countcart').text())+parseInt($('#'+id).val())
+         
+             $('#countcart').text(lastValue)
+              item.push(id)
+              console.log("itemidfirst",item)
+              
+
+          
+         }
+         
+       }
+
+      
+         // $(selectClass).removeClass('');
+
+         // var selectClass=$(this).find("span i").attr("class")
+         // 
+         //cart
+          // $("#container li.name input.name_val").val();
+   
+     });
+
+     $("#itemqty").change(function()
+         {
+         
+
+          var inputQty=0
+          inputQty+=parseInt($('#itemqty').val())
+
+          
+          $('#countcart').text(cardDataQuantity+inputQty)
+          
+
+          });
+        
+     $("#button-cart").click(function(){
+                     // alert("");
+                     console.log("finalItem",cardData)
+                    
+                       
+                         let element = document.getElementById("itemqty"); 
+                         let itemRate = element.getAttribute("rate"); 
+                         if(isItemFound)
+                         {
+                               cardData[itemFoundIndex].itemQuantity=element.value
+                         }
+                         else
+                         {
+                          cardData.push({
+                             'itemInternalId'       : internalid,
+                             'itemQuantity'         : element.value,
+                             'itemId'               : cardData.length+1,
+                             'itemRate'             : itemRate
+                            })      
+                         }
+                                         
+
+                      console.log("finalItem",cardData)
+                        // localStorage.setItem("itemDetail", JSON.stringify(cardData));
+                        // console.log("finalItem",cardData)
+                      //  location.replace("/create-sales-order?&c=1")
+                      
+            });
+
+    </script>
 
