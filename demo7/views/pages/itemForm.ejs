@@ -332,7 +332,6 @@ img {
     <h5 class="modal-title">Inventory Detail</h5>
     </br>
     
-    
     </div>
     <div class="modal-body">
     
@@ -403,12 +402,12 @@ img {
       console.log("cardQty",cardData)
       for(var i=0; i<cardData.length; i++)
       {
-
         if(internalid==cardData[i].itemInternalId)
         {
           $("#itemqty").val(cardData[i].itemQuantity)
           isItemFound=true
           itemFoundIndex=i
+          cardDataQuantity=cardData[i].itemQuantity
         }
         cardDataQuantity+=parseInt(cardData[i].itemQuantity)
         
