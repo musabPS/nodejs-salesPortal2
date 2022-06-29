@@ -11,6 +11,8 @@ const bodyParser = require('body-parser');
 const { json } = require('express/lib/response')
 var moment = require('moment');
 var session = require('express-session')
+const fileUpload = require('express-fileupload')
+
 var nsrestlet = require('nsrestlet');
 
 require('./models/mongoose')
@@ -33,6 +35,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
+
+app.use(express.json())
+app.use(fileUpload())
+app.use(express.urlencoded({ extended: true }))
+
 const netsuiteConfigration = require('./models/netsuiteConfigrations')
 
 const PDFExtract = require('pdf.js-extract').PDFExtract;
@@ -196,6 +203,12 @@ app.use(session({
   
   let pagesCount=0
   let PageData=[]
+  let items=[]
+
+
+
+
+
 
 
   let dataBuffer = fs.readFileSync('PDF_Files/Sample order.pdf');
@@ -221,11 +234,11 @@ app.use(session({
     page3=page3[3]
     page3=page3.split("\n")
 
-    console.log(page3); 
+   // console.log(page3); 
 
 
-    date          = page3[5]
-    to            =  page3[6]
+    date          = page3[5].match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}")[0]
+    to            = page3[6]
     attn          = page3[8]
     from          = page3[10]
     jobNumber     = page3[14]
@@ -235,12 +248,37 @@ app.use(session({
     pod           = page3[26]
     carrierRefNo  = page3[29]
     commodity     = page3[32]
-    volume        =  page3[35]
+    volume        = page3[35]
+
+    let tableStartIndex = page3.indexOf("TANK NUMBERTARE WT/CAPACITYRELEASE DATERELEASE REF");
+    let tableEndIndex = page3.indexOf("LOADING VESSEL");
+
+    console.log("tableStartIndex",tableStartIndex)
+
+
+      itemsLine= page3[tableStartIndex+2]
+      console.log("items",itemsLine)
+
+      let tankNumber = itemsLine.substring(0, 12);
+      console.log("tankNumber",tankNumber)
+
+      let tareWT = itemsLine.substring(12, 22);
+      console.log("tareWT",tareWT)
+
+      let releaseDate="RLS ON"+itemsLine.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}")[0]
+      console.log("releaseDate",releaseDate)
 
 
 
 
+  // for(var i=tableStartIndex+1; i<tableEndIndex; i++)
+  // {
 
+  //   items.push({
+  //     tankDetails: page3[i]
+  //   })
+
+  // }
 
 
     pdfObject={
@@ -260,81 +298,81 @@ app.use(session({
 
     }
 
-    console.log("checkc",pdfObject)
-    res.send( pdfObject)
-
+   // console.log("checkc",pdfObject)
+    res.send(page3)
 });
-    // await Promise.all(files.map(async (file) => {
+//     await Promise.all(files.map(async (file) => {
 
-    //   // Set up the pdf parser
-    //   let pdfParser = new PDFParser(this, 1);
+//       // Set up the pdf parser
+//       let pdfParser = new PDFParser(this, 1);
 
-    //   // Load the pdf document
-    //   pdfParser.loadPDF(`PDF_Files/${file}`);
+//       // Load the pdf document
+//       pdfParser.loadPDF(`PDF_Files/${file}`);
       
-    //   // Parsed the patient
-    //   let patient = await new Promise(async (resolve, reject) => {
+//       // Parsed the patient
+//       let patient = await new Promise(async (resolve, reject) => {
 
-    //       // On data ready
-    //       pdfParser.on("pdfParser_dataReady", (pdfData) => {
+//           // On data ready
+//           pdfParser.on("pdfParser_dataReady", (pdfData) => {
            
 
-    //           // The raw PDF data in text form
-    //           const raw = pdfParser.getRawTextContent().replace(/\r\n/g, " ");
+//               // The raw PDF data in text form
+//               const raw = pdfParser.getRawTextContent().replace(/\r\n/g, " ");
              
-    //           pagesCount= raw.split('--Page').length-1
-    //         //  let count = raw.split('').filter(x => x == ch).length
-    //           //console.log("count",pagesCount)
+//               pagesCount= raw.split('--Page').length-1
+//             //  let count = raw.split('').filter(x => x == ch).length
+//               //console.log("count",pagesCount)
 
-    //          let pageData = raw.split('Page (2)')[1]
-    //           // pageData=pageData.split('Page (3)')[1]
-    //           let  pageEndIndex1 =  raw.indexOf('Page (1)');
-    //           let  pageEndIndex2 =  raw.indexOf('Page (2)');
-    //           let result = raw.substring(pageEndIndex1, pageEndIndex2);
-    //          // console.log("pageEndIndex",result)
+//              let pageData = raw.split('Page (2)')[1]
+//               // pageData=pageData.split('Page (3)')[1]
+//               let  pageEndIndex1 =  raw.indexOf('Page (1)');
+//               let  pageEndIndex2 =  raw.indexOf('Page (2)');
+//               let result = raw.substring(pageEndIndex1, pageEndIndex2);
+//              // console.log("pageEndIndex",result)
 
-             
-    //           date = result.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}");
-    //           let to_attn = /TO\s(.*?)TO/i.exec(result)[1].trim()
-    //           to_attn = to_attn.split("ATTN")
-    //           let attn = to_attn[1].trim().replace(/:/g, "")
-    //           let to = to_attn[0].trim().replace(/:/g, "")
+            
 
-    //           let from =result.match("[FROM-]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}");
+//               date = result.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}");
+//               let to_attn = /TO\s(.*?)TO/i.exec(result)[1].trim()
+//               to_attn = to_attn.split("ATTN")
+//               let attn = to_attn[1].trim().replace(/:/g, "")
+//               let to = to_attn[0].trim().replace(/:/g, "")
+
+//               let from =result.match("[FROM-]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}");
 
 
-    //          // let to=to_attn
-    //           console.log("from",from)
+//              // let to=to_attn
+//               console.log("from",from)
  
-    //           console.log("matchdata",result.match(/TO/i))
-    //          let fax = result.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}")
-    //           let extractData={
-    //             date : date[0],
-    //             attn : attn,
-    //             to   : to
-    //           }
+//               console.log("matchdata",result.match(/TO/i))
+//              let fax = result.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}")
+//               let extractData={
+//                 date : date[0],
+//                 attn : attn,
+//                 to   : to
+//               }
 
               
 
 
-              // Return the parsed data
-              //  resolve({
-              //      name: /Date\s(.*?)Address/i.exec(raw)[1].trim()
-              // //     address: /Address\s(.*?)Phone/i.exec(raw)[1].trim(),
-              // //     phone: /Phone\s(.*?)Birthday/i.exec(raw)[1].trim(),
-              // //     birthday: /Birthday\s(.*?)Email\sAddress/i.exec(raw)[1].trim(),
-              // //     emailAddress: /Email\sAddress\s(.*?)Blood\stype/i.exec(raw)[1].trim(),
-              // //     bloodType: /Blood\stype\s(.*?)Height/i.exec(raw)[1].trim(),
-              // //     height: /Height\s(.*?)Weight/i.exec(raw)[1].trim(),
-              // //     weight: /Weight\s(.*?)--/i.exec(raw)[1].trim()
-              //  });
+//             //  Return the parsed data
+//             //   resolve({
+//                 //   name: /Date\s(.*?)Address/i.exec(raw)[1].trim()
+//               //     address: /Address\s(.*?)Phone/i.exec(raw)[1].trim(),
+//               //     phone: /Phone\s(.*?)Birthday/i.exec(raw)[1].trim(),
+//               //     birthday: /Birthday\s(.*?)Email\sAddress/i.exec(raw)[1].trim(),
+//               //     emailAddress: /Email\sAddress\s(.*?)Blood\stype/i.exec(raw)[1].trim(),
+//               //     bloodType: /Blood\stype\s(.*?)Height/i.exec(raw)[1].trim(),
+//               //     height: /Height\s(.*?)Weight/i.exec(raw)[1].trim(),
+//               //     weight: /Weight\s(.*?)--/i.exec(raw)[1].trim()
+//               // });
 
-        //  });
+//          });
 
-     // });
+//      });
 
-      // Add the patient to the patients array
-     // patients.push(patient);
+//     //   Add the patient to the patients array
+//     //  patients.push(patient);
 
 //  }));
 
@@ -343,6 +381,120 @@ app.use(session({
 
 }) 
 
+app.post('/pdfextract',async (req,res)=>{
+
+  
+  let pagesCount=0
+  let PageData=[]
+  let items=[]
+
+
+
+
+
+
+
+  let dataBuffer = fs.readFileSync('PDF_Files/Sample order.pdf');
+
+  pdf(dataBuffer).then(function(data) {
+ 
+    // number of pages
+    console.log(data.numpages);
+    // number of rendered pages
+    console.log(data.numrender);
+    // PDF info
+    console.log(data.info);
+    // PDF metadata
+    console.log(data.metadata); 
+    // PDF.js version
+    // check https://mozilla.github.io/pdf.js/getting_started/
+    console.log(data.version);
+    // PDF text
+
+
+    page3=data.text
+    page3=page3.split("\n\n")
+    page3=page3[3]
+    page3=page3.split("\n")
+
+   // console.log(page3); 
+
+   
+
+
+    date          = page3[5].match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}")[0]
+    to            = page3[6]
+    attn          = page3[8]
+    from          = page3[10]
+    jobNumber     = page3[14]
+    shipper       = page3[17]
+    pol           = page3[20]
+    term          = page3[23]
+    pod           = page3[26]
+    carrierRefNo  = page3[29]
+    commodity     = page3[32]
+    volume        = page3[35]
+
+    //line item login work loop lagana hy only
+
+    let tableStartIndex = page3.indexOf("TANK NUMBERTARE WT/CAPACITYRELEASE DATERELEASE REF");
+    let tableEndIndex = page3.indexOf("LOADING VESSEL");
+
+    console.log("tableStartIndex",tableStartIndex)
+
+
+      itemsLine= page3[tableStartIndex+2]
+      console.log("items",itemsLine)
+
+      let tankNumber = itemsLine.substring(0, 12);
+      console.log("tankNumber",tankNumber)
+
+      let tareWT = itemsLine.substring(12, 22);
+      console.log("tareWT",tareWT)
+
+      let releaseDate="RLS ON"+itemsLine.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}")[0]
+      console.log("releaseDate",releaseDate)
+
+
+
+
+  // for(var i=tableStartIndex+1; i<tableEndIndex; i++)
+  // {
+
+  //   items.push({
+  //     tankDetails: page3[i]
+  //   })
+
+  // }
+
+
+    pdfObject={
+
+      date          : date,
+      to            : to,
+      attn          : attn,
+      from          : from,
+      jobNumber     : jobNumber,
+      shipper       : shipper,
+      pol           : pol,
+      term          : term,
+      pod           : pod,
+      carrierRefNo  : carrierRefNo,
+      commodity     : commodity,
+      volume        : volume
+
+    }
+
+   // console.log("checkc",pdfObject)
+    res.send(pdfObject)
+});
+//     await Promise.all(files.map(async (file) => {
+
+
+  console.log("check",patients)
+
+
+}) 
 
  const port =  process.env.PORT || 3000
  app.listen(port, () => {
